@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/sitemap.xml",
-      "destination": "https://redirects.to.vercel.app/sitemap.xml",
+      "destination": "https://promptarena-server.onrender.com/sitemap.xml",
       "permanent": false
     }
   ],

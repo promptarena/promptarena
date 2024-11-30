@@ -43,4 +43,4 @@ Allow: /
 
 
 # Sitemap declaration (essential for SEO)
-Sitemap: https://redirects.to.vercel.app/sitemap.xml
+Sitemap: https://promptarena-server.onrender.com/sitemap.xml
