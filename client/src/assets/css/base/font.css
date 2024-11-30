@@ -1,0 +1,7 @@
+/* assets/css/base/font.css */
+@font-face {
+  font-family: 'AntonSC';
+  src: url('../../fonts/Anton SC.ttf') format('truetype'); /* Adjust the path if necessary */
+  font-weight: normal;
+  font-style: normal;
+}

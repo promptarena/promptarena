@@ -1,0 +1,58 @@
+/* CustomCursor.css */
+.custom-cursor {
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.8); /* Rounded border */
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.1s ease-out,
+    border-color 0.3s ease,
+    opacity 0.3s ease;
+  mix-blend-mode: difference; /* Blends with the background to create a unique effect */
+  backdrop-filter: blur(5px); /* Modern glassy effect */
+}
+
+.custom-cursor.hovered {
+  border-color: rgba(0, 255, 0, 0.8); /* Green border on hover */
+}
+
+.custom-cursor.clicked {
+  border-color: rgba(0, 255, 255, 0.8); /* Cyan border on click */
+}
+
+.cursor-triangle {
+  width: 5px;
+  height: 5px;
+  border: 8px solid rgba(8, 138, 155, 0.562);
+  border-radius: 100%;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  transform: translate(-60%, -80%) rotate(0deg); /* Center and rotate dynamically */
+  transition:
+    transform 0.2s ease,
+    border-bottom-color 0.3s ease;
+}
+
+/* Hover effect for the triangle */
+.custom-cursor.hovered .cursor-triangle {
+  border-bottom-color: rgba(0, 255, 0, 0.7); /* Change color on hover */
+}
+
+/* Optional: Add hover states for interactive elements */
+button:hover ~ .custom-cursor,
+a:hover ~ .custom-cursor {
+  border-color: rgba(
+    255,
+    255,
+    0,
+    0.8
+  ); /* Highlight cursor on interactive elements */
+  transform: scale(
+    1.5
+  ); /* Increase size when hovering over interactive elements */
+}
