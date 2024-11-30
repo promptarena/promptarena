@@ -214,6 +214,7 @@ import { useReviewStore } from '../../store/reviewStore';
 import { formatRelativeTime } from '../../utils/date';
 import { Tag, Clock, User, Star } from 'lucide-react';
 import OptimizedImage from '../base/OptimizedImage';
+import EventLoggingButton from '../global/EventLoggingButton';
 
 const CollageImages = React.memo(({ images }) => (
   <div className="grid grid-cols-2 grid-rows-2 gap-0 absolute inset-0">
@@ -348,69 +349,73 @@ const PromptCard = React.memo(({ prompt }) => {
   );
 
   return (
-    <div className="relative overflow-hidden rounded-xl p-[2px] backdrop-blur-3xl transition-all">
-      <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+    <EventLoggingButton category="prompts" action="view" label={title}>
+      <div className="relative overflow-hidden rounded-xl p-[2px] backdrop-blur-3xl transition-all">
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
 
-      <div className="relative bg-[#1E293B] rounded-xl overflow-hidden font-space-grotesk">
-        <div className="relative w-full h-0 pb-[100%] overflow-hidden rounded-tl-xl">
-          <CollageImages images={collageImages} />
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 cursor-pointer"
-            title={title}
-          />
+        <div className="relative bg-[#1E293B] rounded-xl overflow-hidden font-space-grotesk">
+          <div className="relative w-full h-0 pb-[100%] overflow-hidden rounded-tl-xl">
+            <CollageImages images={collageImages} />
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 cursor-pointer"
+              title={title}
+            />
 
-          <div className="absolute top-2 right-2">
-            <span className="inline-flex items-center px-2 py-0.5 rounded bg-[#4B5563]/80 backdrop-blur-sm text-xs text-white font-medium">
-              {prompt.model || 'Unknown'}
-            </span>
-          </div>
-
-          <div className="absolute bottom-2 left-2">
-            {isLoadingSellerProfile ? (
-              <span className="animate-pulse text-xs text-gray-500">
-                Loading...
+            <div className="absolute top-2 right-2">
+              <span className="inline-flex items-center px-2 py-0.5 rounded bg-[#4B5563]/80 backdrop-blur-sm text-xs text-white font-medium">
+                {prompt.model || 'Unknown'}
               </span>
-            ) : (
-              memoizedUserAndTimestamp
-            )}
-          </div>
-        </div>
-
-        <div className="p-4 shadow-inner space-y-2">
-          <div className="flex items-center mb-2">
-            <h2 className="text-2xl font-bold text-white leading-tight font-syncopate">
-              {title.length > 20 ? `${title.slice(0, 20)}...` : title}
-            </h2>
-          </div>
-
-          {/* Conditionally show description with truncation for large descriptions */}
-          <p className="text-base text-[#9CA3AF] mb-3 font-space-grotesk">
-            {description.length > 100
-              ? `${description.substring(0, 100)}...`
-              : description}
-          </p>
-
-          <div className="text-sm text-[#9CA3AF] font-jetbrains-mono mb-4 space-y-1">
-            <div>
-              <span className="font-semibold text-white">Category:</span>
-              <Link
-                className="hover:underline"
-                to={`/prompts/category/${category}`}
-              >
-                {category.length > 10 ? `${category.slice(0, 8)}...` : category}
-              </Link>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold text-white">Rating:</span>
-              <Stars rating={rating} />
-              <span className="ml-2">({reviewsCount || 100} reviews)</span>
             </div>
 
-            <div className="flex gap-1">{memoizedTags}</div>
+            <div className="absolute bottom-2 left-2">
+              {isLoadingSellerProfile ? (
+                <span className="animate-pulse text-xs text-gray-500">
+                  Loading...
+                </span>
+              ) : (
+                memoizedUserAndTimestamp
+              )}
+            </div>
+          </div>
+
+          <div className="p-4 shadow-inner space-y-2">
+            <div className="flex items-center mb-2">
+              <h2 className="text-2xl font-bold text-white leading-tight font-syncopate">
+                {title.length > 20 ? `${title.slice(0, 20)}...` : title}
+              </h2>
+            </div>
+
+            {/* Conditionally show description with truncation for large descriptions */}
+            <p className="text-base text-[#9CA3AF] mb-3 font-space-grotesk">
+              {description.length > 100
+                ? `${description.substring(0, 100)}...`
+                : description}
+            </p>
+
+            <div className="text-sm text-[#9CA3AF] font-jetbrains-mono mb-4 space-y-1">
+              <div>
+                <span className="font-semibold text-white">Category:</span>
+                <Link
+                  className="hover:underline"
+                  to={`/prompts/category/${category}`}
+                >
+                  {category.length > 10
+                    ? `${category.slice(0, 8)}...`
+                    : category}
+                </Link>
+              </div>
+              <div className="flex items-center">
+                <span className="font-semibold text-white">Rating:</span>
+                <Stars rating={rating} />
+                <span className="ml-2">({reviewsCount || 100} reviews)</span>
+              </div>
+
+              <div className="flex gap-1">{memoizedTags}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </EventLoggingButton>
   );
 });
 

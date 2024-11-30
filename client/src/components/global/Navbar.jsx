@@ -7,6 +7,7 @@ import { useAuthStore } from '../../store/authStore';
 import NotificationBell from './NotificationBell';
 import ProfileDropdown from '../base/ProfileDropdown';
 import '../../assets/css/base/font.css';
+import EventLoggingButton from './EventLoggingButton';
 
 const Navbar = ({ isAuthenticated }) => {
   const { isLoading, user, logout } = useAuthStore();
@@ -41,9 +42,17 @@ const Navbar = ({ isAuthenticated }) => {
             to={path}
             onClick={() => type === 'mobile' && setMenuOpen(false)}
           >
-            {path === '/'
-              ? 'Home'
-              : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+            {
+              <EventLoggingButton
+                category="navbar"
+                action="navigate"
+                label={`${path === '/' ? 'home' : path.slice(1)}`}
+              >
+                {path === '/'
+                  ? 'Home'
+                  : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+              </EventLoggingButton>
+            }
           </Link>
         </motion.div>
       );
@@ -116,7 +125,15 @@ const Navbar = ({ isAuthenticated }) => {
                 whileTap={{ scale: 0.98 }}
                 className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm px-4 py-1.5 rounded-lg transition-colors duration-200"
               >
-                <Link to="/login">Log in</Link>
+                <Link to="/login">
+                  <EventLoggingButton
+                    category="navbar"
+                    action="navigate"
+                    label="login-button"
+                  >
+                    Login
+                  </EventLoggingButton>
+                </Link>
               </motion.div>
             )}
           </div>

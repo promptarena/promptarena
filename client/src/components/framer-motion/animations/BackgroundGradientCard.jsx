@@ -4,6 +4,7 @@ import { BackgroundGradient } from '../ui/BackgroundGradient';
 import { formatRelativeTime } from '../../../utils/date';
 import { Link } from 'react-router-dom';
 import { getOptimizedImageUrl } from '../../../utils/imageOptimizer';
+import EventLoggingButton from '../../global/EventLoggingButton';
 
 export function BackgroundGradientCard({ post }) {
   console.log('post: ', post);
@@ -132,7 +133,9 @@ export function BackgroundGradientCard({ post }) {
           {content.slice(0, 80) + '...'}
         </p>
         <button className="inline-flex py-1 w-full items-center justify-center rounded-3xl border border-gray-800 bg-gradient-to-t from-[#8678f9] from-0% to-[#c7d2fe] font-medium text-gray-950 transition-colors focus:outline-none">
-          {buttonText || <Link to={`/blog/${post._id}`}>Read more</Link>}
+          <EventLoggingButton category="blog" action="view" label={title}>
+            {buttonText || <Link to={`/blog/${post._id}`}>Read more</Link>}
+          </EventLoggingButton>
         </button>
       </BackgroundGradient>
     </div>

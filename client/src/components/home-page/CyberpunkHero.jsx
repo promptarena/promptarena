@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Play, Sparkle, WandSparkles } from 'lucide-react';
 import ParallaxImage from '../framer-motion/animations/ParallaxImage';
 import { humanRobotMain, humanRobotMainBg } from '../../assets/img/homepage';
+import EventLoggingButton from '../global/EventLoggingButton';
 
 export default function CyberpunkHero() {
   const Yvalue = useParallaxY();
@@ -56,18 +57,29 @@ export default function CyberpunkHero() {
           </p>
           <div className="flex flex-nowrap justify-center md:space-x-6 space-x-2 mt-8">
             <Link to="/explore">
-              <CustomizableButton
-                // buttonText="Let's Get Started"
-                buttonText="Explore Now!"
-                buttonContainerStyles="md:px-6 text-nowrap px-4 md:py-[0.65rem] py-[0.55rem] text-xs md:text-base text-shadow rounded-full uppercase"
-                buttonStyles="group relative rounded-full p-0 transition-transform hover:scale-105"
-              />
+              <EventLoggingButton
+                category="navigation"
+                action="clicked"
+                label="explore"
+              >
+                <CustomizableButton
+                  // buttonText="Let's Get Started"
+                  buttonText="Explore Now!"
+                  buttonContainerStyles="md:px-6 text-nowrap px-4 md:py-[0.65rem] py-[0.55rem] text-xs md:text-base text-shadow rounded-full uppercase"
+                  buttonStyles="group relative rounded-full p-0 transition-transform hover:scale-105"
+                />
+              </EventLoggingButton>
             </Link>
             <Link to="/prompt/create">
-              <button className="md:px-6 px-5 text-nowrap md:py-[0.65rem] py-[0.73rem] md:text-base bg-[#1C2333]/80 rounded-full text-xs uppercase font-semibold hover:bg-[#1C2333] hover:scale-105 duration-slow transition-colors flex items-center gap-2">
+              <EventLoggingButton
+                category="navigation"
+                action="clicked"
+                label="create-prompt"
+                className="md:px-6 px-5 text-nowrap md:py-[0.65rem] py-[0.73rem] md:text-base bg-[#1C2333]/80 rounded-full text-xs uppercase font-semibold hover:bg-[#1C2333] hover:scale-105 duration-slow transition-colors flex items-center gap-2"
+              >
                 <WandSparkles size={20} />
                 <span>Create Prompt</span>
-              </button>
+              </EventLoggingButton>
             </Link>
           </div>
         </div>

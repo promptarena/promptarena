@@ -115,6 +115,7 @@ import { useUserProfileStore } from '../../store/userProfileStore';
 import { formatRelativeTime } from '../../utils/date';
 import '../../assets/css/prompt/MinimalPromptCard.css';
 import OptimizedImage from '../base/OptimizedImage';
+import EventLoggingButton from '../global/EventLoggingButton';
 
 // CollageImages component for rendering images in a grid
 const CollageImages = memo(({ images }) => (
@@ -171,58 +172,60 @@ const MinimalPromptCard = memo(({ prompt }) => {
   }, [seller.username, fetchUserProfileByUsername]);
 
   return (
-    <Link to={`/prompt/${promptId}`}>
-      <div className="card">
-        <div className="image-wrapper">
-          <CollageImages images={collageImages} />
-          <div className="label sm:py-[0.20rem] sm:px-[0.35rem] px-[0.25rem] py-[0.10rem] sm:text-[0.7rem] text-[0.6rem] shadow-2xl rounded-md glass-panel">
-            <Link to={`/prompts/category/${category}`}>{category}</Link>
+    <EventLoggingButton category="prompts" action="view" label={title}>
+      <Link to={`/prompt/${promptId}`}>
+        <div className="card">
+          <div className="image-wrapper">
+            <CollageImages images={collageImages} />
+            <div className="label sm:py-[0.20rem] sm:px-[0.35rem] px-[0.25rem] py-[0.10rem] sm:text-[0.7rem] text-[0.6rem] shadow-2xl rounded-md glass-panel">
+              <Link to={`/prompts/category/${category}`}>{category}</Link>
+            </div>
           </div>
-        </div>
-        <div className="overlay sm:p-[0.5rem] p-[0.3rem]">
-          <h4 className="title font-semibold text-sm md:text-base">
-            {title.length > 20 ? `${title.slice(0, 20)}...` : title}
-          </h4>
-          <div className="additional-info">
-            <div className="space-x-2 mb-1">
-              {tags.slice(0, 2).map((tag, idx) => (
-                <Link
-                  key={idx}
-                  to={`/prompts/tag/${tag}`}
-                  className="hover:underline"
-                >
-                  <span
-                    className={`badge sm:px-[0.30rem] px-[0.20rem] py-[0px] rounded bg-text ring-1 text-shadow sm:text-xs text-[10px] font-thin text-white ${idx === 0 ? 'ring-cyber-green/50' : 'ring-cyber-blue/50'}`}
+          <div className="overlay sm:p-[0.5rem] p-[0.3rem]">
+            <h4 className="title font-semibold text-sm md:text-base">
+              {title.length > 20 ? `${title.slice(0, 20)}...` : title}
+            </h4>
+            <div className="additional-info">
+              <div className="space-x-2 mb-1">
+                {tags.slice(0, 2).map((tag, idx) => (
+                  <Link
+                    key={idx}
+                    to={`/prompts/tag/${tag}`}
+                    className="hover:underline"
                   >
-                    {tag}
-                  </span>
-                </Link>
-              ))}
-            </div>
-            <div className="flex justify-between items-center sm:gap-2">
-              <div className="flex items-center space-x-1">
-                <User size={14} />
-                <span className="sm:text-xs text-[10px] text-nowrap">
-                  {isLoadingSellerProfile
-                    ? 'Loading...'
-                    : sellerProfile?.name || window.innerWidth > 425
-                      ? seller.username
-                      : seller.username.length > 10
-                        ? `${seller.username.slice(0, 6)}...`
-                        : seller.username || 'Anonymous'}
-                </span>
+                    <span
+                      className={`badge sm:px-[0.30rem] px-[0.20rem] py-[0px] rounded bg-text ring-1 text-shadow sm:text-xs text-[10px] font-thin text-white ${idx === 0 ? 'ring-cyber-green/50' : 'ring-cyber-blue/50'}`}
+                    >
+                      {tag}
+                    </span>
+                  </Link>
+                ))}
               </div>
-              <div className="flex items-center space-x-1">
-                <Clock size={14} />
-                <span className="sm:text-xs text-[10px] text-nowrap">
-                  {formatRelativeTime(createdAt)}
-                </span>
+              <div className="flex justify-between items-center sm:gap-2">
+                <div className="flex items-center space-x-1">
+                  <User size={14} />
+                  <span className="sm:text-xs text-[10px] text-nowrap">
+                    {isLoadingSellerProfile
+                      ? 'Loading...'
+                      : sellerProfile?.name || window.innerWidth > 425
+                        ? seller.username
+                        : seller.username.length > 10
+                          ? `${seller.username.slice(0, 6)}...`
+                          : seller.username || 'Anonymous'}
+                  </span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <Clock size={14} />
+                  <span className="sm:text-xs text-[10px] text-nowrap">
+                    {formatRelativeTime(createdAt)}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </EventLoggingButton>
   );
 });
 

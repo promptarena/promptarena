@@ -5,6 +5,7 @@ import RandomImage from '../../utils/RandomImage';
 import { useContactStore } from '../../store/contactStore';
 import toast from 'react-hot-toast';
 import ErrorThrower from '../base/ErrorThrower';
+import EventLoggingButton from '../global/EventLoggingButton';
 
 export default function GetInTouch() {
   const [firstName, setFirstName] = useState('');
@@ -159,16 +160,22 @@ export default function GetInTouch() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 2.2 }}
               >
-                {isLoading ? (
-                  <span className="text-white gap-5 flex-center">
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Taking it to the new heights...!
-                  </span>
-                ) : (
-                  <span className="text-white gap-5 flex-center">
-                    Take it to new heights <ArrowRight className="w-5 h-5" />
-                  </span>
-                )}
+                <EventLoggingButton
+                  category="contact"
+                  action="submit"
+                  label={`${firstName} ${lastName} - ${email} - ${phone} - ${message}`}
+                >
+                  {isLoading ? (
+                    <span className="text-white gap-5 flex-center">
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Taking it to the new heights...!
+                    </span>
+                  ) : (
+                    <span className="text-white gap-5 flex-center">
+                      Take it to new heights <ArrowRight className="w-5 h-5" />
+                    </span>
+                  )}
+                </EventLoggingButton>
               </motion.button>
             </motion.form>
           </div>

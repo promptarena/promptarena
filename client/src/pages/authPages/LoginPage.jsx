@@ -8,6 +8,7 @@ import { BorderBeam } from '../../components/framer-motion/ui/BorderBeam';
 import ShinyButton from '../../components/framer-motion/animations/ShinyButton';
 import SpotlightButton from '../../components/framer-motion/ui/SpotlightButton';
 import ErrorThrower from '../../components/base/ErrorThrower';
+import EventLoggingButton from '../../components/global/EventLoggingButton';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -69,30 +70,43 @@ const LoginPage = () => {
 
                 {error && <ErrorThrower error={error} />}
 
-                <ShinyButton classNames="rounded-md" addType="submit">
-                  <motion.span
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className=" transition duration-200 "
-                    type="submit"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <Loader className="w-6 h-6 animate-spin  mx-auto" />
-                    ) : (
-                      'Login'
-                    )}
-                  </motion.span>
-                </ShinyButton>
+                <EventLoggingButton
+                  category="auth"
+                  action="click"
+                  label="login"
+                  className="w-full"
+                >
+                  <ShinyButton classNames="rounded-md" addType="submit">
+                    <motion.span
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className=" transition duration-200 "
+                      type="submit"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <Loader className="w-6 h-6 animate-spin  mx-auto" />
+                      ) : (
+                        'Login'
+                      )}
+                    </motion.span>
+                  </ShinyButton>
+                </EventLoggingButton>
 
                 <div className="lg:w-[70%] w-[90%]  md:pl-10 mx-auto">
                   <Link to="/forget-password">
-                    <SpotlightButton
-                      classNamesForAnimatedSpan="absolute bg-gradient-to-r from-blue-100 to-cyan-100 left-[50%] top-[50%] h-32 w-44 ring-2 -translate-x-[50%] -translate-y-[50%] rounded-full"
-                      classNamesForButtonContainer="rounded mt-4 ring-1 px-4 py-[1px] ring-[1px] shadow-glow-primary ring-dark-primary focus:ring-blue-400 font-medium lg:w-[90%] w-full text-white"
+                    <EventLoggingButton
+                      category="auth"
+                      action="navigate"
+                      label="forget-password"
                     >
-                      Forgot Password?{' '}
-                    </SpotlightButton>
+                      <SpotlightButton
+                        classNamesForAnimatedSpan="absolute bg-gradient-to-r from-blue-100 to-cyan-100 left-[50%] top-[50%] h-32 w-44 ring-2 -translate-x-[50%] -translate-y-[50%] rounded-full"
+                        classNamesForButtonContainer="rounded mt-4 ring-1 px-4 py-[1px] ring-[1px] shadow-glow-primary ring-dark-primary focus:ring-blue-400 font-medium lg:w-[90%] w-full text-white"
+                      >
+                        Forgot Password?{' '}
+                      </SpotlightButton>
+                    </EventLoggingButton>
                   </Link>
                 </div>
               </form>
@@ -104,7 +118,13 @@ const LoginPage = () => {
                   to="/signup"
                   className="text-primary duration-slow dark:text-primary-dark hover:underline"
                 >
-                  Sign Up{' '}
+                  <EventLoggingButton
+                    category="auth"
+                    action="navigate"
+                    label="signup"
+                  >
+                    Sign Up
+                  </EventLoggingButton>
                 </Link>
               </p>
             </div>
