@@ -4,11 +4,11 @@ import { siteName } from '../../config/envConfig';
 import { useEffect, useState } from 'react';
 import { getCurrentSiteUrl } from '../../utils/getCurrentSiteUrl';
 
-const defaultTitle = `${siteName} - Free AI Prompts`;
+const defaultTitle = `${siteName} - The Best Free AI Prompt Marketplace`;
 const defaultDescription = `Discover and use free AI prompts for text generation, image creation, and more. Unleash your creativity with ${siteName}'s free prompt library.`;
 const defaultImage =
   'https://promptarena.vercel.app/promptarena/images/promptarena-og-card.jpg';
-const defaultAuthorName = 'mathanraj murugesan';
+const defaultAuthorName = 'Mathanraj Murugesan';
 
 const SEO = ({
   title,
