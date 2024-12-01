@@ -46,7 +46,7 @@ const SignUpPage = () => {
       />
       <div className="  w-full ring-0 shadow-glow-primary rounded-[20px_70px] ring-cyber-purple">
         <div className=" w-full bg-plain-black-background rounded-[20px_70px] dark:bg-plain-black-background bg-opacity-50 glass-panel shadow-glow-secondary dark:shadow-glow-secondary overflow-hidden">
-          <div className="p-5">
+          <div className="p-5 pt-0">
             <h2 className="h3 text-text-subdued dark:text-dark-text font-share-tech-mono text-center">
               Create Account
             </h2>

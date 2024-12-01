@@ -115,17 +115,14 @@ const GoogleButtons = ({ chooseBtn = 'login' }) => {
   };
 
   return (
-    <div
-      className={
-        'rounded-md w-full border-none bg-[linear-gradient(325deg,#0044ff_0%,#2ccfff_55%,#0044ff_90%)] bg-[280%_auto] font-medium text-white shadow-[0px_0px_20px_rgba(71,184,255,0.5),0px_5px_5px_-1px_rgba(58,125,233,0.25),inset_4px_4px_8px_rgba(175,230,255,0.5),inset_-4px_-4px_8px_rgba(19,95,216,0.35)] transition-[background] duration-700 hover:bg-right-top focus:outline-none focus:ring-blue-400 focus:ring-offset-1 focus:ring-offset-white focus-visible:ring-2 dark:focus:ring-blue-500 dark:focus:ring-offset-black'
-      }
-    >
+    <>
       {chooseBtn === 'login' ? (
         <GoogleLogin
           auto_select
           shape="rectangular"
           type="standard"
           useOneTap
+          width="100%"
           text="signin_with"
           theme="filled_blue"
           onSuccess={handleGoogleLogin}
@@ -136,6 +133,7 @@ const GoogleButtons = ({ chooseBtn = 'login' }) => {
           auto_select
           shape="rectangular"
           type="standard"
+          width="100%"
           useOneTap
           text="signup_with"
           theme="filled_blue"
@@ -143,7 +141,7 @@ const GoogleButtons = ({ chooseBtn = 'login' }) => {
           onError={handleGoogleSignup}
         />
       )}
-    </div>
+    </>
   );
 };
 
