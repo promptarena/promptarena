@@ -1,3 +1,4 @@
+const userModel = require('../models/user.model')
 const generateUniqueUsername = async (baseName) => {
   let username = baseName.toLowerCase().replace(/\s+/g, '');
   let isUsernameTaken = await userModel.findOne({ username });
@@ -8,6 +9,7 @@ const generateUniqueUsername = async (baseName) => {
     isUsernameTaken = await userModel.findOne({ username });
     count++;
   }
+  
   
   console.log('Generated Unique username: ', username);
   return username;
