@@ -71,7 +71,7 @@ const LoginPage = () => {
 
                 {error && <ErrorThrower error={error} />}
 
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 justify-center items-center">
                   <EventLoggingButton
                     category="auth"
                     action="click"

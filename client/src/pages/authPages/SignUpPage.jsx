@@ -89,7 +89,7 @@ const SignUpPage = () => {
                 <PasswordStrengthMeter password={password} />
               </div>
 
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 justify-center items-center">
                 <ShinyButton classNames="rounded-md" addType="submit">
                   <EventLoggingButton
                     category="auth"
@@ -113,6 +113,7 @@ const SignUpPage = () => {
                 </ShinyButton>
 
                 <EventLoggingButton
+                
                   className="w-full"
                   category="auth"
                   action="googleClick"
