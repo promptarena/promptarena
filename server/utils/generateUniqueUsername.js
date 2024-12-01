@@ -10,7 +10,6 @@ const generateUniqueUsername = async (baseName) => {
     count++;
   }
   
-  
   console.log('Generated Unique username: ', username);
   return username;
 };

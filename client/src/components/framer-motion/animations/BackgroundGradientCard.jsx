@@ -7,8 +7,7 @@ import { getOptimizedImageUrl } from '../../../utils/imageOptimizer';
 import EventLoggingButton from '../../global/EventLoggingButton';
 
 export function BackgroundGradientCard({ post }) {
-  console.log('post: ', post);
-  const { media, title, author, content, createdAt, buttonText } = post;
+  const { media, title, author, createdAt, buttonText } = post;
   const images = media?.images || [];
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -24,8 +23,8 @@ export function BackgroundGradientCard({ post }) {
 
   return (
     <div>
-      <BackgroundGradient className="rounded-[22px] p-4 sm:p-5 bg-white dark:bg-zinc-900">
-        <div className="relative w-full overflow-hidden rounded-2xl aspect-square">
+      <BackgroundGradient className="rounded-[22px] max-h-[500px] p-4 sm:p-5 bg-white dark:bg-zinc-900">
+        <div className="relative w-full overflow-hidden ring-1 ring-neutral-400 rounded-2xl aspect-square">
           <AnimatePresence initial={false}>
             {images.length > 0 && (
               <motion.img
@@ -69,10 +68,7 @@ export function BackgroundGradientCard({ post }) {
 
         {/* Card Content */}
         <div className="py-3 text-sm font-regular text-gray-900 flex items-center justify-between">
-          <a
-            href="#"
-            className="flex flex-row items-center hover:text-neutral-200 mr-3"
-          >
+          <span className="flex flex-row items-center hover:text-neutral-200 mr-3">
             <svg
               className="text-gray-900 dark:text-neutral-400"
               fill="currentColor"
@@ -97,7 +93,7 @@ export function BackgroundGradientCard({ post }) {
                 {author.username}
               </Link>
             </span>
-          </a>
+          </span>
           <span className="mr-3 flex flex-row items-center">
             <svg
               className="text-gray-900 dark:text-neutral-400"
@@ -127,11 +123,15 @@ export function BackgroundGradientCard({ post }) {
         </div>
         <hr />
         <p className="text-base sm:text-xl text-black mt-3 mb-2 dark:text-neutral-200">
-          {title.slice(0, 30) + '...'}
+          {title.slice(0, 40) + '...'}
         </p>
-        <p className="text-sm text-neutral-600 mb-2 dark:text-neutral-400">
-          {content.slice(0, 80) + '...'}
-        </p>
+        {/* <p className="text-sm text-neutral-600 mb-2 dark:text-neutral-400">
+          <div
+            className="blog-content"
+            dangerouslySetInnerHTML={{ __html: shortDescription }}
+          ></div>
+        </p> */}
+
         <button className="inline-flex py-1 w-full items-center justify-center rounded-3xl border border-gray-800 bg-gradient-to-t from-[#8678f9] from-0% to-[#c7d2fe] font-medium text-gray-950 transition-colors focus:outline-none">
           <EventLoggingButton category="blog" action="view" label={title}>
             {buttonText || <Link to={`/blog/${post._id}`}>Read more</Link>}

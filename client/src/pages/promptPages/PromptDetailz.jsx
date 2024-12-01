@@ -501,7 +501,6 @@ export default function PromptDetailz() {
     averageRatingForPrompt,
   } = useReviewStore();
   const { user, isAuthenticated } = useAuthStore();
-  console.log('user: ', user);
   const [editReview, setEditReview] = useState(null);
 
   // Unconditional useEffect calls
@@ -509,30 +508,6 @@ export default function PromptDetailz() {
     fetchPromptById(promptId);
     fetchReviewsForPrompt(promptId);
   }, [promptId, fetchPromptById, fetchReviewsForPrompt]);
-
-  // useEffect(() => {
-  //   if (currentPrompt) {
-  //     const fetchFilteredPrompts = async () => {
-  //       setLoadingFiltered(true);
-  //       try {
-  //         const params = {
-  //           category: currentPrompt.category,
-  //           tags: currentPrompt.tags.join(','),
-  //         };
-  //         const response = await axiosInstance.get('/prompt/all', { params });
-  //         setFilteredPrompts(
-  //           response.data?.data?.prompts?.filter(p => p._id !== promptId) || []
-  //         );
-
-  //       } catch (error) {
-  //         handleError(error, console.error);
-  //       } finally {
-  //         setLoadingFiltered(false);
-  //       }
-  //     };
-  //     fetchFilteredPrompts();
-  //   }
-  // }, [currentPrompt, promptId]);
 
   const rating = useMemo(
     () =>
@@ -565,9 +540,59 @@ export default function PromptDetailz() {
     );
   if (!currentPrompt) {
     return (
-      <div>
-      <LoadingSpinner />
-      </div>
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="w-full min-h-screen relative bg-gradient-to-b from-[#1a0b2e] to-[#2d1b4e]"
+      >
+        <div className="absolute rotate-180 bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f3e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] z-[-1] opacity-80"></div>
+
+        <div className="flex flex-col-reverse container mx-auto lg:flex-row text-white lg:py-5 pt-5 pb-0">
+          {/* Left Side Skeleton */}
+          <div className="flex flex-col w-full lg:w-1/2 pr-0 lg:pr-8 mb-0 lg:mb-0">
+            {/* Title Placeholder */}
+            <div className="bg-gray-700 h-8 w-3/4 rounded-md animate-pulse mt-5"></div>
+
+            {/* Description Placeholder */}
+            <div className="space-y-2 mt-4">
+              <div className="bg-gray-700 h-4 w-full rounded-md animate-pulse"></div>
+              <div className="bg-gray-700 h-4 w-5/6 rounded-md animate-pulse"></div>
+            </div>
+
+            {/* Button Placeholder */}
+            <div className="bg-gray-700 h-10 w-32 rounded-md animate-pulse mt-6"></div>
+
+            {/* Prompt Section */}
+            <div className="bg-gray-800 rounded-2xl p-4 mt-6 space-y-2 animate-pulse">
+              <div className="bg-gray-600 h-4 w-20 rounded-md"></div>
+              <div className="bg-gray-600 h-4 w-5/6 rounded-md"></div>
+            </div>
+
+            {/* Tags Placeholder */}
+            <div className="mt-4 flex space-x-2">
+              <div className="bg-purple-600 h-6 w-12 rounded-full animate-pulse"></div>
+              <div className="bg-purple-600 h-6 w-16 rounded-full animate-pulse"></div>
+              <div className="bg-purple-600 h-6 w-10 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+
+          {/* Right Side Skeleton */}
+          <div className="w-full lg:w-1/2 relative lg:sticky top-0 md:top-28 h-80 lg:h-[80vh]">
+            <div className="relative h-full flex justify-center items-center rounded-3xl overflow-hidden">
+              {/* Image Placeholder */}
+              <div className="bg-gray-700 h-full w-full rounded-3xl animate-pulse"></div>
+
+              {/* Navigation Placeholder */}
+              <div className="absolute bottom-4 flex items-center gap-2">
+                <div className="bg-gray-800 h-10 w-10 rounded-full animate-pulse"></div>
+                <div className="bg-gray-800 h-6 w-20 rounded-full animate-pulse"></div>
+                <div className="bg-gray-800 h-10 w-10 rounded-full animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
     );
   }
 
@@ -670,22 +695,6 @@ export default function PromptDetailz() {
               )}
             </div>
 
-            {/* Tags */}
-            {/* <h1>
-            <span className="text-gray-400 h6 font-extrabold">Tags:</span>
-          </h1>
-          <div className="bg-purple-900 rounded-3xl px-6 py-5 text-white mb-8">
-            <div className="flex flex-wrap gap-3">
-              {currentPrompt.tags.map(tag => (
-                <Link key={tag} to={`/prompts/tag/${tag}`}>
-                  <span className="bg-purple-800 shadow-2xl text-shadow px-4 py-2 rounded-full text-sm">
-                    #{tag}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div> */}
-
             {/* Prompt */}
             {isAuthenticated ? (
               currentPrompt && (
@@ -695,19 +704,6 @@ export default function PromptDetailz() {
                       <div>
                         <div className="flex items-center justify-between gap-4">
                           <h3 className="font-semibold ">Prompt:</h3>
-                          {/* Copy Button */}
-                          {/* <button
-                          onClick={() => {
-                            navigator.clipboard.writeText(currentPrompt.prompt);
-                            {
-                              toast.success('Prompt copied to clipboard');
-                            }
-                          }}
-                          className="bg-purple-800 shadow-2xl text-white px-2 py-2 rounded-lg hover:bg-purple-800 transition-colors"
-                          // className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400 transition-colors"
-                        >
-                          <Copy className="w-4 h-4" />
-                        </button> */}
 
                           <motion.button
                             whileTap={{
@@ -790,9 +786,7 @@ export default function PromptDetailz() {
                   <div className="flex items-center gap-4">
                     <div>
                       <h3 className="font-semibold">Tags:</h3>
-                      {/* <p className="text-sm text-gray-400">
-                      {formatDate(currentPrompt.createdAt)}
-                    </p> */}
+
                       <div className="flex flex-wrap space-x-2">
                         {currentPrompt.tags.map(tag => (
                           <Link key={tag} to={`/prompts/tag/${tag}`}>
@@ -842,11 +836,7 @@ export default function PromptDetailz() {
                   repeat: Infinity,
                 }}
               />
-              {/* <img
-              src={currentPrompt.media.images[currentSlide - 1]}
-              alt={`Slide ${currentSlide}`}
-              className="w-full h-auto object-cover rounded-3xl aspect-square"
-            /> */}
+          
               <AnimatePresence mode="wait">
                 {currentPrompt.media.images.length > 0 && (
                   <motion.img

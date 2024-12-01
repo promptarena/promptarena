@@ -73,7 +73,7 @@ const NotificationBell = () => {
       <AnimatePresence>
         {showDropdown && (
           <motion.div
-            className="origin-top-right absolute right-0 mt-2 sm:w-80 3xs:w-56 2xs:w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            className="origin-top-right absolute right-0 mt-2 sm:w-80 3xs:w-56 2xs:w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             variants={dropdownVariants}
             initial="hidden"
             animate="visible"

@@ -131,3 +131,98 @@ body {
     background-position: 200% 0;
   }
 }
+
+
+.blog-content {
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ffffff;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3 {
+  margin-top: 1.5em;
+  font-weight: bold;
+}
+
+.blog-content h1 {
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.blog-content h2 {
+  font-size: 1.75rem;
+  color: #ffffff ;
+}
+
+.blog-content h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.blog-content p {
+  margin-top: 1em;
+  color: #ffffff;
+  margin-bottom: 1em;
+}
+
+.blog-content a {
+  color: #0084ff !important; /* Indigo blue for links */
+  text-decoration: underline;
+}
+
+.blog-content a:hover {
+  color: #2c5282; /* Darker blue on hover */
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin-left: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.blog-content ul li,
+.blog-content ol li {
+  margin-bottom: 0.5em;
+}
+
+.blog-content strong {
+  font-weight: bold;
+}
+
+.blog-content em {
+  font-style: italic;
+}
+
+.blog-content img {
+  max-width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+}
+
+.blog-content blockquote {
+  font-style: italic;
+  color: #f0f0f0;
+  border-left: 4px solid #e2e8f0;
+  padding-left: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+@media (max-width: 768px) {
+  .blog-content h1 {
+    font-size: 1.75rem;
+  }
+
+  .blog-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .blog-content p {
+    font-size: 0.9rem;
+  }
+}

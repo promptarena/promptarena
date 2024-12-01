@@ -22,6 +22,8 @@ import OptimizedImage from '../base/OptimizedImage';
 import SEO from '../seo/SEO';
 import { getCurrentSiteUrl } from '../../utils/getCurrentSiteUrl';
 import Footer from '../global/Footer';
+import { FaWhatsapp } from 'react-icons/fa';
+import DOMPurify from 'dompurify';
 
 export default function ModernBlogPost() {
   const { blogId } = useParams();
@@ -56,29 +58,6 @@ export default function ModernBlogPost() {
   }
 
   const { title, media, content } = singleBlogPost;
-  console.log('content: ', content);
-  console.log('media: ', media);
-
-  console.log('singleBlogPost Author: ', singleBlogPost.author);
-
-  const paragraphs = content
-    ? content.split('\n').filter(para => para.trim() !== '')
-    : []; // Only split and filter if content exists
-
-  const allButLastParagraph =
-    paragraphs.length > 1
-      ? paragraphs.slice(0, -1) // Exclude the last paragraph if more than one paragraph exists
-      : []; // Otherwise, return an empty array for allButLastParagraph
-
-  const lastParagraph =
-    paragraphs.length > 0
-      ? paragraphs[paragraphs.length - 1] // Extract the last paragraph if any paragraph exists
-      : null; // Otherwise, set lastParagraph to null
-
-  // Debugging logs
-  console.log('Paragraphs:', paragraphs);
-  console.log('All But Last Paragraph:', allButLastParagraph);
-  console.log('Last Paragraph:', lastParagraph);
 
   const shareUrl = window.location.href;
   console.log('shareUrl: ', shareUrl);
@@ -97,11 +76,9 @@ export default function ModernBlogPost() {
       case 'linkedin':
         shareLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
         break;
-      case 'instagram':
-        toast.error(
-          'Instagram does not support direct sharing from web apps. Please use the app.'
-        );
-        return;
+      case 'whatsapp':
+        shareLink = `https://wa.me/?text=${encodeURIComponent(title)}%20${encodeURIComponent(shareUrl)}`;
+        break;
       default:
         break;
     }
@@ -123,7 +100,7 @@ export default function ModernBlogPost() {
     updatedAt: singleBlogPost.updatedAt,
   };
 
-  console.log(' blogPost', blogPost);
+  const sanitizedContent = DOMPurify.sanitize(blogPost.content);
 
   return (
     <>
@@ -170,13 +147,17 @@ export default function ModernBlogPost() {
             </div>
 
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-6">
+            {/* <div className="lg:col-span-2 space-y-6">
               {allButLastParagraph.map((para, index) => (
                 <p key={index} className="text-lg leading-relaxed">
                   {para}
                 </p>
               ))}
-            </div>
+            </div> */}
+            <div
+              className="blog-content lg:col-span-2 -mt-10"
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            ></div>
 
             {/* Sidebar Content */}
             <div className="space-y-8">
@@ -224,9 +205,9 @@ export default function ModernBlogPost() {
                     onClick={() => handleShare('linkedin')}
                     className="w-6 h-6 text-blue-600 cursor-pointer hover:text-blue-500"
                   />
-                  <Instagram
-                    onClick={() => handleShare('instagram')}
-                    className="w-6 h-6 text-pink-500 cursor-pointer hover:text-pink-400"
+                  <FaWhatsapp
+                    onClick={() => handleShare('whatsapp')}
+                    className="w-6 h-6 text-green-400 cursor-pointer hover:text-green-300"
                   />
                 </div>
               </div>
@@ -253,11 +234,29 @@ export default function ModernBlogPost() {
             {/* Additional Content */}
             <div className="lg:col-span-2 space-y-6">
               <h2 className="text-3xl font-bold mt-8">{title}</h2>
-              {lastParagraph && (
-                <p className="text-lg leading-relaxed">{lastParagraph}</p>
-              )}
+
+              <div className="flex items-center space-x-4">
+                <img
+                  src={singleBlogPost.author.profileImage}
+                  alt={singleBlogPost.author.name}
+                  className="w-12 h-12 rounded-full"
+                />
+                <div>
+                  <p className="text-lg font-semibold">
+                    {singleBlogPost.author.name}
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    {formatCustomDate(
+                      singleBlogPost.author.createdAt,
+                      'DD - MMMM - YYYY'
+                    )}
+                  </p>
+                </div>
+              </div>
+
               <blockquote className="border-l-4 border-purple-500 pl-4 my-6 italic text-xl">
-                Quotes go here
+                The future of creativity is collaborative, with humans and AI
+                working together to achieve new heights of imagination.
               </blockquote>
             </div>
 

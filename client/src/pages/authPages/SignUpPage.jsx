@@ -113,6 +113,7 @@ const SignUpPage = () => {
                 </ShinyButton>
 
                 <EventLoggingButton
+                  className="md:w-[100%]"
                   category="auth"
                   action="googleClick"
                   label="google-sign-up-button"

@@ -296,7 +296,7 @@ const HomePage = () => {
   if (isLoading) {
     return (
       <section className="h-screen relative z-[51 ]">
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-0">
           <CyberpunkHero />
         </div>
       </section>

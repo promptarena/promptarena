@@ -38,7 +38,7 @@ const LoadingSpinner = () => {
   );
 
   return (
-    <div className="flex-center flex-col w-screen h-screen bg-dark-background overflow-hidden text-white">
+    <div className="flex-center flex-col w-full h-screen bg-dark-background overflow-hidden text-white">
       {/* Lottie Animation with Rotation Effect */}
       <MemoizedMotionDiv {...motionDivProps} className="w-1/2 max-w-xs">
         <MemoizedLottie
@@ -53,8 +53,9 @@ const LoadingSpinner = () => {
         {...motionTextProps}
         className="mt-6 text-lg container mx-auto font-semibold text-center tracking-wide"
       >
-        <span className="inline-block animate-[typing_2s_steps(30,end)_infinite] overflow-hidden whitespace-nowrap border-r-2 border-white">
+        <span className="text-shadow tracking-widest">
           Hang tight! Setting things up just for you...
+          <br /> Quiet, please!
         </span>
       </motion.div>
     </div>
