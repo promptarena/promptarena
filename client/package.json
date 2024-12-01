@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@react-oauth/google": "^0.12.1",
     "@studio-freight/lenis": "^1.0.42",
     "@tsparticles/react": "^3.0.0",
     "auth": "file:..",

@@ -10,6 +10,7 @@ import { BorderBeam } from '../../components/framer-motion/ui/BorderBeam';
 import ShinyButton from '../../components/framer-motion/animations/ShinyButton';
 import SpotlightButton from '../../components/framer-motion/ui/SpotlightButton';
 import EventLoggingButton from '../../components/global/EventLoggingButton';
+import GoogleLoginButton from '../../components/global/GoogleLoginButton';
 
 const SignUpPage = () => {
   const [username, setUsername] = useState('');
@@ -88,27 +89,38 @@ const SignUpPage = () => {
                 <PasswordStrengthMeter password={password} />
               </div>
 
-              <ShinyButton classNames="rounded-md" addType="submit">
-                <EventLoggingButton
-                  category="auth"
-                  action="click"
-                  label="sign-up-button"
-                >
-                  <motion.span
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className=" transition duration-200 "
-                    type="submit"
-                    disabled={isLoading}
+              <div className="flex flex-col gap-3">
+                <ShinyButton classNames="rounded-md" addType="submit">
+                  <EventLoggingButton
+                    category="auth"
+                    action="click"
+                    label="sign-up-button"
                   >
-                    {isLoading ? (
-                      <Loader className="w-6 h-6 animate-spin  mx-auto" />
-                    ) : (
-                      'Sign Up'
-                    )}
-                  </motion.span>
+                    <motion.span
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className=" transition duration-200 "
+                      type="submit"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <Loader className="w-6 h-6 animate-spin  mx-auto" />
+                      ) : (
+                        'Sign Up'
+                      )}
+                    </motion.span>
+                  </EventLoggingButton>
+                </ShinyButton>
+
+                <EventLoggingButton
+                  className="w-full"
+                  category="auth"
+                  action="googleClick"
+                  label="google-sign-up-button"
+                >
+                  <GoogleLoginButton chooseBtn="signup" />
                 </EventLoggingButton>
-              </ShinyButton>
+              </div>
             </form>
           </div>
           <div className="px-8 py-0  bg-opacity-50 flex justify-center">

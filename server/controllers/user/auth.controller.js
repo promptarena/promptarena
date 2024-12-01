@@ -4,7 +4,6 @@ const {
   sendPasswordResetEmail,
   sendResetSuccessEmail,
 } = require('../../services/emailService');
-const { CLIENT_URL, APP_NAME } = require('../../config/envConfig');
 const { hashPassword, comparePassword } = require('../../utils/passwordUtils');
 const {
   generateTokenAndSetCookie,
@@ -17,6 +16,84 @@ const {
   sendSuccessResponse,
 } = require('../../utils/responseUtils');
 const notificationModel = require('../../models/notification.model');
+const { OAuth2Client } = require('google-auth-library');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const {
+  CLIENT_URL,
+  APP_NAME,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+} = require('../../config/envConfig');
+
+// Configure Google OAuth
+const client = new OAuth2Client(GOOGLE_CLIENT_ID);
+
+// Configure Passport Google Strategy
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      callbackURL: `${CLIENT_URL}/api/v1/auth/google/callback`,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        console.log('Profile:', profile);
+        const { id, displayName, emails, photos } = profile;
+
+        // Check if the user already exists
+        let user = await userModel.findOne({ googleId: id });
+        console.log('user: ', user);
+
+        if (!user) {
+          // Create new user with Google profile information
+          user = await userModel.create({
+            googleId: id,
+            username: displayName,
+            email: emails[0].value,
+            profilePicture: photos[0].value,
+            isVerified: true, // Google accounts are inherently verified
+            lastLogin: Date.now(),
+          });
+
+          // Send welcome email
+          await sendWelcomeEmail(user.email, user.username);
+
+          // Create a notification for the new user
+          await notificationModel.create({
+            user: user._id,
+            message: `Welcome to ${APP_NAME}, ${user.username}!`,
+            read: false,
+          });
+        }
+
+        user.lastLogin = Date.now();
+        await user.save();
+
+        done(null, user);
+      } catch (error) {
+        done(error, null);
+      }
+    }
+  )
+);
+
+// Serialize user for session storage
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// Deserialize user from session
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await userModel.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
+});
+
 module.exports = {
   signup: async (req, res, next) => {
     const { username, email, password } = req.body;
@@ -62,7 +139,7 @@ module.exports = {
       if (!user) {
         return handleError(next, 'User not created', 400);
       }
-      
+
       console.log(user);
       console.log(user._id);
       console.log(res);
@@ -92,6 +169,73 @@ module.exports = {
         error.message || 'Server Error Comes in Signup Controller',
         400
       );
+    }
+  },
+
+  googleAuth: async (req, res, next) => {
+    const { token } = req.body;
+
+    if (!token) {
+      return handleError(next, 'Google token is required', 400);
+    }
+
+    try {
+      // Verify the Google token
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: GOOGLE_CLIENT_ID,
+      });
+
+      const payload = ticket.getPayload();
+      console.log('Payload:', payload);
+
+      const { sub: googleId, email, name, picture } = payload;
+
+      // Check if user already exists
+      let user = await userModel.findOne({ googleId });
+
+      if (!user) {
+        try {
+          user = await userModel.create({
+            googleId,
+            email,
+            username: name.toLowerCase().replace(/\s+/g, ''),
+            name,
+            profileImage: picture,
+            isVerified: true,
+            lastLogin: Date.now(),
+          });
+
+          console.log('new user', user);
+
+          // Send welcome email
+          await sendWelcomeEmail(user.email, user.username);
+
+          // Create a welcome notification for new users
+          await notificationModel.create({
+            user: user._id,
+            message: `Welcome to ${APP_NAME}, ${user.username}!`,
+            read: false,
+          });
+        } catch (error) {
+          if (error.code === 11000) {
+            return handleError(next, 'Username already exists', 400, error);
+          }
+
+          throw error;
+        }
+      } else {
+        // Update the last login time for existing users
+        user.lastLogin = Date.now();
+        await user.save();
+      }
+      // Generate a JWT and set it in cookies
+      generateTokenAndSetCookie(res, user._id);
+
+      return sendSuccessResponse(res, 'Google login success', user, 200);
+    } catch (error) {
+      console.log('error in google auth', error);
+      return handleError(next, 'Failed to authenticate with Google', 500);
     }
   },
 

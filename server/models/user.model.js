@@ -25,7 +25,14 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
+      required: function () {
+        return !this.googleId; // Require password only if googleId is not present
+      },
+    },
+    googleId: {
+      type: String, // Google user ID
+      unique: true,
+      sparse: true, // Allows multiple users without a Google ID
     },
     phoneNumber: {
       type: String,

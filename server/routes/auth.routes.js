@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { signup, verifyEmail, login, forgotPassword, resetPassword, getUser, logout } = require("../controllers/user/auth.controller");
+const { signup, verifyEmail, login, forgotPassword, resetPassword, getUser, logout, googleAuth } = require("../controllers/user/auth.controller");
 const authMiddleware = require("../middlewares/authMiddleware");
 const router = Router();
 router.get("/", (req, res) => {
@@ -24,5 +24,8 @@ router.post("/forgot-password", forgotPassword);
 router.post("/reset-password/:token", resetPassword);
 // Logout route
 router.post("/logout", logout);
+// Google auth route
+router.post('/google', googleAuth); // POST route for handling Google login/signup
+
 
 module.exports = router;

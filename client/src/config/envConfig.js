@@ -1,11 +1,11 @@
 // src/config/envConfig.js
 
-
 // Set the site name
 export const siteName = process.env.PUBLIC_SITE_NAME || 'PromptArena';
 //google analytics
 export const googleTrackingId = process.env.PUBLIC_GOOGLE_TRACKING_ID;
-console.log('googleTrackingId: ', googleTrackingId);
+export const googleClientId = process.env.PUBLIC_GOOGLE_CLIENT_ID;
+
 // Set API URL
 export const apiUrl =
   import.meta.env.MODE === 'development'

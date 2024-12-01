@@ -56,12 +56,6 @@ const NotificationBell = () => {
     deleteNotification(notificationId);
   };
 
-  // const handleDeleteAllNotifications = () => {
-  //   if (window.confirm('Are you sure you want to delete all notifications?')) {
-  //     deleteAllNotifications();
-  //   }
-  // };
-
   const handleDeleteAllNotifications = () => {
     // Replacing window.confirm with the custom confirm modal
     customConfirm('Are you sure you want to delete all notifications?', () => {
@@ -79,7 +73,7 @@ const NotificationBell = () => {
       <AnimatePresence>
         {showDropdown && (
           <motion.div
-            className="origin-top-right absolute right-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            className="origin-top-right absolute right-0 mt-2 sm:w-80 3xs:w-56 2xs:w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             variants={dropdownVariants}
             initial="hidden"
             animate="visible"

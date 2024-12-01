@@ -9,6 +9,7 @@ import ShinyButton from '../../components/framer-motion/animations/ShinyButton';
 import SpotlightButton from '../../components/framer-motion/ui/SpotlightButton';
 import ErrorThrower from '../../components/base/ErrorThrower';
 import EventLoggingButton from '../../components/global/EventLoggingButton';
+import GoogleLoginButton from '../../components/global/GoogleLoginButton';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -49,7 +50,7 @@ const LoginPage = () => {
               <form
                 className="max-w-md mx-auto"
                 onSubmit={handleLogin}
-                autoComplete="true"
+                autoComplete="false"
               >
                 <Input
                   icon={Mail}
@@ -70,32 +71,43 @@ const LoginPage = () => {
 
                 {error && <ErrorThrower error={error} />}
 
-                <EventLoggingButton
-                  category="auth"
-                  action="click"
-                  label="login"
-                  className="w-full"
-                >
-                  <ShinyButton classNames="rounded-md" addType="submit">
-                    <motion.span
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className=" transition duration-200 "
-                      type="submit"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <Loader className="w-6 h-6 animate-spin  mx-auto" />
-                      ) : (
-                        'Login'
-                      )}
-                    </motion.span>
-                  </ShinyButton>
-                </EventLoggingButton>
+                <div className="flex flex-col gap-3">
+                  <EventLoggingButton
+                    category="auth"
+                    action="click"
+                    label="login"
+                    className="w-full"
+                  >
+                    <ShinyButton classNames="rounded-md" addType="submit">
+                      <motion.span
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className=" transition duration-200 "
+                        type="submit"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          <Loader className="w-6 h-6 animate-spin  mx-auto" />
+                        ) : (
+                          'Login'
+                        )}
+                      </motion.span>
+                    </ShinyButton>
+                  </EventLoggingButton>
+
+                  <EventLoggingButton
+                    category="auth"
+                    action="googleClick"
+                    label="google-login-button"
+                  >
+                    <GoogleLoginButton chooseBtn="login" />
+                  </EventLoggingButton>
+                </div>
 
                 <div className="lg:w-[70%] w-[90%]  md:pl-10 mx-auto">
                   <Link to="/forget-password">
                     <EventLoggingButton
+                      className="w-full"
                       category="auth"
                       action="navigate"
                       label="forget-password"
