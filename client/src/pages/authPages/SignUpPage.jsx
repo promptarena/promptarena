@@ -89,7 +89,7 @@ const SignUpPage = () => {
                 <PasswordStrengthMeter password={password} />
               </div>
 
-              <div className="flex flex-col gap-3 justify-center items-center">
+              <div className="flex flex-col gap-3 justify-center items-center w-[100%]">
                 <ShinyButton classNames="rounded-md" addType="submit">
                   <EventLoggingButton
                     category="auth"

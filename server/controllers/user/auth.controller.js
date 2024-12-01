@@ -25,6 +25,8 @@ const {
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
 } = require('../../config/envConfig');
+const { generateUniqueUsername } = require('../../utils/generateUniqueUsername');
+
 
 // Configure Google OAuth
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
@@ -195,11 +197,22 @@ module.exports = {
       let user = await userModel.findOne({ googleId });
 
       if (!user) {
+        let username = name.toLowerCase().replace(/\s+/g, '');
+
+        // Check if the username already exists
+        const existingUserWithUsername = await userModel.findOne({
+          username,
+        });
+
+        // Generate a unique username if necessary
+        if (existingUserWithUsername) {
+          username = await generateUniqueUsername(name);
+        }
         try {
           user = await userModel.create({
             googleId,
             email,
-            username: name.toLowerCase().replace(/\s+/g, ''),
+            username,
             name,
             profileImage: picture,
             isVerified: true,
