@@ -96,7 +96,7 @@ const LoginPage = () => {
                   </EventLoggingButton>
 
                   <EventLoggingButton
-                    className="w-full"
+                    className="md:w-[100%]"
                     category="auth"
                     action="googleClick"
                     label="google-login-button"
