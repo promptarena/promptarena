@@ -41,7 +41,7 @@ const NotFoundPage = () => {
               <motion.div
                 initial={{ y: 0 }}
                 // animate={{ y: 20, rotate: [0, 360, 0] }}
-                animate={{ y: [-10, 10, -10] , rotate: [10, -20, 10], }}
+                animate={{ y: [-10, 10, -10], rotate: [10, -20, 10] }}
                 transition={{
                   repeat: Infinity,
                   duration: 4,
@@ -52,18 +52,6 @@ const NotFoundPage = () => {
                 <span className="text-white text-[200px] sm:text-[180px] lg:text-[280px] font-bold leading-none">
                   0
                 </span>
-                {/* <motion.img
-                  src={roboGirlStraight}
-                  alt="Floating astronaut"
-                  className="absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2 w-[100px] sm:w-[140px] lg:w-[180px] object-center"
-                  initial={{ y: 0 }}
-                  animate={{ y: [-10, 10, -10] }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 4,
-                    ease: 'easeInOut',
-                  }}
-                /> */}
               </motion.div>
               <span className="text-white text-[190px] sm:text-[180px] lg:text-[280px] font-bold leading-none">
                 4

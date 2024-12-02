@@ -85,7 +85,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                 </div>
                 <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
               </div>
-              <Link to={'/profile/settings'}>
+              <Link to={'/profile/settings'} onClick={() => setIsOpen(false)}>
                 <FaCog className="w-6 h-6 text-gray-400 dark:text-gray-500" />
               </Link>
             </div>
@@ -98,6 +98,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                 <Link
                   to={'/profile'}
                   className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
+                  onClick={() => setIsOpen(false)}
                 >
                   <FaUserCircle className="w-6 h-6 text-cyan-500" />
                   <span className="ml-3">View Profile</span>
@@ -109,6 +110,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                 <Link
                   to={'/profile/edit'}
                   className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
+                  onClick={() => setIsOpen(false)}
                 >
                   <Edit className="w-6 h-6 text-green-500" />
                   <span className="ml-3">Edit Profile</span>
@@ -120,6 +122,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                 <Link
                   to={'/profile/dashboard'}
                   className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
+                  onClick={() => setIsOpen(false)}
                 >
                   <FaQuestionCircle className="w-6 h-6 text-yellow-500" />
                   <span className="ml-3">Dashboard</span>
@@ -131,6 +134,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                 <Link
                   to={'/profile/settings'}
                   className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
+                  onClick={() => setIsOpen(false)}
                 >
                   <FaCog className="w-6 h-6 text-blue-500" />
                   <span className="ml-3">Settings</span>
@@ -140,6 +144,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                 href="/"
                 whileHover={{ scale: 1.03, backgroundColor: '#e5e7eb' }}
                 className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
+                onClick={() => setIsOpen(false)}
               >
                 <FaQuestionCircle className="w-6 h-6 text-pink-500" />
                 <span className="ml-3">Helper Center</span>
@@ -149,7 +154,10 @@ const ProfileDropdown = ({ user, handleLogout }) => {
             <div aria-label="footer" className="pt-2">
               <motion.button
                 type="button"
-                onClick={handleLogout}
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
                 whileHover={{ scale: 1.05, backgroundColor: '#e5e7eb' }}
                 className="flex items-center w-full py-3 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
               >
@@ -179,7 +187,6 @@ const ProfileDropdown = ({ user, handleLogout }) => {
             h: 50,
             q: 'auto',
           })}
-          // src={user.profileImage}
           alt={user.username}
           className="w-10 h-10 rounded-full"
         />
