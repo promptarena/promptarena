@@ -227,6 +227,7 @@ import CyberpunkHeroEnding from '../components/home-page/CyberpunkHeroEnding';
 import AnimatedLogoCloud from '../components/framer-motion/animations/AnimatedLogoCloud';
 import SEO from '../components/seo/SEO';
 import { getCurrentSiteUrl } from '../utils/getCurrentSiteUrl';
+import AIGeneratedContent from '../components/global/AIGeneratedContent';
 
 const HomePage = () => {
   const [data, setData] = useState({
@@ -313,6 +314,7 @@ const HomePage = () => {
       />
 
       <CyberpunkHero />
+      <AIGeneratedContent />
       <HeroImageSection />
       <HeroImageCarousel />
       {/* <HeroSection /> */}
