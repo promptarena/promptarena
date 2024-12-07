@@ -184,15 +184,6 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                   <span className="ml-3">Settings</span>
                 </Link>
               </motion.span>
-              <motion.Link
-                to="/"
-                whileHover={{ scale: 1.03, backgroundColor: '#e5e7eb' }}
-                className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
-                onClick={() => setIsOpen(false)}
-              >
-                <FaQuestionCircle className="w-6 h-6 text-pink-500" />
-                <span className="ml-3">Helper Center</span>
-              </motion.Link>
             </div>
 
             <div aria-label="footer" className="pt-2">
