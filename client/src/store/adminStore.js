@@ -84,19 +84,21 @@ export const useAdminStore = create((set, get) => ({
     }
   },
 
-  fetchPrompts: async () => {
-    set({ isLoadingPrompts: true, errorPrompts: null });
-    try {
-      const response = await axiosInstance.get('/admin/prompts');
-      handleResponse(response, data =>
-        set({ prompts: data, isLoadingPrompts: false })
-      );
-    } catch (error) {
-      handleError(error, message =>
-        set({ errorPrompts: message, isLoadingPrompts: false })
-      );
-    }
-  },
+  // fetchPrompts: async () => {
+  //   set({ isLoadingPrompts: true, errorPrompts: null });
+  //   try {
+  //     const response = await axiosInstance.get('/admin/prompts');
+  //     console.log('response: ', response);
+  //     handleResponse(response, data =>
+  //       set({ prompts: data, isLoadingPrompts: false })
+  //     );
+  //   } catch (error) {
+  //     console.log('error: ', error);
+  //     handleError(error, message =>
+  //       set({ errorPrompts: message, isLoadingPrompts: false })
+  //     );
+  //   }
+  // },
   approvePrompt: async promptId => {
     set({ isLoadingPrompts: true, errorPrompts: null });
     try {

@@ -39,6 +39,7 @@ import AdminUserForm from './components/admin/analytics/AdminUserForm';
 import SettingsPage from './pages/userPages/SettingsPage';
 import ExplorePage from './pages/ExplorePage';
 import ProfilePage from './pages/userPages/ProfilePage';
+import AdminDashboardz from './pages/admin/AdminDashboardz';
 
 // Lazy-loaded Pages
 const DashboardPage = React.lazy(
@@ -169,7 +170,7 @@ export default function Router() {
           path="/admin"
           element={
             <AdminProtectedRoute>
-              <AdminDashboard />
+              <AdminDashboardz />
             </AdminProtectedRoute>
           }
         />

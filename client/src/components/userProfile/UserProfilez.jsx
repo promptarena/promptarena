@@ -479,7 +479,6 @@ import { getCurrentSiteUrl } from '../../utils/getCurrentSiteUrl';
 
 export default function UserProfilez({ usernameFromProfilePage }) {
   let { username } = useParams();
-  console.log('username: ', username);
 
   // If username from URL is not present, use usernameFromProfilePage
   if (!username) {
@@ -689,7 +688,7 @@ export default function UserProfilez({ usernameFromProfilePage }) {
                     {user.name}
                   </h1>
                   <p className="text-[#8b8b8b] text-md">
-                    <Link to={`/user/${user.username}`}>@{user.username}</Link>
+                    <>@{user.username}</>
                   </p>
                   <p className="text-sm max-w-xs mt-3 leading-relaxed">
                     {user.bio ? user.bio : 'No bio provided.'}

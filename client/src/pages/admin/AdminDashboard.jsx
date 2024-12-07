@@ -1045,10 +1045,7 @@ const AdminDashboardPage = () => {
     users,
     deleteUser,
     updateUser,
-    fetchPrompts,
-    prompts,
-    approvePrompt,
-    rejectPrompt,
+
     sendAdminNotification,
   } = useAdminStore();
 
@@ -1058,8 +1055,8 @@ const AdminDashboardPage = () => {
   useEffect(() => {
     fetchDetailedAnalytics();
     fetchUsers();
-    fetchPrompts();
-  }, [fetchDetailedAnalytics, fetchUsers, fetchPrompts]);
+    // fetchPrompts();
+  }, [fetchDetailedAnalytics, fetchUsers]);
 
   const handleLogout = () => logout();
 
@@ -1095,23 +1092,23 @@ const AdminDashboardPage = () => {
     }
   };
 
-  const handleApprovePrompt = async promptId => {
-    try {
-      await approvePrompt(promptId);
-      fetchPrompts();
-    } catch (error) {
-      console.error('Error approving prompt:', error);
-    }
-  };
+  // const handleApprovePrompt = async promptId => {
+  //   try {
+  //     await approvePrompt(promptId);
+  //     fetchPrompts();
+  //   } catch (error) {
+  //     console.error('Error approving prompt:', error);
+  //   }
+  // };
 
-  const handleRejectPrompt = async promptId => {
-    try {
-      await rejectPrompt(promptId);
-      fetchPrompts();
-    } catch (error) {
-      console.error('Error rejecting prompt:', error);
-    }
-  };
+  // const handleRejectPrompt = async promptId => {
+  //   try {
+  //     await rejectPrompt(promptId);
+  //     fetchPrompts();
+  //   } catch (error) {
+  //     console.error('Error rejecting prompt:', error);
+  //   }
+  // };
 
   const handleSendAdminNotification = async () => {
     const message = prompt('Enter the notification message:');
@@ -1447,7 +1444,7 @@ const AdminDashboardPage = () => {
               </tr>
             </thead>
             <tbody>
-              {prompts.map(prompt => (
+              {/* {prompts.map(prompt => (
                 <tr key={prompt._id}>
                   <td className="border px-4 py-2">{prompt.title}</td>
                   <td className="border px-4 py-2">{prompt.category}</td>
@@ -1470,7 +1467,7 @@ const AdminDashboardPage = () => {
                     </button>
                   </td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
           </table>
         </div>
