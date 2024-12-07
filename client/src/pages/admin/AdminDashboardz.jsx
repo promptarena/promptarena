@@ -198,15 +198,6 @@ const AdminDashboardz = () => {
         return (
           <div className="glass-panel rounded-xl">
             <div className="flex flex-col lg:flex-row gap-4 mb-6">
-              {/* <div className="flex-1 bg-indigo-100 border border-indigo-200 rounded-xl p-6 animate-fade-in">
-                <h2 className="text-4xl md:text-5xl text-blue-900">
-                  Welcome <br />
-                  <strong>Dash</strong>
-                </h2>
-                <span className="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-indigo-800">
-                  01:51
-                </span>
-              </div> */}
               <div className="flex-1 bg-indigo-100 border border-indigo-200 rounded-xl animate-fade-in">
                 <div className="bg-[#1f1f1f] rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up">
                   <div className="bg-gray-800 bg-opacity-50 rounded-lg border p-5 border-gray-700">

@@ -1,25 +1,3 @@
-// // Function to get the optimized image URL based on Cloudinary transformations
-// export const getOptimizedImageUrl = (url, transformations = {}) => {
-//   console.log('url: ', url);
-//   // Check if the URL is a Cloudinary URL
-//   if (!url.includes('res.cloudinary.com')) {
-//     return url; // If not a Cloudinary URL, return the original URL as is
-//   }
-
-//   const baseCloudinaryUrl = 'https://res.cloudinary.com/dpkqselpi/image/upload';
-
-//   // Extract the public ID and path from the original Cloudinary URL
-//   const [_, path] = url.split('/upload/');
-
-//   // Apply transformations to the image
-//   const transformationString = Object.entries(transformations)
-//     .map(([key, value]) => `${key}_${value}`)
-//     .join(',');
-
-//   return `${baseCloudinaryUrl}/${transformationString}/${path}`;
-// };
-
-// Function to get the optimized image URL based on Cloudinary transformations
 export const getOptimizedImageUrl = (url, transformations = {}) => {
   // Validate that the URL is a valid string
   if (!url || typeof url !== 'string') {

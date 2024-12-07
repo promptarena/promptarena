@@ -43,29 +43,6 @@ export default function HorizantolImagesection() {
             ))}
           </MarqueeSlider>
         </div>
-        {/* <div className="w-full lg:w-1/2 space-y-2">
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="https://placehold.co/800x400"
-              alt="Monkey with orange goggles"
-              className="w-full h-[150px] object-cover"
-            />
-          </div>
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="https://placehold.co/800x400"
-              alt="Artistic monkey with sunglasses"
-              className="w-full h-[200px] object-cover"
-            />
-          </div>
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="https://placehold.co/800x400"
-              alt="Monkey with headphones"
-              className="w-full h-[150px] object-cover"
-            />
-          </div>
-        </div> */}
 
         {/* Text content */}
         <div className="w-full lg:w-1/2 text-white">

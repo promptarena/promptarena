@@ -36,7 +36,6 @@ import BlogPage from './pages/BlogPage';
 import ModernBlogPost from './components/blog-page/ModernBlogPost';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminUserForm from './components/admin/analytics/AdminUserForm';
-import SettingsPage from './pages/userPages/SettingsPage';
 import ExplorePage from './pages/ExplorePage';
 import ProfilePage from './pages/userPages/ProfilePage';
 import AdminDashboardz from './pages/admin/AdminDashboardz';
@@ -129,14 +128,6 @@ export default function Router() {
             }
           />
           <Route path="/profile/username/:username" element={<UserProfile />} />
-          <Route
-            path="/profile/settings"
-            element={
-              <ProtectedRoute>
-                <SettingsPage />
-              </ProtectedRoute>
-            }
-          />
         </Route>
 
         {/* Auth Routes */}
@@ -174,7 +165,6 @@ export default function Router() {
             </AdminProtectedRoute>
           }
         />
-
 
         <Route
           path="/admin/blog/edit/:blogId"

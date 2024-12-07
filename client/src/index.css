@@ -132,7 +132,6 @@ body {
   }
 }
 
-
 .blog-content {
   font-family: 'Arial', sans-serif;
   font-size: 1rem;
@@ -154,7 +153,7 @@ body {
 
 .blog-content h2 {
   font-size: 1.75rem;
-  color: #ffffff ;
+  color: #ffffff;
 }
 
 .blog-content h3 {

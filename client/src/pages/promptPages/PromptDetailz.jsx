@@ -836,7 +836,7 @@ export default function PromptDetailz() {
                   repeat: Infinity,
                 }}
               />
-          
+
               <AnimatePresence mode="wait">
                 {currentPrompt.media.images.length > 0 && (
                   <motion.img

@@ -1,4 +1,4 @@
-import { Sparkles, Info, Mailbox, MailPlus } from 'lucide-react';
+import { MailPlus } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { purpleRobotHalfFace } from '../../assets/img/aboutpage';
 
@@ -9,8 +9,6 @@ export default function ContactHero() {
   // Parallax Transformations
   const gridY = useTransform(scrollY, [0, 500], ['0%', '-30%']); // Grid moves slower
   const robotTranslateY = useTransform(scrollY, [0, 500], ['0%', '15%']); // Robot parallax
-  const glowTranslateY = useTransform(scrollY, [0, 500], ['0%', '10%']); // Glow parallax
-  const glowScale = useTransform(scrollY, [0, 500], [1, 1.5]); // Glow scaling
   const textTranslateY = useTransform(scrollY, [0, 500], ['0%', '-10%']); // Text parallax
 
   return (
@@ -32,8 +30,6 @@ export default function ContactHero() {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <h1 className="h1 font-bold text-shadow leading-tight mb-6">
-            {/* Discover, Collect &<br />
-            Sell Popular{' '} */}
             Let's Talk AI: Connect with the{' '}
             <span className="relative px-5 ml-0 text-5xl inline-block">
               <span className="relative z-10 text-shadow">PromptArena</span>
@@ -52,17 +48,6 @@ export default function ContactHero() {
 
           {/* Animated Buttons */}
           <div className="flex space-x-4">
-            {/* <motion.button
-              className="flex items-center space-x-2 bg-purple-700 hover:bg-purple-500 text-white px-6 py-3 rounded-full transition-colors duration-200 shadow-md"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Sparkles size={20} />
-              <span>
-                <span className="font-semibold">Discover</span>
-              </span>
-            </motion.button> */}
-
             <motion.button
               className="flex items-center px-8 py-3 border-2 border-purple-200 text-white rounded-full hover:bg-purple-200/20 transition-colors duration-200 shadow-md"
               whileHover={{ scale: 1.1 }}
@@ -99,10 +84,7 @@ export default function ContactHero() {
             }}
           />
           {/* Glow Effect */}
-          <motion.div
-            className="absolute top-1/4 right-1/4 w-64 h-64 bg-[#cc69f3] opacity-20 blur-3xl rounded-full"
-            // style={{ y: glowTranslateY, scale: glowScale }}
-          />
+          <motion.div className="absolute top-1/4 right-1/4 w-64 h-64 bg-[#cc69f3] opacity-20 blur-3xl rounded-full" />
         </div>
       </motion.div>
 
