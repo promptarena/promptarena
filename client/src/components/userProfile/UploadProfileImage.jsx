@@ -17,8 +17,10 @@ const UploadProfileImage = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [displayProgress, setDisplayProgress] = useState(0);
   const [isFetchingProfile, setIsFetchingProfile] = useState(false);
-  const [profileImageUrl, setProfileImageUrl] = useState(user.profileImage); // Initialize with current image
+  const [profileImageUrl, setProfileImageUrl] = useState(user.profileImage === null ? 'https://res.cloudinary.com/djvzjxj7f/image/upload/v1691285127/placeholder.png' : user.profileImage); // Initialize with current image
   const fileInputRef = useRef(null);
+
+  console.log('profileImageUrl: ', user.profileImage);
 
   // File change handler
   const handleImageChange = e => {
@@ -85,6 +87,7 @@ const UploadProfileImage = () => {
 
   const handleImageClick = () => fileInputRef.current.click();
 
+  
   return (
     <>
       {/* Profile Update Section */}

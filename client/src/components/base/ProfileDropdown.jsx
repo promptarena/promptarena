@@ -148,7 +148,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                   <span className="ml-3">View Profile</span>
                 </Link>
               </motion.span>
-              <motion.span
+              {/* <motion.span
                 whileHover={{ scale: 1.03, backgroundColor: '#e5e7eb' }}
               >
                 <Link
@@ -159,7 +159,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                   <Edit className="w-6 h-6 text-green-500" />
                   <span className="ml-3">Edit Profile</span>
                 </Link>
-              </motion.span>
+              </motion.span> */}
               <motion.span
                 whileHover={{ scale: 1.03, backgroundColor: '#e5e7eb' }}
               >
@@ -176,7 +176,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                 whileHover={{ scale: 1.03, backgroundColor: '#e5e7eb' }}
               >
                 <Link
-                  to={'/profile/settings'}
+                  to={'/profile/edit'}
                   className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
                   onClick={() => setIsOpen(false)}
                 >
@@ -185,7 +185,7 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                 </Link>
               </motion.span>
               <motion.Link
-                to="/help"
+                to="/"
                 whileHover={{ scale: 1.03, backgroundColor: '#e5e7eb' }}
                 className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
                 onClick={() => setIsOpen(false)}

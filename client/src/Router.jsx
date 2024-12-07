@@ -174,31 +174,8 @@ export default function Router() {
             </AdminProtectedRoute>
           }
         />
-        <Route
-          path="/admin/notification"
-          element={
-            <AdminProtectedRoute>
-              <AdminNotificationForm />
-            </AdminProtectedRoute>
-          }
-        />
 
-        <Route
-          path="/admin/blog"
-          element={
-            <AdminProtectedRoute>
-              <AdminBlogList />
-            </AdminProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/blog/create"
-          element={
-            <AdminProtectedRoute>
-              <AdminBlogForm />
-            </AdminProtectedRoute>
-          }
-        />
+
         <Route
           path="/admin/blog/edit/:blogId"
           element={
