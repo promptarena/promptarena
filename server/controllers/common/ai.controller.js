@@ -8,6 +8,7 @@ const {
   sendSuccessResponse,
   handleError,
 } = require('../../utils/responseUtils');
+const chatbotModel = require('../../models/chatbot.model');
 
 // Create an instance of the Express app.
 const app = express();
@@ -123,6 +124,18 @@ app.post('/chat', async (req, res) => {
 
     // Check if the response is successful and return it to the client.
     if (response.status === 200) {
+      const assistantResponse = response.data; // Extract the assistant's reply from response.data.
+
+      // Save chat details in the database.
+      const chat = new chatbotModel({
+        model,
+        userMessage: message,
+        assistantResponse: assistantResponse, // Adjust based on API response structure.
+        seed: 42,
+      });
+
+      await chat.save(); // Save to the database.
+
       return sendSuccessResponse(res, 'API request successful.', {
         success: true,
         model: model,
