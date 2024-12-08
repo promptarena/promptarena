@@ -79,18 +79,12 @@ app.post('/chat', async (req, res) => {
 
   // Validate message - it must be a non-empty string.
   if (!message || typeof message !== 'string') {
-    return handleError(next, 'Message is required.', 400);
+    return res.status(400).json({ error: 'Valid message is required.' });
   }
 
   // Validate model - it must be one of the valid models.
   if (!model || !validModels.includes(model)) {
-    return handleError(
-      next,
-      `Valid model is required. Available models are: ${validModels.join(
-        ', '
-      )}`,
-      400
-    );
+    return res.status(400).json({ error: 'Valid model is required.' });
   }
 
   // Prepare the payload to send to the Pollinations API.
@@ -145,34 +139,26 @@ app.post('/chat', async (req, res) => {
         data: response.data,
       });
     } else {
-      return handleError(
-        next,
-        'error',
-        `API request failed with status: ${response.status}`,
-        500
-      );
+      return res.status(response.status).json(response.data);
     }
   } catch (error) {
     // Handle errors and return appropriate messages.
     if (error.response) {
       // If the API returns an error response.
-      return handleError(next, 'error', error.response.data, 500);
+      return res.status(error.response.status).json(error.response.data);
     } else if (error.request) {
       // If no response was received from the API.
-      return handleError(
-        next,
-        `No response received from ${APP_NAME} API. ${error.message}` ||
-          'Error processing request.',
-        500
-      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || 'Error processing request.',
+
+      })
     } else {
       // For other errors (e.g., network issues).
-      return handleError(
-        next,
-        'error',
-        error.message || 'Error processing request.',
-        500
-      );
+      return res.status(500).json({
+        success: false,
+        message: error.message || 'Error processing request.',
+      });
     }
   }
 });
