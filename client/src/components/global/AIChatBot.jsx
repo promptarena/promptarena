@@ -88,7 +88,7 @@ const AIChatBot = () => {
 
     try {
       // Make a POST request to the backend
-      const response = await fetch(`${apiUrl}/ai/chat`, {
+      const response = await fetch(`${apiUrl}ai/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
