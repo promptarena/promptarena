@@ -76,11 +76,12 @@ const apiUrl = 'https://text.pollinations.ai/';
 // Route to handle Pollinations API call.
 app.post('/chat', async (req, res) => {
   const { message, model } = req.body;
+  console.log('req.body: ', req.body);
 
   // Validate message - it must be a non-empty string.
-  if (!message || typeof message !== 'string') {
-    return res.status(400).json({ error: 'Valid message is required.' });
-  }
+  // if (!message || typeof message !== 'string') {
+  //   return res.status(400).json({ error: 'Valid message is required.' });
+  // }
 
   // Validate model - it must be one of the valid models.
   if (!model || !validModels.includes(model)) {
@@ -136,7 +137,7 @@ app.post('/chat', async (req, res) => {
         seed: data.seed,
         timestamp: Date.now(),
         message: message,
-        
+
         role: 'assistant',
         data: response.data,
       });
