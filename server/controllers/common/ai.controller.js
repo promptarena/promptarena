@@ -135,6 +135,8 @@ app.post('/chat', async (req, res) => {
         model: model,
         seed: data.seed,
         timestamp: Date.now(),
+        message: message,
+        
         role: 'assistant',
         data: response.data,
       });
