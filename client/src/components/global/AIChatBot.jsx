@@ -105,6 +105,8 @@ const AIChatBot = () => {
           role: responseData.data.role || 'assistant',
           content: responseData.data.data || 'No response provided.',
           timestamp: new Date(responseData.data.timestamp).toISOString(),
+          model: responseData.data.model,
+          message: responseData.data.message,
         };
         setMessages(prev => [...prev, aiMessage]); // Add AI response to chat
       } else {
@@ -259,6 +261,7 @@ const AIChatBot = () => {
           <div className="relative p-2">
             <motion.input
               value={input}
+
               onChange={e => setInput(e.target.value)}
               whileTap={{ scale: 0.9 }}
               type="text"
