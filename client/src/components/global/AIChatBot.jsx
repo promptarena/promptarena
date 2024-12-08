@@ -15,6 +15,7 @@ import {
   formatRelativeTime,
 } from '../../utils/date';
 import ReactMarkdown from 'react-markdown';
+import axiosInstance from '../../services/axiosInstance';
 
 const AIChatBot = () => {
   const chatVariants = {
@@ -89,7 +90,7 @@ const AIChatBot = () => {
 
     try {
       // Make a POST request to the backend
-      const response = await fetch(`${apiUrl}/ai/chat`, {
+      const response = await axiosInstance.post(`${apiUrl}/ai/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
