@@ -109,12 +109,14 @@
 import { Search, Scissors, Share2, Download } from 'lucide-react';
 import { useState } from 'react';
 import AIImage from './AIImage';
+import AIChat from './AIChat';
+import AIChatBot from './AIChatBot';
 
 export default function AIImageAndTextGenerator() {
   const [activeTab, setActiveTab] = useState('image');
 
   return (
-    <div className="min-h-screen dark:bg-dark-background bg-background text-text dark:text-dark-text overflow-hidden p-6">
+    <div className="min-h-screen dark:bg-dark-background bg-background text-text dark:text-dark-text overflow-hidden container mx-auto">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mt-1 mb-5 ">
           <h2 className="h1 font-bold font-syncopate">
@@ -164,10 +166,9 @@ export default function AIImageAndTextGenerator() {
                 <AIImage />
               </>
             ) : (
-              <div className="aspect-[4/3] rounded-lg bg-gray-200 flex items-center justify-center">
-                {/* Placeholder for Text component */}
-                <p className="text-gray-500">Text Component will be here</p>
-              </div>
+              <>
+                <AIChatBot />
+              </>
             )}
           </div>
         </>

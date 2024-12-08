@@ -225,3 +225,33 @@ body {
     font-size: 0.9rem;
   }
 }
+
+
+
+.chatBot {
+  --sb-track-color: #949494;
+  --sb-thumb-color: #a760b9;
+  --sb-size: 8px;
+}
+
+.chatBot::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+.chatBot::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 5px;
+}
+
+.chatBot::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 5px;
+  border: 1px solid #232e33;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .chatBot {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}

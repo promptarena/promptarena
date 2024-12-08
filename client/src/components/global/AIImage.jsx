@@ -152,6 +152,7 @@ const AIImage = () => {
             className="flex flex-col items-center justify-center w-14 h-14 bg-white shadow-md hover:shadow-lg transition-shadow px-4 py-2 rounded-md"
           >
             <ArrowLeftFromLine className="w-5 h-5 text-gray-600" />
+            <span className="text-xxs font-bold text-gray-600">Previous</span>
           </button>
           <button
             title="Download"
@@ -159,6 +160,7 @@ const AIImage = () => {
             className="flex flex-col items-center justify-center w-14 h-14 bg-white shadow-md hover:shadow-lg transition-shadow px-4 py-2 rounded-md"
           >
             <Download className="w-5 h-5 text-gray-600" />
+            <span className="text-xxs font-bold text-gray-600">Download</span>
           </button>
           <button
             title="Next"
@@ -166,6 +168,7 @@ const AIImage = () => {
             className="flex flex-col items-center justify-center w-14 h-14 bg-white shadow-md hover:shadow-lg transition-shadow px-4 py-2 rounded-md"
           >
             <ArrowRightFromLine className="w-5 h-5 text-gray-600" />
+            <span className="text-xxs font-bold text-gray-600"></span>
           </button>
         </div>
 
