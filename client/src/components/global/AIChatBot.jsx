@@ -14,6 +14,7 @@ import {
   formatDate,
   formatRelativeTime,
 } from '../../utils/date';
+import ReactMarkdown from 'react-markdown';
 
 const AIChatBot = () => {
   const chatVariants = {
@@ -88,7 +89,7 @@ const AIChatBot = () => {
 
     try {
       // Make a POST request to the backend
-      const response = await fetch(`${apiUrl}ai/chat`, {
+      const response = await fetch(`${apiUrl}/ai/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -115,6 +116,7 @@ const AIChatBot = () => {
       }
     } catch (error) {
       console.error('Error communicating with the server:', error);
+      console.log( error);
       setMessages(prev => [
         ...prev,
         {
@@ -137,6 +139,8 @@ const AIChatBot = () => {
         chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
+
+  console.log('messages: ', messages);
 
   return (
     <>
@@ -223,7 +227,9 @@ const AIChatBot = () => {
                       <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
                       <div>
                         <div className="bg-gray-300 text-gray-800 p-3 rounded-r-lg rounded-bl-lg">
-                          <p className="text-sm">{msg.content}</p>
+                          <p className="text-sm">
+                          {msg.content}
+                          </p>
                         </div>
                         <span className="text-xs text-gray-100 leading-none">
                           {formatCustomDate(msg.timestamp, 'h:mm a')}
@@ -264,7 +270,6 @@ const AIChatBot = () => {
                 disabled={loading}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                
                 type="submit"
                 aria-label="Submit"
                 className={`flex aspect-square h-[80%] items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800 ${loading ? 'pointer-events-none cursor-not-allowed opacity-50' : ''}`}
