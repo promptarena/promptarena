@@ -52,7 +52,7 @@ const AIChatBot = () => {
   };
 
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([
+  const [message, setMessage] = useState([
     {
       role: 'system',
       content: `I am ${siteName}'s AI assistant. I will answer your questions about ${siteName}.`,
@@ -85,42 +85,42 @@ const AIChatBot = () => {
       content: input,
       timestamp: new Date().toISOString(),
     };
-    setMessages(prev => [...prev, userMessage]); // Add user message to chat
+    setMessage(prev => [...prev, userMessage]); // Add user message to chat
     setLoading(true);
 
     try {
       // Make a POST request to the backend
-      const response = await axiosInstance.post("/ai/chat", {
+      const response = await fetch(`${apiUrl}/ai/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ message: input, model }),
       });
+      console.log('response: ', response);
 
       const responseData = await response.json();
+      console.log('responseData: ', responseData);
 
       if (responseData.data && responseData.data.success) {
         const aiMessage = {
           role: responseData.data.role || 'assistant',
           content: responseData.data.data || 'No response provided.',
           timestamp: new Date(responseData.data.timestamp).toISOString(),
-          model: responseData.data.model,
-          message: responseData.data.message,
         };
-        setMessages(prev => [...prev, aiMessage]); // Add AI response to chat
+        setMessage(prev => [...prev, aiMessage]); // Add AI response to chat
       } else {
         const errorMessage = {
           role: 'assistant',
           content: `Error: ${responseData.message || 'Something went wrong.'}`,
           timestamp: new Date().toISOString(),
         };
-        setMessages(prev => [...prev, errorMessage]);
+        setMessage(prev => [...prev, errorMessage]);
       }
     } catch (error) {
       console.error('Error communicating with the server:', error);
       console.log( error);
-      setMessages(prev => [
+      setMessage(prev => [
         ...prev,
         {
           role: 'assistant',
@@ -141,9 +141,9 @@ const AIChatBot = () => {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [message]);
 
-  console.log('messages: ', messages);
+  console.log('messages: ', message);
 
   return (
     <>
@@ -186,7 +186,7 @@ const AIChatBot = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs text-[0.55rem] rounded focus:ring-blue-500 focus:border-blue-500 block sm:w-[55%] w-[50%] px-1 py-[0.0.2rem] dark:bg-gray-10 dark:text-gray-700 font-semibold focus:outline-none transform duration-slow dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 {availableModels.map(model => (
-                  <option key={model.name} value={model.name.toLowerCase()}>
+                  <option key={model.name} value={model.name}>
                     {model.description}
                   </option>
                 ))}
@@ -203,7 +203,7 @@ const AIChatBot = () => {
           ref={chatContainerRef}
           className="flex flex-col flex-grow p-2 h-0 chatBot overflow-x-hidden overflow-y-scroll"
         >
-          {messages.map((msg, index) => (
+          {message.map((msg, index) => (
             <div key={index} className="mb-4">
               <div>
                 <div>
@@ -261,7 +261,7 @@ const AIChatBot = () => {
           <div className="relative p-2">
             <motion.input
               value={input}
-
+        
               onChange={e => setInput(e.target.value)}
               whileTap={{ scale: 0.9 }}
               type="text"

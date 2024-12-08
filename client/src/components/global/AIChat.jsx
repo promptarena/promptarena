@@ -6,6 +6,7 @@ const AIChat = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [model, setModel] = useState('mistral'); // Default model
+  console.log('model: ', model);
   const chatContainerRef = useRef(null); // Ref to the chat container
 
   const availableModels = [
@@ -45,6 +46,7 @@ const AIChat = () => {
       });
 
       const responseData = await response.json();
+      console.log('responseData: ', responseData);
 
       if (responseData.data && responseData.data.success) {
         const aiMessage = {

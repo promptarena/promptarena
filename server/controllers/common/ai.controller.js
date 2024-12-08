@@ -76,16 +76,21 @@ const apiUrl = 'https://text.pollinations.ai/';
 // Route to handle Pollinations API call.
 app.post('/chat', async (req, res) => {
   const { message, model } = req.body;
-  console.log('req.body: ', req.body);
 
   // Validate message - it must be a non-empty string.
-  // if (!message || typeof message !== 'string') {
-  //   return res.status(400).json({ error: 'Valid message is required.' });
-  // }
+  if (!message || typeof message !== 'string') {
+    return handleError(next, 'Message is required.', 400);
+  }
 
   // Validate model - it must be one of the valid models.
   if (!model || !validModels.includes(model)) {
-    return res.status(400).json({ error: 'Valid model is required.' });
+    return handleError(
+      next,
+      `Valid model is required. Available models are: ${validModels.join(
+        ', '
+      )}`,
+      400
+    );
   }
 
   // Prepare the payload to send to the Pollinations API.
@@ -136,32 +141,38 @@ app.post('/chat', async (req, res) => {
         model: model,
         seed: data.seed,
         timestamp: Date.now(),
-        message: message,
-
         role: 'assistant',
         data: response.data,
       });
     } else {
-      return res.status(response.status).json(response.data);
+      return handleError(
+        next,
+        'error',
+        `API request failed with status: ${response.status}`,
+        500
+      );
     }
   } catch (error) {
     // Handle errors and return appropriate messages.
     if (error.response) {
       // If the API returns an error response.
-      return res.status(error.response.status).json(error.response.data);
+      return handleError(next, 'error', error.response.data, 500);
     } else if (error.request) {
       // If no response was received from the API.
-      return res.status(500).json({
-        success: false,
-        message: error.message || 'Error processing request.',
-
-      })
+      return handleError(
+        next,
+        `No response received from ${APP_NAME} API. ${error.message}` ||
+          'Error processing request.',
+        500
+      );
     } else {
       // For other errors (e.g., network issues).
-      return res.status(500).json({
-        success: false,
-        message: error.message || 'Error processing request.',
-      });
+      return handleError(
+        next,
+        'error',
+        error.message || 'Error processing request.',
+        500
+      );
     }
   }
 });
