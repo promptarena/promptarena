@@ -5,7 +5,7 @@ const AIChat = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [model, setModel] = useState('mistral'); // Default model
+  const [model, setModel] = useState('openai'); // Default model
   console.log('model: ', model);
   const chatContainerRef = useRef(null); // Ref to the chat container
 
