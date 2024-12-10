@@ -17,43 +17,61 @@ const app = express();
 app.use(express.json());
 
 // Load the system prompt from a text file (synchronously).
-const loadSystemPrompt = (filePathDir = '../../prompts/system_prompt.txt') => {
-  const filePath = path.join(__dirname, filePathDir); // Construct the full path to the file
+// Load a file's content and return a default message if the file is missing or an error occurs
+const loadFileContent = (filePathDir, defaultContent) => {
+  const filePath = path.resolve(__dirname, filePathDir);
   console.log('filePath: ', filePath);
 
-  // Check if the system_prompt.txt file exists
   if (!fs.existsSync(filePath)) {
-    console.error('System prompt file is missing: system_prompt.txt');
-    return `
-      You are an AI assistant with expert knowledge in ${APP_NAME}. 
-      You must only provide answers based on the following knowledge base:
-      ${APP_NAME} is a generative AI platform for creating text, images, music, and videos. 
-      It supports multiple AI models such as OpenAI, Mistral, Llama, and more. 
-      If the user asks something outside this scope, politely let them know you can only answer based on ${APP_NAME}-related information.
-    `;
+    console.error(`File is missing: ${filePath}`);
+    return defaultContent;
   }
 
   try {
     const data = fs.readFileSync(filePath, 'utf8');
-    console.log('System instructions are loaded from system_prompt.txt');
+    console.log('Requested file has been loaded:', filePath);
     return data;
   } catch (err) {
-    console.error('Error reading system prompt file:', err);
-    return `
-      You are an AI assistant with expert knowledge in ${APP_NAME}. 
-      You must only provide answers based on the following knowledge base:
-      ${APP_NAME} is a generative AI platform for creating text, images, music, and videos. 
-      It supports multiple AI models such as OpenAI, Mistral, Llama, and more. 
-      If the user asks something outside this scope, politely let them know you can only answer based on ${APP_NAME}-related information.
-    `;
+    console.error('Error reading file:', err.message);
+    return defaultContent;
   }
 };
 
-// System prompt loaded from the text file.
-const SYSTEM_PROMPT = loadSystemPrompt(
-  (filePathDir = '../../prompts/system_prompt.txt')
+// Default fallback messages
+const defaultGeneralKnowledge = `
+  You are an AI assistant with expert knowledge in ${APP_NAME}. 
+  You must only provide answers based on the following knowledge base:
+  ${APP_NAME} is a generative AI platform for creating text, images, music, and videos. 
+  It supports multiple AI models such as OpenAI, Mistral, Llama, and more. 
+  If the user asks something outside this scope, politely let them know you can only answer based on ${APP_NAME}-related information.
+`;
+
+const defaultSystemPrompt = `
+  You are Promptex, a world-class prompt generator for PromptArena. Always maintain a professional tone and provide actionable insights.
+`;
+
+// Step 1: Load GENERAL_KNOWLEDGE file and replace {CURRENTDATE}
+let GENERAL_KNOWLEDGE = loadFileContent(
+  '../../knowledge/GENERAL_KNOWLEDGE.txt',
+  defaultGeneralKnowledge
 );
-console.log('SYSTEM_PROMPT: ', SYSTEM_PROMPT);
+
+// Replace {CURRENTDATE} in GENERAL_KNOWLEDGE content
+GENERAL_KNOWLEDGE = GENERAL_KNOWLEDGE.replace(
+  '{CURRENTDATE}',
+  new Date().toLocaleDateString()
+).replace('{CURRENTTIME}', new Date().toLocaleTimeString());
+
+// Step 2: Load SYSTEM_PROMPT and replace {GENERAL_KNOWLEDGE_FILE} with updated GENERAL_KNOWLEDGE
+const SYSTEM_PROMPT = loadFileContent(
+  '../../prompts/system_prompt.txt',
+  defaultSystemPrompt
+).replace('{GENERAL_KNOWLEDGE_FILE}', GENERAL_KNOWLEDGE);
+
+console.log('Updated GENERAL_KNOWLEDGE:', GENERAL_KNOWLEDGE);
+console.log('Updated SYSTEM_PROMPT:', SYSTEM_PROMPT);
+
+// Continue with other logic like valid models and API routes...
 
 const validModels = [
   'openai',
@@ -70,22 +88,22 @@ const validModels = [
   'p1',
 ];
 
-// Define the Pollinations API URL.
+// Define the Pollinations API URL
 const apiUrl = 'https://text.pollinations.ai/';
 
-// Route to handle Pollinations API call.
-app.post('/chat', async (req, res) => {
+// Route to handle Pollinations API call
+app.post('/chat', async (req, res, next) => {
   const { message, model } = req.body;
 
-  // Validate message - it must be a non-empty string.
+  // Validate message - it must be a non-empty string
   if (!message || typeof message !== 'string') {
-    return handleError(next, 'Message is required.', 400);
+    return handleError(res, 'Message is required.', 400); // Fixed: Corrected parameter order for handleError
   }
 
-  // Validate model - it must be one of the valid models.
+  // Validate model - it must be one of the valid models
   if (!model || !validModels.includes(model)) {
     return handleError(
-      next,
+      res,
       `Valid model is required. Available models are: ${validModels.join(
         ', '
       )}`,
@@ -93,7 +111,7 @@ app.post('/chat', async (req, res) => {
     );
   }
 
-  // Prepare the payload to send to the Pollinations API.
+  // Prepare the payload to send to the Pollinations API
   const data = {
     messages: [
       {
@@ -105,36 +123,35 @@ app.post('/chat', async (req, res) => {
         content: message,
       },
     ],
-    model: model, // The model the user selected.
-    seed: 42, // You can modify or randomize the seed if needed.
+    model: model,
+    seed: 42,
     response_format: 'json_object',
   };
 
-  // Define headers for the API request.
+  // Define headers for the API request
   const headers = {
     'Content-Type': 'application/json',
-    Accept: 'application/json, text/plain, */*',
+    Accept: 'application/json',
     'User-Agent': 'axios/1.7.9',
   };
 
   try {
-    // Make the POST request to the Pollinations API.
+    // Make the POST request to the Pollinations API
     const response = await axios.post(apiUrl, data, { headers });
-    console.log('response: ', response);
+    console.log('response: ', response.data);
 
-    // Check if the response is successful and return it to the client.
     if (response.status === 200) {
-      const assistantResponse = response.data; // Extract the assistant's reply from response.data.
+      const assistantResponse = response.data;
 
-      // Save chat details in the database.
+      // Save chat details in the database
       const chat = new chatbotModel({
         model,
         userMessage: message,
-        assistantResponse: assistantResponse, // Adjust based on API response structure.
+        assistantResponse: assistantResponse,
         seed: 42,
       });
 
-      await chat.save(); // Save to the database.
+      await chat.save();
 
       return sendSuccessResponse(res, 'API request successful.', {
         success: true,
@@ -142,34 +159,27 @@ app.post('/chat', async (req, res) => {
         seed: data.seed,
         timestamp: Date.now(),
         role: 'assistant',
-        data: response.data,
+        data: assistantResponse,
       });
     } else {
       return handleError(
-        next,
-        'error',
+        res,
         `API request failed with status: ${response.status}`,
         500
       );
     }
   } catch (error) {
-    // Handle errors and return appropriate messages.
     if (error.response) {
-      // If the API returns an error response.
-      return handleError(next, 'error', error.response.data, 500);
-    } else if (error.request) {
-      // If no response was received from the API.
       return handleError(
-        next,
-        `No response received from ${APP_NAME} API. ${error.message}` ||
-          'Error processing request.',
+        res,
+        error.response.data || 'Error processing request.',
         500
       );
+    } else if (error.request) {
+      return handleError(res, 'No response received from API.', 500);
     } else {
-      // For other errors (e.g., network issues).
       return handleError(
-        next,
-        'error',
+        res,
         error.message || 'Error processing request.',
         500
       );
@@ -177,12 +187,92 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-// System prompt loaded from the text file.
-const SYSTEM_PROMPT_PERSONAL = loadSystemPrompt(
-  (filePathDir = '../../prompts/system_prompt.txt')
-);
+// Route to handle personalized chat API call
+app.post('/personalized/chat', async (req, res) => {
+  const {
+    message,
+    seed = 42,
+    model = 'openai',
+    temperature = 0.7,
+    max_tokens = 1000, // Fixed: Set realistic max_tokens value
+    top_p = 1.0,
+    frequency_penalty = 0.0,
+    presence_penalty = 0.0,
+    stop = ['\n'],
+    response_format = 'json_object',
+  } = req.body;
 
-console.log('SYSTEM_PROMPT_PERSONAL: ', SYSTEM_PROMPT_PERSONAL);
+  if (!message || typeof message !== 'string') {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Message is required.' });
+  }
+
+  const data = {
+    messages: [
+      {
+        role: 'system',
+        content: SYSTEM_PROMPT,
+      },
+      {
+        role: 'user',
+        content: message,
+      },
+    ],
+    model: model,
+    seed: seed,
+    response_format: response_format,
+    temperature: temperature,
+    max_tokens: max_tokens,
+    top_p: top_p,
+    frequency_penalty: frequency_penalty,
+    presence_penalty: presence_penalty,
+    stop: stop,
+  };
+
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'User-Agent': 'axios/1.7.9',
+  };
+
+  try {
+    const response = await axios.post(apiUrl, data, { headers });
+    console.log('response: ', response.data);
+
+    if (response.status === 200) {
+      return res.json({
+        success: true,
+        model: model,
+        seed: seed,
+        data: response.data,
+      });
+    } else {
+      return res.status(response.status).json({
+        success: false,
+        message: `Error: Received status code ${response.status}.`,
+      });
+    }
+  } catch (error) {
+    if (error.response) {
+      return res.status(error.response.status).json({
+        success: false,
+        message: error.response.data || 'Error processing request.',
+      });
+    } else if (error.request) {
+      return res.status(500).json({
+        success: false,
+        message: 'No response received from the API.',
+      });
+    } else {
+      return res.status(500).json({
+        success: false,
+        message:
+          error.message || 'An error occurred while processing the request.',
+      });
+    }
+  }
+});
 
 app.post('/personalized/chat', async (req, res) => {
   const {
