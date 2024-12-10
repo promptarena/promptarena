@@ -83,7 +83,7 @@ const Navbar = ({ isAuthenticated }) => {
         <motion.nav
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
-          className="w-full max-w-7xl bg-plain-black-background/0 backdrop-blur-xl border-[0.5px] border-neutral-200 rounded-2xl px-5 md:px-6 py-3.5 flex items-center justify-between"
+          className="w-full max-w-7xl 2xl:max-w-[90rem] bg-plain-black-background/0 backdrop-blur-xl border-[0.5px] border-neutral-200 rounded-2xl px-5 md:px-6 py-3.5 flex items-center justify-between"
           role="navigation"
           aria-label="Main Navigation"
         >

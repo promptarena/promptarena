@@ -704,202 +704,204 @@ const avatarVariants = {
 
 const AboutStep = () => {
   return (
-    <div className="w-full overflow-hidden container mx-auto bg-gradient-to-br from-gray-900 via-purple-900/40 to-gray-900 font-sans text-white lg:px-12 py-8 flex flex-col items-center">
-      <div className="text-center space-y-2 mb-12">
-        <motion.h2
-          className="text-2xl font-semibold text-[#D1D5DB]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          CREATE IN 3 EASY STEPS
-        </motion.h2>
-        <motion.h1
-          className="h1 font-bold uppercase"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-        >
-          <span className="text-white">A Three </span>
-          <span className="text-[#9857D3]">Magic</span>
-          <span className="text-white"> steps</span>
-        </motion.h1>
-        <motion.p
-          className="text-gray-400 text-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-        >
-          {/* Experience the magic of AI art creation in minutes today! */}
-          Craft the Perfect Prompt: Follow this simple three-step guide today!
-        </motion.p>
-      </div>
-
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:gap-4 gap-10 place-items-center z-[1] w-full "
-        // className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 place-items-center z-[1] w-full"
-        initial="initial"
-        // whileInView="animate"
-        // exit="exit"
-        // variants={cardVariants}
-        // viewport={{ once: false, amount: 0.3 }}
-      >
-        {/* Step 1 */}
-        <motion.div
-          className="w-full max-w-[380px] overflow-hidden h-full max-h-[400px] bg-purple-800/10 backdrop-blur-3xl rounded-3xl p-8 flex flex-col justify-between border border-[#A855F7] shadow-2xl"
-          // className="w-[380px] h-[380px] bg-purple-800/10 backdrop-blur-3xl rounded-3xl p-8 flex flex-col justify-between border border-[#A855F7] shadow-2xl"
-          variants={cardVariants}
-          whileInView="animate"
-          exit="exit"
-          viewport={{ once: false, amount: 0.3 }}
-          whileHover={{
-            scale: 1.05,
-            rotate: 5,
-            transition: { duration: 0.4, ease: 'easeInOut' },
-          }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <motion.div
-            className="bg-[#805AD5] w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold mb-4 text-white"
-            whileHover={{
-              rotate: 360,
-              scale: 1.2,
-              transition: { duration: 0.4 },
-            }}
+    <div className="bg-gradient-to-br from-gray-900 via-purple-900/40 to-gray-900 font-sans text-white ">
+      <div className="w-full overflow-hidden container mx-auto lg:px-12 py-8 flex flex-col items-center">
+        <div className="text-center space-y-2 mb-12">
+          <motion.h2
+            className="text-2xl font-semibold text-[#D1D5DB]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
           >
-            01
-          </motion.div>
-          <h3 className="text-2xl font-semibold mb-2 text-white">
-            {/* Enter a detailed description of the image you want to generate. */}
-            Start with the subject: What do you want to see? Be specific!
-          </h3>
-          <motion.div className="flex flex-wrap gap-2">
-            {[
-              'Photography',
-              'Graphic',
-              'Illustration',
-              'Novel',
-              'Code',
-              'Script',
-              'Development',
-              'Lyrics',
-              'Design',
-              'Film',
-              'Email',
-              'Anime',
-            ].map((tag, index) => (
-              <motion.span
-                key={index}
-                className={`px-3 py-1 rounded-full font-semibold text-shadow text-sm ${getTagColor(index)}`}
-                custom={index}
-                variants={tagVariants(index)}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: false }}
-                whileHover={{
-                  scale: 1.1,
-                  rotate: 5,
-                  transition: { duration: 0.3 },
-                }}
-              >
-                {tag}
-              </motion.span>
-            ))}
-          </motion.div>
-        </motion.div>
+            CREATE IN 3 EASY STEPS
+          </motion.h2>
+          <motion.h1
+            className="h1 font-bold uppercase"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            <span className="text-white">A Three </span>
+            <span className="text-[#9857D3]">Magic</span>
+            <span className="text-white"> steps</span>
+          </motion.h1>
+          <motion.p
+            className="text-gray-400 text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            {/* Experience the magic of AI art creation in minutes today! */}
+            Craft the Perfect Prompt: Follow this simple three-step guide today!
+          </motion.p>
+        </div>
 
-        {/* Step 2 */}
         <motion.div
-          className="w-full max-w-[380px] h-full max-h-[400px] bg-purple-800/10 backdrop-blur-3xl rounded-3xl p-8 flex flex-col justify-between border border-[#A855F7] shadow-lg"
-          whileInView="animate"
-          exit="exit"
-          variants={cardVariants}
-          viewport={{ once: false, amount: 0.3 }}
-          whileHover={{
-            scale: 1.1,
-            rotate: -3,
-            transition: { duration: 0.4, ease: 'easeInOut' },
-          }}
-          whileTap={{ scale: 0.95 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:gap-4 gap-10 place-items-center z-[1] w-full "
+          // className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 place-items-center z-[1] w-full"
+          initial="initial"
+          // whileInView="animate"
+          // exit="exit"
+          // variants={cardVariants}
+          // viewport={{ once: false, amount: 0.3 }}
         >
-          <div>
-            <div className="bg-[#A855F7] w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold mb-4 text-white">
-              02
-            </div>
+          {/* Step 1 */}
+          <motion.div
+            className="w-full max-w-[380px] overflow-hidden h-full max-h-[400px] bg-purple-800/10 backdrop-blur-3xl rounded-3xl p-8 flex flex-col justify-between border border-[#A855F7] shadow-2xl"
+            // className="w-[380px] h-[380px] bg-purple-800/10 backdrop-blur-3xl rounded-3xl p-8 flex flex-col justify-between border border-[#A855F7] shadow-2xl"
+            variants={cardVariants}
+            whileInView="animate"
+            exit="exit"
+            viewport={{ once: false, amount: 0.3 }}
+            whileHover={{
+              scale: 1.05,
+              rotate: 5,
+              transition: { duration: 0.4, ease: 'easeInOut' },
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <motion.div
+              className="bg-[#805AD5] w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold mb-4 text-white"
+              whileHover={{
+                rotate: 360,
+                scale: 1.2,
+                transition: { duration: 0.4 },
+              }}
+            >
+              01
+            </motion.div>
             <h3 className="text-2xl font-semibold mb-2 text-white">
-              Mood and tone: Describe the desired mood or feeling.
+              {/* Enter a detailed description of the image you want to generate. */}
+              Start with the subject: What do you want to see? Be specific!
             </h3>
-          </div>
-          <motion.div className="flex justify-center -space-x-2">
-            {[avatar7, avatar4, avatar3, avatar2, avatar1].map(
-              (avatar, index) => (
-                <motion.div
+            <motion.div className="flex flex-wrap gap-2">
+              {[
+                'Photography',
+                'Graphic',
+                'Illustration',
+                'Novel',
+                'Code',
+                'Script',
+                'Development',
+                'Lyrics',
+                'Design',
+                'Film',
+                'Email',
+                'Anime',
+              ].map((tag, index) => (
+                <motion.span
                   key={index}
-                  variants={avatarVariants}
-                  whileHover="hover"
+                  className={`px-3 py-1 rounded-full font-semibold text-shadow text-sm ${getTagColor(index)}`}
+                  custom={index}
+                  variants={tagVariants(index)}
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: false }}
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 5,
+                    transition: { duration: 0.3 },
+                  }}
                 >
-                  <img
-                    src={avatar}
-                    alt={`avatar-${index}`}
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
-              )
-            )}
+                  {tag}
+                </motion.span>
+              ))}
+            </motion.div>
           </motion.div>
-        </motion.div>
 
-        {/* Step 3 */}
-        <motion.div
-          className="w-full max-w-[380px] h-full max-h-[400px] bg-purple-800/10 backdrop-blur-3xl rounded-3xl p-8 flex flex-col justify-between border border-[#A855F7] shadow-lg"
-          variants={cardVariants}
-          whileInView="animate"
-          exit="exit"
-          viewport={{ once: false, amount: 0.3 }}
-          whileHover={{
-            scale: 1.1,
-            rotate: 3,
-            transition: { duration: 0.4, ease: 'easeInOut' },
-          }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <div>
-            <div className="bg-[#6B46C1] w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold mb-4 text-white">
-              03
+          {/* Step 2 */}
+          <motion.div
+            className="w-full max-w-[380px] h-full max-h-[400px] bg-purple-800/10 backdrop-blur-3xl rounded-3xl p-8 flex flex-col justify-between border border-[#A855F7] shadow-lg"
+            whileInView="animate"
+            exit="exit"
+            variants={cardVariants}
+            viewport={{ once: false, amount: 0.3 }}
+            whileHover={{
+              scale: 1.1,
+              rotate: -3,
+              transition: { duration: 0.4, ease: 'easeInOut' },
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div>
+              <div className="bg-[#A855F7] w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold mb-4 text-white">
+                02
+              </div>
+              <h3 className="text-2xl font-semibold mb-2 text-white">
+                Mood and tone: Describe the desired mood or feeling.
+              </h3>
             </div>
-            <h3 className="text-2xl font-semibold mb-2 text-white">
-              {/* Let the AI create your image, then preview and download it
+            <motion.div className="flex justify-center -space-x-2">
+              {[avatar7, avatar4, avatar3, avatar2, avatar1].map(
+                (avatar, index) => (
+                  <motion.div
+                    key={index}
+                    variants={avatarVariants}
+                    whileHover="hover"
+                  >
+                    <img
+                      src={avatar}
+                      alt={`avatar-${index}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )
+              )}
+            </motion.div>
+          </motion.div>
+
+          {/* Step 3 */}
+          <motion.div
+            className="w-full max-w-[380px] h-full max-h-[400px] bg-purple-800/10 backdrop-blur-3xl rounded-3xl p-8 flex flex-col justify-between border border-[#A855F7] shadow-lg"
+            variants={cardVariants}
+            whileInView="animate"
+            exit="exit"
+            viewport={{ once: false, amount: 0.3 }}
+            whileHover={{
+              scale: 1.1,
+              rotate: 3,
+              transition: { duration: 0.4, ease: 'easeInOut' },
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div>
+              <div className="bg-[#6B46C1] w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold mb-4 text-white">
+                03
+              </div>
+              <h3 className="text-2xl font-semibold mb-2 text-white">
+                {/* Let the AI create your image, then preview and download it
               instantly. */}
-              Keywords: Play with keywords to find the best fit for prompts.
-            </h3>
-          </div>
-          <motion.div className="flex flex-wrap gap-2 justify-center items-center">
-            <span className="text-[#D53F8C] text-2xl font-bold">Fantasy</span>
-            <Sparkles className="text-[#A855F7] w-8 h-8" />
-            <span className="text-[#6B46C1] text-xl">Unlimited</span>
-            {['Fearful', 'Calculate', 'Adventure'].map((text, index) => (
-              <motion.span
-                key={index}
-                className={`px-2 py-1 rounded text-neutral-100 text-shadow text-sm ${getTagColor(Math.floor(Math.random() * 12))}`}
-                whileHover={{
-                  scale: 1.2,
-                  rotate: 5,
-                  transition: { duration: 0.3, ease: 'easeInOut' },
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {text}
-              </motion.span>
-            ))}
+                Keywords: Play with keywords to find the best fit for prompts.
+              </h3>
+            </div>
+            <motion.div className="flex flex-wrap gap-2 justify-center items-center">
+              <span className="text-[#D53F8C] text-2xl font-bold">Fantasy</span>
+              <Sparkles className="text-[#A855F7] w-8 h-8" />
+              <span className="text-[#6B46C1] text-xl">Unlimited</span>
+              {['Fearful', 'Calculate', 'Adventure'].map((text, index) => (
+                <motion.span
+                  key={index}
+                  className={`px-2 py-1 rounded text-neutral-100 text-shadow text-sm ${getTagColor(Math.floor(Math.random() * 12))}`}
+                  whileHover={{
+                    scale: 1.2,
+                    rotate: 5,
+                    transition: { duration: 0.3, ease: 'easeInOut' },
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {text}
+                </motion.span>
+              ))}
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
-      <div className="pt-12">
-        <h2 className="text-xl text-center font-semibold text-[#D1D5DB] -mb-10">
-          Our supported tools
-        </h2>
+        <div className="pt-12">
+          <h2 className="text-xl text-center font-semibold text-[#D1D5DB] -mb-10">
+            Our supported tools
+          </h2>
 
-        <AnimatedLogoCloud />
+          <AnimatedLogoCloud />
+        </div>
       </div>
     </div>
   );

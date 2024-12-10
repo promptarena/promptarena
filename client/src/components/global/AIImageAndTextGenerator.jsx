@@ -116,62 +116,64 @@ export default function AIImageAndTextGenerator() {
   const [activeTab, setActiveTab] = useState('image');
 
   return (
-    <div className="min-h-screen dark:bg-dark-background bg-background text-text dark:text-dark-text overflow-hidden container mx-auto">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mt-1 mb-5 ">
-          <h2 className="h1 font-bold font-syncopate">
-            <span className="text-[#9857D3] uppercase">AI</span>{' '}
-            <span className="text-white uppercase">
-              Image and Text Generator
-            </span>
-          </h2>
-          <p className="text-gray-400 text-lg">
-            Generate captivating visuals and engaging text with our AI-powered
-            tools. Create captivating visuals and engaging text with our
-            AI-powered tools.
-          </p>
-        </div>
-        {/* Tab Toggle */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-white rounded-full p-1 shadow-lg inline-flex">
-            <button
-              onClick={() => setActiveTab('image')}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeTab === 'image'
-                  ? 'bg-[#7C3AED] text-white'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              Text to Image
-            </button>
-            <button
-              onClick={() => setActiveTab('text')}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeTab === 'text'
-                  ? 'bg-[#7C3AED] text-white'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              Text to Text
-            </button>
+    <div className="dark:bg-dark-background bg-background text-text dark:text-dark-text">
+      <div className="min-h-screen overflow-hidden container pt-8 mx-auto">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mt-1 mb-5 ">
+            <h2 className="h1 font-bold font-syncopate">
+              <span className="text-[#9857D3] uppercase">AI</span>{' '}
+              <span className="text-white uppercase">
+                Image and Text Generator
+              </span>
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Generate captivating visuals and engaging text with our AI-powered
+              tools. Create captivating visuals and engaging text with our
+              AI-powered tools.
+            </p>
           </div>
-        </div>
+          {/* Tab Toggle */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-white rounded-full p-1 shadow-lg inline-flex">
+              <button
+                onClick={() => setActiveTab('image')}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+                  activeTab === 'image'
+                    ? 'bg-[#7C3AED] text-white'
+                    : 'text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                Text to Image
+              </button>
+              <button
+                onClick={() => setActiveTab('text')}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+                  activeTab === 'text'
+                    ? 'bg-[#7C3AED] text-white'
+                    : 'text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                Text to Text
+              </button>
+            </div>
+          </div>
 
-        <>
-          {/* Left Column - Preview */}
-          <div className="grid relative grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Conditionally render based on activeTab */}
-            {activeTab === 'image' ? (
-              <>
-                <AIImage />
-              </>
-            ) : (
-              <>
-                <AIChatBot />
-              </>
-            )}
-          </div>
-        </>
+          <>
+            {/* Left Column - Preview */}
+            <div className="grid relative grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Conditionally render based on activeTab */}
+              {activeTab === 'image' ? (
+                <>
+                  <AIImage />
+                </>
+              ) : (
+                <>
+                  <AIChatBot />
+                </>
+              )}
+            </div>
+          </>
+        </div>
       </div>
     </div>
   );

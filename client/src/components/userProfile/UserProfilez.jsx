@@ -636,12 +636,14 @@ export default function UserProfilez({ usernameFromProfilePage }) {
         />
       </div>
       <>
+      <div className="bg-gradient-to-br from-black via-purple-900/40 to-black text-white">
+        
+          <div className="absolute inset-0 bg-svg rotate-180 opacity-25 z-0" />
         <div
           id="details"
-          className="relative min-h-screen container mx-auto flex items-center justify-center bg-gradient-to-br from-black via-purple-900/40 to-black text-white"
+          className="relative min-h-screen container mx-auto flex items-center justify-center "
         >
           {/* Background Enhancements */}
-          <div className="absolute inset-0 bg-svg rotate-180 opacity-25 z-0" />
 
           {/* Main Profile Card */}
           <motion.div
@@ -1037,6 +1039,7 @@ export default function UserProfilez({ usernameFromProfilePage }) {
             </div>
           </motion.div>
         </div>
+      </div>
       </>
     </>
   );

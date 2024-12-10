@@ -138,7 +138,7 @@ const CreatePromptFormz = () => {
   return (
     <div className="min-h-screen text-gray-100 p-4 md:p-8">
       {/* Tutorial Section */}
-      <div className="bg-gray-800/50 backdrop-blur-3xl text-white p-6 rounded-lg shadow-lg mb-8">
+      {/* <div className="bg-gray-800/50 backdrop-blur-3xl text-white p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-3xl font-semibold mb-4">
           Welcome to Prompt Creator!
         </h2>
@@ -172,9 +172,9 @@ const CreatePromptFormz = () => {
         <p className="font-bold text-lg text-center text-blue-500">
           Ready to create your first prompt? Let’s get started! 🎉
         </p>
-      </div>
+      </div> */}
 
-      <div className="text-center mb-8">
+      <div className="text-center my-8">
         <h1 className="h1 font-ibm-plex-mono text-shadow">Create AI Prompt</h1>
         <h6 className="text-neutral-300 font-bold font-share-tech-mono">
           Add Prompt Details

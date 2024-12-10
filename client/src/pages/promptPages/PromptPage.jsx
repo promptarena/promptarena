@@ -40,13 +40,13 @@ const PromptPage = () => {
     <>
       {/* Hero Container */}
       <div>
-        <div className="relative w-full bg-gradient-to-br from-purple-900/20 via-[#030303]/100 to-purple-900 text-white overflow-hidden">
+        <div className="relative bg-gradient-to-br from-purple-900/20 via-[#030303]/100 to-purple-900 text-white overflow-hidden">
           {/* Hero Section */}
           {/* bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 */}
-          <div className=" w-full container flex min-h-[90vh] flex-col md:flex-row md:items-center md:justify-between justify-center  border-b-8 border-purple-600 ">
+          <div className=" w-full  flex min-h-[90vh] flex-col md:flex-row md:items-center md:justify-between justify-center  border-b-8 border-purple-600 ">
             {/* Vertical text on the left edge */}
             <div
-              className="absolute top-0  left-0 transform -rotate-90 whitespace-nowrap tracking-[0.2em] text-white/80 z-0"
+              className="absolute top-0 z-[21] left-0 transform -rotate-90 whitespace-nowrap tracking-[0.2em] text-white/80"
               style={{ transformOrigin: 'top left' }}
             >
               <motion.div
@@ -66,7 +66,7 @@ const PromptPage = () => {
 
             {/* Vertical text on the right edge */}
             <div
-              className="absolute top-0 right-0 transform -translate-y-1/2 rotate-90 whitespace-nowrap tracking-[0.2em] text-white/80 z-[0] w-full"
+              className="absolute top-0 right-0 z-[21] transform -translate-y-1/2 rotate-90 whitespace-nowrap tracking-[0.2em] text-white/80 w-full"
               style={{ transformOrigin: 'top right' }}
             >
               <motion.div
@@ -85,7 +85,7 @@ const PromptPage = () => {
             </div>
 
             {/* Main content in Hero Section */}
-            <div className="relative mx-auto px-4 pb-12 text-center z-[20]">
+            <div className="relative w-[95%] max-w-[90rem] mx-auto px-4 pb-12 text-center z-[20]">
               {/* Title */}
               <motion.h1
                 initial={{ y: -50, opacity: 0 }}
@@ -125,7 +125,7 @@ const PromptPage = () => {
                     <motion.div
                       initial={{ x: -50, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
-                      className="bg-black/60 backdrop-blur-sm shadow-2xl border border-[#491C91]/50 rounded-xl p-6 space-y-4"
+                      className="bg-black/60 backdrop-blur-sm shadow-2xl border border-[#491C91]/50  rounded-xl p-6 space-y-4"
                     >
                       <div className="flex items-center gap-6">
                         <img
