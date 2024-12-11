@@ -39,6 +39,7 @@ const Blog = require('./models/blog.model');
 const { SitemapStream, streamToPromise } = require('sitemap');
 const { createGzip } = require('zlib');
 const aiRoutes = require('./controllers/common/ai.controller');
+const adminBOT = require('./controllers/admin/adminBOT');
 
 // Initialize Express app
 const app = express();
@@ -260,8 +261,9 @@ app.use(`/api/${VERSION}/purchase`, purchaseRoutes);
 app.use(`/api/${VERSION}/newsletter`, newsletterRoutes);
 // Contact Form Routes
 app.use(`/api/${VERSION}/contact`, contactRoutes);
-
+// AI Routes
 app.use(`/api/${VERSION}/ai`, aiRoutes);
+app.use(`/api/${VERSION}/admin_bot`, adminBOT);
 
 // Log that the routes have been registered
 logger.info('Routes registered successfully'.green.bold);

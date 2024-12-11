@@ -1,2 +1,2 @@
 Today's date is {CURRENTDATE}.
-Current Time {CURRENTTIME}
+Current Time is {CURRENTTIME}.

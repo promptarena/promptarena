@@ -12,6 +12,8 @@ import phindSVG from './phind.svg';
 import gemmaSVG from './gemma.svg';
 import reminiSVG from './remini.jpg';
 import metaSVG from './meta.svg';
+import prompttexLogoMain from './prompttexLogoMain.webp';
+import prompttexLogoLite from './prompttexLogoLite.webp';
 
 export {
   openaiSVG,
@@ -28,4 +30,6 @@ export {
   gemmaSVG,
   metaSVG,
   reminiSVG,
+  prompttexLogoMain,
+  prompttexLogoLite,
 };

@@ -26,6 +26,7 @@ const {
   GOOGLE_CLIENT_SECRET,
 } = require('../../config/envConfig');
 const { generateUniqueUsername } = require('../../utils/generateUniqueUsername');
+const sendEmail = require('../../config/nodemailer');
 
 
 // Configure Google OAuth
@@ -150,6 +151,19 @@ module.exports = {
 
       user.lastLogin = Date.now();
       await sendVerificationEmail(user.email, verificationToken);
+
+      // Send email to admin a new user has been trying to sign up
+      
+      const adminUser = await userModel.findOne({ role: 'admin' });
+      console.log('adminUser: ', adminUser);
+      if (adminUser) {
+        await sendEmail({
+          to: adminUser.email,
+          subject: 'New User Signup',
+          html: `<p>A new user has signed up:</p><ul><li>Name: ${user.username}</li><li>Email: ${user.email}</li></ul>`,
+        });
+      }
+
       // Send success response
       return sendSuccessResponse(
         res,
