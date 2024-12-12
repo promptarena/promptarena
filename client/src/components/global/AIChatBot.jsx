@@ -160,7 +160,7 @@ const AIChatBot = () => {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [input, messages]);
+  }, [messages]);
 
   return (
     <>
