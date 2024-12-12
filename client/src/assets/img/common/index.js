@@ -14,6 +14,8 @@ import reminiSVG from './remini.jpg';
 import metaSVG from './meta.svg';
 import prompttexLogoMain from './prompttexLogoMain.webp';
 import prompttexLogoLite from './prompttexLogoLite.webp';
+import mockRobot from './mockRobot.webp';
+import mockOwl from './mockOwl.webp';
 
 export {
   openaiSVG,
@@ -32,4 +34,6 @@ export {
   reminiSVG,
   prompttexLogoMain,
   prompttexLogoLite,
+  mockOwl,
+  mockRobot,
 };

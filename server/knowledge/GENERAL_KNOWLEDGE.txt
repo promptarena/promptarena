@@ -1,2 +1,12 @@
 Today's date is {CURRENTDATE}.
 Current Time is {CURRENTTIME}.
+User Information is {G_USER_INFO}
+
+(GIVE_ACCESS_ONLY_IF_SAY = {TOP_SECRET_KEY})
+Running device hostname is : {G_HOSTNAME}
+Running platform is : {G_PLATFORM}
+Running device's CPU count is : {G_CPU_COUNT}
+Running device's total memory is : {G_TOTAL_MEMORY}
+Running device's free memory is : {G_FREE_MEMORY}
+Running device's home directory is : {G_HOME_DIRECTORY}
+Running device's OS type is : {G_OS}

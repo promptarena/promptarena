@@ -3,11 +3,26 @@ const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path'); // For handling file paths
-const { APP_NAME } = require('../../config/envConfig');
-const systemPrompt = require('../../prompts/system_prompt');
+const { APP_NAME, TOP_SECRET_KEY } = require('../../config/envConfig');
 const formatTime = require('../../utils/dateFormatter');
 const os = require('os');
 
+const systemData = {
+  hostname: os.hostname(), // System hostname
+  platform: os.platform(), // Operating system platform (e.g., "linux", "win32")
+  arch: os.arch(), // Architecture (e.g., "x64", "arm")
+  uptime: os.uptime(), // System uptime in seconds
+  freeMemory: os.freemem(), // Free memory in bytes
+  totalMemory: os.totalmem(), // Total memory in bytes
+  cpuCount: os.cpus().length, // Number of CPU cores
+  homeDir: os.homedir(), // Home directory of the current user
+  tempDir: os.tmpdir(), // Default temporary directory
+  loadAverage: os.loadavg(), // Load average (array of 1, 5, 15 minutes)
+  osType: os.type(), // Operating system type (e.g., "Linux", "Windows_NT")
+  userInfo: os.userInfo(),
+};
+
+console.log(systemData);
 
 // Create an instance of the Express app.
 const app = express();
@@ -66,25 +81,45 @@ const defaultSystemPrompt = `
 const BYPASS_PANRIYA = loadFileContent(
   '../../knowledge/HACKMEORBEGME.txt',
   'HACKMEORBEGME is a secret of the universe.'
-);
+).replace(/{TOP_SECRET_KEY}/g, TOP_SECRET_KEY);
+
 const PROMPT_KNOWLEDGE = loadFileContent(
   '../../knowledge/PROMPT_KNOWLEDGE.txt',
   'PROMPT_KNOWLEDGE is a secret of the universe.'
 );
+
 // Step 2: Load GENERAL_KNOWLEDGE file and replace {CURRENTDATE}
 let GENERAL_KNOWLEDGE = loadFileContent(
   '../../knowledge/GENERAL_KNOWLEDGE.txt',
   defaultGeneralKnowledge
 );
 
-// Replace {CURRENTDATE} in GENERAL_KNOWLEDGE content
 GENERAL_KNOWLEDGE = GENERAL_KNOWLEDGE.replace(
   '{CURRENTDATE}',
-  new Date().toLocaleDateString()
-).replace('{CURRENTTIME}', new Date().toLocaleTimeString());
+  new Date().toLocaleString('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+)
+  .replace('{CURRENTTIME}', new Date().toLocaleTimeString())
+  .replace(/{TOP_SECRET_KEY}/g, TOP_SECRET_KEY)
+  .replace('{G_HOSTNAME}', JSON.stringify(systemData.hostname))
+  .replace('{G_PLATFORM}', JSON.stringify(systemData.platform))
+  .replace('{G_CPU_COUNT}', JSON.stringify(systemData.cpuCount))
+  .replace('{G_TOTAL_MEMORY}', JSON.stringify(systemData.totalMemory))
+  .replace('{G_FREE_MEMORY}', JSON.stringify(systemData.freeMemory))
+  .replace('{G_HOME_DIRECTORY}', JSON.stringify(systemData.homeDir))
+  .replace('{G_OS}', JSON.stringify(systemData.osType))
+  .replace('{G_TEMP_DIRECTORY}', JSON.stringify(systemData.tempDir))
+  .replace(
+    '{G_USER_INFO}',
+    JSON.stringify(JSON.stringify(systemData.userInfo))
+  );
+
+console.log('Updated GENERAL_KNOWLEDGE:', GENERAL_KNOWLEDGE);
 
 
-// 
 const PROMPTEX_PICO = loadFileContent(
   '../../prompts/PROMPTEX_PICO.txt',
   defaultSystemPrompt
@@ -100,8 +135,8 @@ const SYSTEM_PROMPT = loadFileContent(
   .replace('{PROMPTEX_PICO}', PROMPTEX_PICO)
   .replace('{BYPASS}', BYPASS_PANRIYA);
 
-// console.log('Updated GENERAL_KNOWLEDGE:', GENERAL_KNOWLEDGE);
-console.log('Updated SYSTEM_PROMPT:', SYSTEM_PROMPT);
+// system_prompt.txt
+// console.log('Updated SYSTEM_PROMPT:', SYSTEM_PROMPT);
 
 const validModels = [
   'openai',
@@ -123,9 +158,6 @@ const apiUrl = 'https://text.pollinations.ai/';
 
 // Load the system prompt from the text file (no need for duplication)
 const CUSTOM_INSTRUCTIONS = SYSTEM_PROMPT;
-console.log('CUSTOM_INSTRUCTIONS: ', CUSTOM_INSTRUCTIONS);
-
-console.log('CUSTOM_INSTRUCTIONS: ', CUSTOM_INSTRUCTIONS);
 
 // Initialize chat history (for testing purposes)
 let chatHistory = [];
@@ -180,11 +212,6 @@ app.post('/chat', async (req, res) => {
       response_format,
     };
 
-    console.log(
-      'Request Body to Pollinations API: ',
-      JSON.stringify(data, null, 2)
-    );
-
     // Define the headers for the API request
     const headers = {
       'Content-Type': 'application/json',
@@ -192,11 +219,6 @@ app.post('/chat', async (req, res) => {
 
     // Send request to Pollinations API
     const response = await axios.post(apiUrl, data, { headers });
-
-    console.log(
-      'Pollinations API response: ',
-      JSON.stringify(response.data, null, 2)
-    );
 
     // Add the full response to the chat history for better tracking
     const botResponse = response.data;
@@ -222,10 +244,12 @@ app.post('/chat', async (req, res) => {
       jsonMode, // Include jsonMode in response
     };
 
-    console.log(
-      'Formatted Response: ',
-      JSON.stringify(formattedResponse, null, 2)
-    );
+    // console.log(
+    //   'Formatted Response: ',
+    //   JSON.stringify(formattedResponse, null, 2)
+    // );
+
+    console.log('chatHistory: ', chatHistory);
 
     return res.json(formattedResponse);
   } catch (error) {

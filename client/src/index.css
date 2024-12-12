@@ -255,3 +255,31 @@ body {
                      var(--sb-track-color);
   }
 }
+
+.mockupScroll {
+  --sb-track-color: #949494;
+  --sb-thumb-color: #9d33e4c0;
+  --sb-size: 4px;
+}
+
+.mockupScroll::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+.mockupScroll::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 5px;
+}
+
+.mockupScroll::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 5px;
+  border: 1px solid #232e33;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .mockupScroll {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}

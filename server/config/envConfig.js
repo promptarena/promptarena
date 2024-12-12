@@ -27,4 +27,5 @@ module.exports = {
   SUPPORT_MAIL: process.env.SUPPORT_MAIL || 'mathanmithun8838@gmail.com',
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  TOP_SECRET_KEY: process.env.TOP_SECRET_KEY,
 };

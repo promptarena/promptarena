@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import miniLogo from '../../assets/img/common/minilogo.png';
 import { avatar8 } from '../../assets/img/blogpage';
 import { prompttexLogoLite } from '../../assets/img/common';
+import { MockMobile } from './MockMobile';
 
 const AIChatBot = () => {
   const chatVariants = {
@@ -37,7 +38,7 @@ const AIChatBot = () => {
     {
       role: 'system',
       content: {
-        data: `I am ${siteName}'s AI assistant. How can I help you today?`,
+        data: `I’m Promptex, PromptArena’s AI powerhouse. How can I help you today?`,
         message: 'Welcome Message',
         model: null,
         success: true,
@@ -164,7 +165,9 @@ const AIChatBot = () => {
 
   return (
     <>
-      <div>some content will come here</div>
+      <div>
+        <MockMobile />
+      </div>
       <motion.div
         initial="initial"
         animate="animate"
@@ -225,7 +228,10 @@ const AIChatBot = () => {
         {/* Chat Messages */}
         <div
           ref={chatContainerRef}
-          className="flex flex-col flex-grow p-2 h-0 chatBot overflow-x-hidden overflow-y-scroll"
+          className="flex flex-col scroll-smooth flex-grow p-2 h-0 chatBot overflow-x-hidden overflow-y-scroll"
+          onWheel={e => {
+            e.stopPropagation();
+          }}
         >
           {messages.length === 0 && (
             <div className="h-full flex items-center justify-center">
@@ -243,7 +249,7 @@ const AIChatBot = () => {
                     <motion.div className="flex w-full overflow-hidden mt-2 space-x-3 max-w-xs ml-auto justify-end">
                       <div>
                         <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                          <p className="text-sm">{msg.content.data}</p>
+                          <p className="text-sm ">{msg.content.data}</p>
                         </div>
                         <span className="text-xs text-gray-100 leading-none">
                           {formatCustomDate(msg.timestamp, 'h:mm a')}
