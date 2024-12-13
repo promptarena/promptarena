@@ -40,6 +40,8 @@ const { SitemapStream, streamToPromise } = require('sitemap');
 const { createGzip } = require('zlib');
 const aiRoutes = require('./controllers/common/ai.controller');
 const adminBOT = require('./controllers/admin/adminBOT');
+const compression = require('compression');
+
 
 // Initialize Express app
 const app = express();
@@ -61,7 +63,7 @@ app.use(cookieParser());
 // app.use(cors()); // Allow cross-origin requests, customize for production
 // app.use(rateLimiter); // Enable rate limiting to prevent abuse
 app.use(morgan); // HTTP request logger using Morgan
-
+app.use(compression());
 // app.use(cors({ origin: CLIENT_URL, credentials: true }));
 // console.log('CLIENT_URL: ', CLIENT_URL);
 

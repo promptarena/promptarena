@@ -6,8 +6,7 @@ import { getCurrentSiteUrl } from '../../utils/getCurrentSiteUrl';
 
 const defaultTitle = `${siteName} - The Best Free AI Prompt Marketplace`;
 const defaultDescription = `Discover and use free AI prompts for text generation, image creation, and more. Unleash your creativity with ${siteName}'s free prompt library.`;
-const defaultImage =
-  'https://promptarena.vercel.app/promptarena/images/promptarena-og-card.jpg';
+const defaultImage = '/promptarena/images/promptarena-og-card.jpg';
 const defaultAuthorName = 'Mathanraj Murugesan';
 
 const SEO = ({
@@ -117,10 +116,7 @@ const SEO = ({
           <meta property="og:article:tag" content={tag} key={tag} />
         ))}
       {/* Twitter Card Tags */}
-      <meta
-        name="twitter:card"
-        content="https://promptarena.vercel.app/promptarena/images/promptarena-og-card.jpg"
-      />
+      <meta name="twitter:card" content={defaultImage} />
       {twitterUsername && (
         <meta
           name="twitter:creator"

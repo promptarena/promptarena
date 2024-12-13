@@ -107,7 +107,7 @@ const Navbar = ({ isAuthenticated }) => {
 
           {/* Center Logo */}
           <div className="absolute left-1/2 block transform -translate-x-[65%] md:-translate-x-1/2">
-            <span className="text-white text-2xl tracking-widest font-[AntonSC] text-shadow">
+            <span className="text-white text-2xl tracking-widest font-anton text-shadow">
               <Link to="/">{siteName}</Link>
             </span>
           </div>

@@ -2,10 +2,7 @@
 import plugin from 'tailwindcss/plugin';
 
 export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}', // Adjust paths if needed
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './public/**/*.html'],
   darkMode: 'class', // Use 'class' for manual dark mode toggling or 'media' for system preference
   theme: {
     extend: {
@@ -16,6 +13,7 @@ export default {
         'roboto-mono': ['Roboto Mono', 'monospace'],
         'ibm-plex-mono': ['IBM Plex Mono', 'monospace'],
         'share-tech-mono': ['Share Tech Mono', 'monospace'],
+        anton: ['AntonSC', 'sans-serif'],
       },
       colors: {
         // Light Mode Colors
