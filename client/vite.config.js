@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { config } from 'dotenv';
 import react from '@vitejs/plugin-react';
 import compression from 'vite-plugin-compression';
-import { visualizer } from 'rollup-plugin-visualizer';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // Load environment variables from .env file
 config();
@@ -25,14 +25,22 @@ export default defineConfig(({ mode }) => {
         threshold: 10240,
       }),
       react(),
-      visualizer({ open: false }),
+      VitePWA({
+        strategies: 'injectManifest',
+        srcDir: 'src/service-worker',
+        filename: 'sw.js',
+        injectManifest: {
+          maximumFileSizeToCacheInBytes: 5000000, // 5MB
+        },
+        registerType: 'autoUpdate',
+      }),
     ],
+
     envDir: './',
     resolve: {
       alias: { '@': '/src' },
     },
     base: './',
-
     define: {
       // Set process.env.NODE_ENV based on the mode
       'process.env.NODE_ENV': JSON.stringify(mode),
