@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { config } from 'dotenv';
 import react from '@vitejs/plugin-react';
 import compression from 'vite-plugin-compression';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // Load environment variables from .env file
 config();
@@ -24,9 +25,8 @@ export default defineConfig(({ mode }) => {
         threshold: 10240,
       }),
       react(),
+      visualizer({ open: false }),
     ],
-    // plugins: [MillionLint.vite()],
-
     envDir: './',
     resolve: {
       alias: { '@': '/src' },

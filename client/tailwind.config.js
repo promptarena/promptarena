@@ -2,7 +2,11 @@
 import plugin from 'tailwindcss/plugin';
 
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './public/**/*.html'],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx,html}', // Scan React components and HTML for Tailwind classes
+    './public/index.html',
+  ],
+
   darkMode: 'class', // Use 'class' for manual dark mode toggling or 'media' for system preference
   theme: {
     extend: {
