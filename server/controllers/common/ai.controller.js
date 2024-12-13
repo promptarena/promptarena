@@ -6,6 +6,7 @@ const path = require('path'); // For handling file paths
 const { APP_NAME, TOP_SECRET_KEY } = require('../../config/envConfig');
 const formatTime = require('../../utils/dateFormatter');
 const os = require('os');
+const ChatBot = require('../../models/chatbot.model');
 
 const systemData = {
   hostname: os.hostname(), // System hostname
@@ -21,8 +22,6 @@ const systemData = {
   osType: os.type(), // Operating system type (e.g., "Linux", "Windows_NT")
   userInfo: os.userInfo(),
 };
-
-console.log(systemData);
 
 // Create an instance of the Express app.
 const app = express();
@@ -117,8 +116,7 @@ GENERAL_KNOWLEDGE = GENERAL_KNOWLEDGE.replace(
     JSON.stringify(JSON.stringify(systemData.userInfo))
   );
 
-console.log('Updated GENERAL_KNOWLEDGE:', GENERAL_KNOWLEDGE);
-
+// console.log('Updated GENERAL_KNOWLEDGE:', GENERAL_KNOWLEDGE);
 
 const PROMPTEX_PICO = loadFileContent(
   '../../prompts/PROMPTEX_PICO.txt',
@@ -163,6 +161,11 @@ const CUSTOM_INSTRUCTIONS = SYSTEM_PROMPT;
 let chatHistory = [];
 
 app.post('/chat', async (req, res) => {
+  
+  const { model, userMessage, timestamp, assistantResponse } = req.body;
+
+  console.log(' req.body: ',  req.body);
+
   try {
     const {
       message,
@@ -220,6 +223,22 @@ app.post('/chat', async (req, res) => {
     // Send request to Pollinations API
     const response = await axios.post(apiUrl, data, { headers });
 
+    // save the response in the database
+
+    try {
+       const newMessage = await ChatBot.create({
+         model,
+         userMessage: message,
+         assistantResponse: response.data,
+       });
+
+       console.log('newMessage: ', newMessage);
+
+       await newMessage.save(); 
+    } catch (error) {
+      console.error('Error saving message:', error);
+    }
+
     // Add the full response to the chat history for better tracking
     const botResponse = response.data;
     chatHistory.push({
@@ -229,7 +248,7 @@ app.post('/chat', async (req, res) => {
 
     // Format the timestamp for the response
     const timestamp = formatTime();
-    console.log('timestamp: ', timestamp);
+    // console.log('timestamp: ', timestamp);
 
     // Build the response to return
     const formattedResponse = {
@@ -249,7 +268,7 @@ app.post('/chat', async (req, res) => {
     //   JSON.stringify(formattedResponse, null, 2)
     // );
 
-    console.log('chatHistory: ', chatHistory);
+    // console.log('chatHistory: ', chatHistory);
 
     return res.json(formattedResponse);
   } catch (error) {

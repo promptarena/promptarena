@@ -5,6 +5,14 @@ const fs = require('fs');
 const path = require('path'); // For handling file paths
 const { APP_NAME } = require('../../config/envConfig');
 const formatTime = require('../../utils/dateFormatter');
+const UserModel = require('../../models/user.model');
+const PromptModel = require('../../models/prompt.model');
+const ReviewModel = require('../../models/review.model');
+const NotificationModel = require('../../models/notification.model');
+const ContactModel= require('../../models/contact.model');
+const BlogModel = require('../../models/blog.model');
+const SubscriberModel = require('../../models/subscriber.model');
+const ChatBotModel = require('../../models/chatbot.model');
 
 // Create an instance of the Express app.
 const app = express();
@@ -14,14 +22,14 @@ app.use(express.json());
 
 // Load the system prompt from a text file (synchronously).
 const loadSystemPrompt = (
-  filePathDir = '../../prompts/CUSTOM_INSTRUCTIONS.txt'
+  filePathDir = '../../prompts/ADMIN_INSTRUCTIONS.txt'
 ) => {
   const filePath = path.join(__dirname, filePathDir); // Construct the full path to the file
   console.log('filePath: ', filePath);
 
   // Check if the CUSTOM_INSTRUCTIONS.txt file exists
   if (!fs.existsSync(filePath)) {
-    console.error('System prompt file is missing: CUSTOM_INSTRUCTIONS.txt');
+    console.error('System prompt file is missing: ADMIN_INSTRUCTIONS.txt');
     return `
       You are an AI assistant with expert knowledge in ${APP_NAME}. 
       You must only provide answers based on the following knowledge base:
@@ -33,7 +41,7 @@ const loadSystemPrompt = (
 
   try {
     const data = fs.readFileSync(filePath, 'utf8');
-    console.log('System instructions are loaded from CUSTOM_INSTRUCTIONS.txt');
+    console.log('System instructions are loaded from ADMIN_INSTRUCTIONS.txt');
     return data;
   } catch (err) {
     console.error('Error reading system prompt file:', err);
@@ -48,10 +56,10 @@ const loadSystemPrompt = (
 };
 
 // Load the system prompt from the text file (no need for duplication)
-const CUSTOM_INSTRUCTIONS = loadSystemPrompt(
-  '../../prompts/CUSTOM_INSTRUCTIONS.txt'
+const ADMIN_INSTRUCTIONS = loadSystemPrompt(
+  '../../prompts/ADMIN_INSTRUCTIONS.txt'
 );
-console.log('CUSTOM_INSTRUCTIONS: ', CUSTOM_INSTRUCTIONS);
+// console.log('ADMIN_INSTRUCTIONS: ', ADMIN_INSTRUCTIONS);
 
 // Valid AI models
 const validModels = [
@@ -108,8 +116,52 @@ const sendChat = async (req, res) => {
       });
     }
 
+    // Fetch the user from the database
+    const user = await UserModel.find({});
+    console.log('user: ', user.length);
+    // Fetch the Prompts from the database
+    const prompts = await PromptModel.find({});
+    console.log('prompts: ', prompts.length);
+    // Fetch the Reviews from the database
+    const reviews = await ReviewModel.find({});
+    console.log('reviews: ', reviews.length);
+    // Fetch the notifications from the database
+    const notifications = await NotificationModel.find({});
+    console.log('notifications: ', notifications.length);
+    // Fetch the contact from the database
+    const contact = await ContactModel.find({});
+    console.log('contact: ', contact.length);
+    // Fetch the blog from the database
+    const blog = await BlogModel.find({});
+    console.log('blog: ', blog.length);
+    // Fetch the subscriber from the database
+    const subscriber = await SubscriberModel.find({});
+    console.log('subscriber: ', subscriber.length);
+    // Fetch the chatbot from the database
+    const chatbot = await ChatBotModel.find({});
+    console.log('chatbot: ', chatbot.length);
+
     // Add system prompt and user message to chat history
-    chatHistory.push({ role: 'system', content: CUSTOM_INSTRUCTIONS });
+    // chatHistory.push({ role: 'system', content: JSON.stringify(user, null, 2) });
+    const instructionsWithUser = ADMIN_INSTRUCTIONS.replace(
+      '[USER_COLLECTION]',
+      JSON.stringify(user, null, 2)
+    )
+      .replace('[PROMPTS_COLLECTION]', JSON.stringify(prompts, null, 2))
+      .replace('[REVIEWS_COLLECTION]', JSON.stringify(reviews, null, 2))
+      .replace('[NOTIFICATIONS_COLLECTION]', JSON.stringify(notifications, null, 2))
+      .replace('[CONTACT_COLLECTION]', JSON.stringify(contact, null, 2))
+      .replace('[BLOG_COLLECTION]', JSON.stringify(blog, null, 2))
+      .replace('[SUBSCRIBER_COLLECTION]', JSON.stringify(subscriber, null, 2))
+      .replace('[CHATBOT_COLLECTION]', JSON.stringify(chatbot, null, 2));
+
+    console.log('Instructions after replacement:', instructionsWithUser);
+
+    chatHistory.push({
+      role: 'system',
+      content: instructionsWithUser,
+    });
+
     chatHistory.push({ role: 'user', content: message });
 
     // Prepare the payload to send to the Pollinations API
@@ -164,7 +216,7 @@ const sendChat = async (req, res) => {
       seed,
       role: 'assistant',
       timestamp,
-    //   history: chatHistory.map((entry) => entry.content), 
+      //   history: chatHistory.map((entry) => entry.content),
       jsonMode, // Include jsonMode in response
     };
 

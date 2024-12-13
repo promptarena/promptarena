@@ -9,7 +9,7 @@ const HeaderBar = ({ user, handleLogout }) => {
           <span className="material-icons-outlined text-2xl">menu</span>
         </button>
         <div className="text-xl font-bold text-blue-900">
-          Prompt<span className="text-indigo-800">Arena</span>
+          Prompt<span className="text-indigo-800">Arena</span> - Admin<span className="text-indigo-800">Panel</span>
         </div>
         <div className="flex items-center space-x-2">
           <span className="material-icons-outlined p-2 text-2xl cursor-pointer hover:text-indigo-800 transition-transform duration-300 hover:scale-110 hidden md:block">

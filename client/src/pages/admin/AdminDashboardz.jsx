@@ -25,6 +25,10 @@ import {
   CircleXIcon,
   X,
   Menu,
+  Plus,
+  ChartBar,
+  Bot,
+  BotOff,
 } from 'lucide-react';
 import AdminNotificationForm from '../../components/admin/notifications/AdminNotificationForm';
 import AdminBlogForm from '../../components/admin/blog/AdminBlogForm';
@@ -39,9 +43,11 @@ import HeaderBar from '../../components/admin/common/HeaderBar';
 import ProfileDetails from '../../components/userProfile/ProfileDetails';
 import UpdateProfileForm from '../../components/userProfile/UpdateProfileForm';
 import ChangePasswordForm from '../../components/userProfile/ChangePasswordForm';
+import AdminChatBOT from '../../components/admin/common/AdminChatBOT';
 
 const AdminDashboardz = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isAISidebarOpen, setAISidebarOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState('Dashboard');
   const sidebarRef = useRef(null);
 
@@ -600,7 +606,22 @@ const AdminDashboardz = () => {
           >
             {renderContent()}
           </motion.main>
+
+          <aside
+            className={`fixed lg:static inset-x-0 w-auto md:w-[340px] rounded-xl h-[calc(100vh-4rem)] lg:h-auto transform ${
+              isAISidebarOpen ? 'hidden' : 'translate-x-0 shadow-none p-0 mt-4 '
+            } lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto`}
+          >
+            <AdminChatBOT />
+          </aside>
         </div>
+        <button
+          onClick={() => setAISidebarOpen(!isAISidebarOpen)}
+          className="fixed bottom-2 right-0 text-stone-50 bg-purple-500 p-3 rounded shadow-lg hover:bg-purple-700 focus:outline-none z-50"
+        >
+          {isAISidebarOpen ? <Bot size={24} /> : <BotOff size={24} />}
+          
+        </button>
       </body>
       {AlertModalComponent}
     </div>
