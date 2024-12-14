@@ -296,14 +296,17 @@ const HomePage = () => {
   const { featuredPrompts, popularPrompts, newestPrompts, isLoading } = data;
 
   if (isLoading) {
-    return (
-      <section className="h-screen relative z-[51 ]">
-        <div className="container mx-auto p-0">
-          <CyberpunkHero />
-        </div>
-      </section>
-    );
+    return <LoadingSpinner />;
   }
+  // if (isLoading) {
+  //   return (
+  //     <section className="h-screen relative z-[51 ]">
+  //       <div className="container mx-auto p-0">
+  //         <CyberpunkHero />
+  //       </div>
+  //     </section>
+  //   );
+  // }
 
   return (
     <>
