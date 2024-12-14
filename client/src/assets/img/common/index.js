@@ -16,11 +16,13 @@ import prompttexLogoMain from './prompttexLogoMain.webp';
 import prompttexLogoLite from './prompttexLogoLite.webp';
 import mockRobot from './mockRobot.webp';
 import mockOwl from './mockOwl.webp';
+import searchSquare from './search-square.svg';
 
 export {
   openaiSVG,
   claudeSVG,
   mistralSVG,
+  searchSquare,
   perplexitySVG,
   bardSVG,
   togetheraiSVG,
