@@ -8,6 +8,7 @@ Disallow: /cgi-bin/ # Protect server scripts
 Disallow: /tmp/ # Protect temporary files
 Disallow: /*? # Disallow URLs with query parameters (consider allowing essential parameters if needed)
 Disallow: /search # Disallow search results pages (if they create duplicate content issues)
+Disallow: /favicon.ico
 
 # Allow crawling of essential resources
 Allow: *.css # Allow CSS files

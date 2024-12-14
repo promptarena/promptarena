@@ -194,6 +194,11 @@ const SEO = ({
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
       {/* Other Meta Tags */}
       <link rel="manifest" href="/manifest.json" />
+      {/* Google Site Verification */}
+      <meta
+        name="google-site-verification"
+        content="WuUsYcTMuoWHnCLjpxk0AcP2dzdOFeXQRbAQ5GZAZ1w"
+      />
       {/* JSON-LD Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify(schemaOrgJSONLD)}
