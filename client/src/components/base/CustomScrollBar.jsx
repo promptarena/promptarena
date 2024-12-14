@@ -1,10 +1,10 @@
 // CustomScrollBar.jsx
-import { useViewportScroll, useTransform, motion } from 'framer-motion';
+import { useScroll, useTransform, motion } from 'framer-motion';
 import React from 'react';
 
 const CustomScrollWrapper = ({ children }) => {
   // Track scroll progress across the document
-  const { scrollYProgress } = useViewportScroll();
+  const { scrollYProgress } = useScroll();
 
   // Transform scroll progress to control width of custom scrollbar
   const width = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);

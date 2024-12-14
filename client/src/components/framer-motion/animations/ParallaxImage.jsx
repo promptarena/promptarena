@@ -1,9 +1,9 @@
 // ParallaxImage.jsx
-import { useTransform, useViewportScroll, motion } from 'framer-motion';
+import { useTransform, useScroll, motion } from 'framer-motion';
 
 const ParallaxImage = ({ bgImage, fgImage }) => {
   // Track the scroll position using Framer Motion's useViewportScroll
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
 
   // Parallax effect for the background image
   const y = useTransform(scrollY, [0, 1000], [10, -10]);

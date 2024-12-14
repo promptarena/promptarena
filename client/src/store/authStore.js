@@ -101,8 +101,8 @@ export const useAuthStore = create(set => ({
         () => set({ isCheckingAuth: false })
       );
     } catch (error) {
+      
       set({ isAuthenticated: false, isCheckingAuth: false, error: null });
-      throw error;
     }
   },
 

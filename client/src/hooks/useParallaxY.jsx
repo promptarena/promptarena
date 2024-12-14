@@ -1,8 +1,8 @@
 // useParallaxY.js
-import { useTransform, useViewportScroll } from 'framer-motion';
+import { useTransform, useScroll } from 'framer-motion';
 
 const useParallaxY = () => {
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
   const y = useTransform(scrollY, [1000, 0], [-200, 0]);
   return y;
 };

@@ -1,11 +1,11 @@
 import React from 'react';
-import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { vrrobot } from '../../assets/img/explore';
 import { fireBG } from '../../assets/video';
 import BlurInText from '../framer-motion/animations/BlurInText';
 
 export default function ExploreHero() {
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
 
   // Parallax effect for elements
   const yOffsetBackground = useTransform(scrollY, [0, 500], ['0%', '-20%']);
