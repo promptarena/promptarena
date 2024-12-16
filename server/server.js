@@ -153,9 +153,7 @@ app.get('/sitemap.xml', async (req, res) => {
         priority: 0.5,
       });
     });
-    // Don't forget to end the stream!
     smStream.end();
-    // Stream the response
     pipeline.pipe(res).on('error', (e) => {
       throw e;
     });
@@ -174,7 +172,7 @@ app.use(`/api/${VERSION}/blog`, blogRoutes);
 app.use(`/api/${VERSION}/prompt`, promptRoutes);
 app.use(`/api/${VERSION}/review`, reviewRoutes);
 app.use(`/api/${VERSION}/notification`, notificationRoutes);
-app.use(`/api/${VERSION}/purchase`, purchaseRoutes);
+app.use(`/api/${VERSION}/purchase`, purchaseRoutes);  
 // Newsletter Routes
 app.use(`/api/${VERSION}/newsletter`, newsletterRoutes);
 // Contact Form Routes
