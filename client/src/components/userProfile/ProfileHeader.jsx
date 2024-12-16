@@ -42,7 +42,7 @@ const ProfileHeader = ({ user, isAuthenticated, authUser }) => {
     {
       icon: Settings,
       label: 'Settings',
-      link: '/profile/settings',
+      link: '/profile/edit',
     },
   ];
 

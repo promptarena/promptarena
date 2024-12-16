@@ -766,7 +766,7 @@ const PromptList = () => {
         {/* Filter Section */}
 
         <motion.div
-          className="bg-gradient-to-b from-slate-900 to-slate-700 overflow-hidden shadow-lg rounded-lg p-6 lg:p-8 w-full lg:max-w-xs ring-1 ring-neutral-400 max-w-lg mx-auto static lg:sticky top-24 max-h-min"
+          className="z-[10] bg-gradient-to-b from-slate-900 to-slate-700 overflow-hidden shadow-lg rounded-lg p-6 lg:p-8 w-full lg:max-w-xs ring-1 ring-neutral-400 max-w-lg mx-auto static lg:sticky top-24 max-h-min"
           // className="bg-gradient-to-b from-slate-900 to-slate-700 shadow-lg rounded-lg p-6 lg:p-8 w-full lg:max-w-xs sticky top-24"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
