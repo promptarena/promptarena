@@ -196,7 +196,8 @@ import ProfileDropdown from '../base/ProfileDropdown';
 import '../../assets/css/base/font.css';
 import EventLoggingButton from './EventLoggingButton';
 import NavbarSearch from './NavbarSearch';
-import { ArrowDown, ChevronDown } from 'lucide-react';
+import { ArrowDown, ChevronDown, Webhook } from 'lucide-react';
+import { FaLocationArrow } from 'react-icons/fa';
 
 const Navbar = ({ isAuthenticated }) => {
   const { isLoading, user, logout } = useAuthStore();
@@ -356,9 +357,9 @@ const Navbar = ({ isAuthenticated }) => {
             ? 'close search here...! '
             : 'search your prompts anywhere'}{' '}
           <span
-            className={`inline-block -ml-1 duration-slow ${isSearchVisible ? '-rotate-90' : 'rotate-90'}`}
+            className={`inline-block text-xxs -ml-1 transition-transform ease-in  duration-slow ${isSearchVisible ? '-rotate-[91deg]' : 'rotate-[91deg]'}`}
           >
-            ⮞
+            &#10148;
           </span>
         </button>
 

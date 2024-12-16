@@ -88,7 +88,7 @@ function ProfileEditPagez() {
   };
 
   return (
-    <div className="bg-white dark:bg-dark-background w-full flex flex-col md:flex-row gap-8 px-4 lg:px-20 xl:px-32 text-[#161931] dark:text-dark-text">
+    <div className="bg-white dark:bg-dark-background pt-4 w-full flex flex-col md:flex-row gap-8 px-4 lg:px-20 xl:px-32 text-[#161931] dark:text-dark-text">
       {/* Sidebar */}
       <aside
         ref={sidebarRef}

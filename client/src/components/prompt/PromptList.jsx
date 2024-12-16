@@ -948,21 +948,21 @@ const PromptList = () => {
 
         {/* Prompt Cards Section */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 w-full"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 justify-center place-items-center gap-6 w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
           {prompts.length > 0 ? (
             prompts.map(prompt => (
-              <div key={prompt._id} className="w-full">
+              <div key={prompt._id}>
                 <Link to={`/prompt/${prompt._id}`}>
                   <PromptCard prompt={prompt} />
                 </Link>
               </div>
             ))
           ) : (
-            <div className="col-span-full text-center text-gray-500">
+            <div className="col-span-full place-items-center h3 font-bold text-center text-gray-500">
               No prompts found. Adjust your filters.
             </div>
           )}

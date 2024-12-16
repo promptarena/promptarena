@@ -173,7 +173,7 @@ export function FileDropzone({
                   <File className="mr-2 w-10 h-10 text-neutral-500" />
                 )}
                 <span className="flex-1 truncate text-neutral-600 text-xs tracking-tighter dark:text-neutral-400">
-                  {file.name}
+                  {file.name.slice(0, 40)}
                 </span>
                 <Trash2
                   className="mr-2 w-5 h-5 cursor-pointer text-red-500 transition-colors hover:text-red-600"

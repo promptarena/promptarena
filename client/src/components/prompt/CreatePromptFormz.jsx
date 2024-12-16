@@ -136,7 +136,7 @@ const CreatePromptFormz = () => {
   };
 
   return (
-    <div className="min-h-screen text-gray-100 p-4 md:p-8">
+    <div className="min-h-screen text-gray-100 p-0 md:p-8">
       {/* Tutorial Section */}
       {/* <div className="bg-gray-800/50 backdrop-blur-3xl text-white p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-3xl font-semibold mb-4">
@@ -180,9 +180,9 @@ const CreatePromptFormz = () => {
           Add Prompt Details
         </h6>
       </div>
-      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Preview Card */}
-        <div className="order-1 md:order-1">
+        <div className="order-1 mx-auto md:order-1">
           <PromptCard
             prompt={{
               title: title || 'Untitled Prompt',
@@ -416,7 +416,7 @@ const CreatePromptFormz = () => {
             </div>
 
             {/* Media Upload Section */}
-            <div className="mb-6 space-y-6">
+            <div className="mb-6 space-y-6 overflow-x-hidden">
               <div>
                 <label className="block font-bold mb-2 text-lg">
                   🖼️ Upload Images (max 5)
@@ -433,8 +433,9 @@ const CreatePromptFormz = () => {
                   onFilesSelected={files => handleFileChange(files, 'images')}
                 />
               </div>
+              {/* VIDEO NO NEED NOW */}
 
-              <div>
+              {/* <div>
                 <label className="block font-bold mb-2 text-lg">
                   📹 Upload Videos (max 2)
                 </label>
@@ -464,9 +465,11 @@ const CreatePromptFormz = () => {
                     </ul>
                   </div>
                 )}
-              </div>
+              </div> */}
 
-              <div>
+              {/* PDF NO NEED NOW */}
+
+              {/* <div>
                 <label className="block font-bold mb-2 text-lg">
                   📄 Upload PDFs (max 2)
                 </label>
@@ -496,7 +499,7 @@ const CreatePromptFormz = () => {
                     </ul>
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
 
             {/* Submit Section */}
