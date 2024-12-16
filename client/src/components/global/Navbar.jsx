@@ -369,7 +369,7 @@ const Navbar = ({ isAuthenticated }) => {
             isSearchVisible ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }
           }
           transition={{ duration: 0.4, ease: 'easeInOut' }}
-          className={`mt-2 ${isSearchVisible ? 'block absolute top-[7rem]' : 'hidden'}`}
+          className={`mt-2 ${isSearchVisible ? 'block absolute top-[7rem] z-0' : 'hidden'}`}
         >
           <NavbarSearch />
         </motion.div>
