@@ -7,6 +7,7 @@ import {
   FaSignOutAlt,
   FaClosedCaptioning,
   FaUserShield,
+  FaPlusCircle,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { CircleXIcon, Edit } from 'lucide-react';
@@ -136,6 +137,18 @@ const ProfileDropdown = ({ user, handleLogout }) => {
                   </Link>
                 </motion.span>
               )}
+              <motion.span
+                whileHover={{ scale: 1.03, backgroundColor: '#e5e7eb' }}
+              >
+                <Link
+                  to={'/prompt/create'}
+                  className="flex items-center py-2 px-4 text-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-all duration-150 ease-in-out"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <FaPlusCircle className="w-6 h-6 text-emerald-400" />
+                  <span className="ml-3">Create Prompt</span>
+                </Link>
+              </motion.span>
               <motion.span
                 whileHover={{ scale: 1.03, backgroundColor: '#e5e7eb' }}
               >

@@ -55,7 +55,7 @@ const NavbarSearch = () => {
   console.log('results: ', results);
 
   return (
-    <div className="relative">
+    <div className="relative z-[-1]">
       <input
         type="text"
         className={`glassEffect text-gray-200 h-8 ring-1 ring-gray-500 focus:ring-gray-400 py-1 px-5  rounded-full text-sm focus:outline-none transition-all duration-slow ease-in-out xl:w-[500px] ${inputWidth}`}

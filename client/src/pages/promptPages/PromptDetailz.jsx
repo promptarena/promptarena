@@ -652,7 +652,7 @@ export default function PromptDetailz() {
       >
         <div className="absolute rotate-180 bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f3e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] z-[-1] opacity-80"></div>
 
-        <div className="flex flex-col-reverse container mx-auto lg:flex-row text-white lg:py-5 pt-5 pb-0">
+        <div className="flex flex-col-reverse container mx-auto lg:flex-row text-white lg:py-7 pt-7 pb-0">
           {/* Left Side Content */}
           <div className="flex flex-col w-full lg:w-1/2 pr-0 lg:pr-8 mb-0 lg:mb-0">
             {/* Content and buttons */}

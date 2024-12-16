@@ -348,7 +348,7 @@ const Navbar = ({ isAuthenticated }) => {
         {/* Search Button */}
         <button
           onClick={() => setIsSearchVisible(!isSearchVisible)}
-          className={`mt-0 px-4 text-xs py-0 absolute font-share-tech-mono bottom-[-1.20rem] border-[1px] border-t-0 capitalize glass-panel font-medium duration-slow rounded-b-md rounded-t-none transition-colors ${isSearchVisible ? 'text-gray-200/50' : 'text-gray-200/70'}`}
+          className={`mt-0 px-4 text-xs z-[-1] py-0 absolute font-share-tech-mono bottom-[-1.20rem] border-[1px] border-t-0 capitalize glass-panel font-medium duration-slow rounded-b-md rounded-t-none transition-colors ${isSearchVisible ? 'text-gray-200/50' : 'text-gray-200/70'}`}
         >
           {/* {isSearchVisible ? 'Close Search' : 'Open Search'} */}
           {/* <ArrowDown className="w-4 h-4" /> */}
@@ -369,7 +369,7 @@ const Navbar = ({ isAuthenticated }) => {
             isSearchVisible ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }
           }
           transition={{ duration: 0.4, ease: 'easeInOut' }}
-          className={`mt-2 ${isSearchVisible ? 'block absolute top-[6rem]' : 'hidden'}`}
+          className={`mt-2 ${isSearchVisible ? 'block absolute top-[7rem]' : 'hidden'}`}
         >
           <NavbarSearch />
         </motion.div>
