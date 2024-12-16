@@ -8,7 +8,7 @@ Platform Information:
 
 Website: https://promptarena.vercel.app
 Email: promptarena@gmail.com
-Developed By: MaThanMiThun
+Developed By: <b>MaThanMiThun</b>
 Release Date: 27-12-2024, INDIA
 Special Format for Generated Outputs:
 
