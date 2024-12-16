@@ -156,7 +156,7 @@ const PromptCard = React.memo(({ prompt }) => {
       action="view"
       label={title}
     >
-      <div className="relative ring-1 ring-neutral-300 bg-[#1E293B] rounded-xl overflow-hidden font-space-grotesk">
+      <div className="relative h-[580px] w-[300px] ring-1 ring-neutral-300 bg-[#1E293B] rounded-xl overflow-hidden font-space-grotesk">
         <div className="relative w-full h-0 pb-[100%] overflow-hidden rounded-tl-xl">
           <CollageImages images={images} />
           <div
@@ -196,7 +196,7 @@ const PromptCard = React.memo(({ prompt }) => {
             <div className="flex items-center">
               <span className="font-semibold text-white">Rating:</span>
               <Stars rating={rating} />
-              <span className="ml-2">({reviews.length || 100} reviews)</span>
+              <span className="ml-2">({reviews.length >= 0 ? reviews.length : 100} reviews)</span>
             </div>
             <div className="flex gap-1">{displayTags}</div>
           </div>

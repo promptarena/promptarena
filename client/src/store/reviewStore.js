@@ -26,7 +26,8 @@ export const useReviewStore = create((set, get) => ({
         }))
       );
     } catch (error) {
-      handleError(error, message => set({ error: message, isLoading: false }));
+      console.log('error: ', error);
+      // handleError(error, message => set({ error: message, isLoading: false }));
     }
   },
   createReview: async (promptId, rating, comment) => {
