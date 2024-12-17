@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import useSmoothScroll from './hooks/useSmoothScroll';
 import CustomScrollWrapper from './components/base/CustomScrollBar';
 import { AnalyticsProvider } from './contexts/analyticsContext';
+import ScrollToTop from './components/global/ScrollToTop';
 
 const App = () => {
   useSmoothScroll(); // Initialize smooth scrolling
@@ -15,6 +16,7 @@ const App = () => {
     <CustomScrollWrapper>
       <AnalyticsProvider>
         {/* Main application routing */}
+        <ScrollToTop />
         <Router />
         {/* Toast notifications */}
         {memoizedToaster}

@@ -63,7 +63,7 @@ export default function Router() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 3000);
+    const timeout = setTimeout(() => setLoading(false), 100);
     checkAuth(); // Check authentication on mount
 
     return () => clearTimeout(timeout); // Cleanup timeout

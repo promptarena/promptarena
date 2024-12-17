@@ -1,140 +1,11 @@
-// import { defineConfig } from 'vite';
-// import { config } from 'dotenv';
-// import react from '@vitejs/plugin-react';
-// import compression from 'vite-plugin-compression';
-// import { VitePWA } from 'vite-plugin-pwa';
-// import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
-
-// // Load environment variables from .env file
-// config();
-
-// // https://vitejs.dev/config/
-// export default defineConfig(({ mode }) => {
-//   // Log the current mode (development or production)
-//   console.log(`Current mode: ${mode}`);
-
-//   return {
-//     server: {
-//       port: process.env.PORT || 5173,
-//       historyApiFallback: true,
-//     },
-//     build: {
-//       rollupOptions: {
-//         output: {
-//           manualChunks: {
-//             vendor: ['react', 'react-dom', '@react-oauth/google'],
-//           },
-//         },
-//       },
-//     },
-//     plugins: [
-//       ViteImageOptimizer({
-//         optipng: {
-//           optimizationLevel: 7,
-//         },
-//         pngquant: {
-//           quality: [0.8, 0.9],
-//         },
-//       }),
-//       compression({
-//         algorithm: 'brotliCompress',
-//         ext: '.br',
-//         threshold: 10240,
-//       }),
-//       react(),
-//       VitePWA({
-//         strategies: 'injectManifest',
-//         srcDir: 'src/service-worker',
-//         filename: 'sw.js',
-//         injectManifest: {
-//           maximumFileSizeToCacheInBytes: 5000000, // 5MB
-//         },
-//         registerType: 'autoUpdate',
-//         manifest: {
-//           name: 'PromptArena',
-//           short_name: 'PromptArena',
-//           start_url: '.',
-//           display: 'standalone',
-//           theme_color: '#000000',
-//           background_color: '#ffffff',
-//           icons: [
-//             {
-//               src: '/android-icon-36x36.png',
-//               sizes: '36x36',
-//               type: 'image/png',
-//               density: '0.75',
-//             },
-//             {
-//               src: '/android-icon-48x48.png',
-//               sizes: '48x48',
-//               type: 'image/png',
-//               density: '1.0',
-//             },
-//             {
-//               src: '/android-icon-72x72.png',
-//               sizes: '72x72',
-//               type: 'image/png',
-//               density: '1.5',
-//             },
-//             {
-//               src: '/android-icon-96x96.png',
-//               sizes: '96x96',
-//               type: 'image/png',
-//               density: '2.0',
-//             },
-//             {
-//               src: '/android-icon-144x144.png',
-//               sizes: '144x144',
-//               type: 'image/png',
-//               density: '3.0',
-//             },
-//             {
-//               src: '/android-icon-192x192.png',
-//               sizes: '192x192',
-//               type: 'image/png',
-//               density: '4.0',
-//             },
-//           ],
-//           screenshots: [
-//             {
-//               src: '/screenshot-desktop.png',
-//               sizes: '1280x720',
-//               type: 'image/png',
-//               form_factor: 'wide',
-//             },
-//             {
-//               src: '/screenshot-mobile.png',
-//               sizes: '324x687',
-//               type: 'image/png',
-//               form_factor: 'narrow',
-//             },
-//           ],
-//         },
-//       }),
-//     ],
-
-//     envDir: './',
-//     resolve: {
-//       alias: { '@': '/src' },
-//     },
-//     base: './',
-//     define: {
-//       // Set process.env.NODE_ENV based on the mode
-//       'process.env.NODE_ENV': JSON.stringify(mode),
-//       // Expose other environment variables
-//       'process.env': {
-//         ...process.env,
-//       },
-//     },
-//   };
-// });
-
 import { defineConfig } from 'vite';
 import { config } from 'dotenv';
 import react from '@vitejs/plugin-react';
 import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import removeConsole from 'vite-plugin-remove-console';
+
 
 // Load environment variables from .env file
 config();
@@ -197,15 +68,18 @@ export default defineConfig(({ mode }) => {
       compression({
         algorithm: 'gzip',
         ext: '.br',
-        threshold: 10240, // Files larger than 10KB will be compressed
+        threshold: 10240,
       }),
       react(),
+      removeConsole({ 
+      include: ['log', 'info', 'warn', 'error', 'debug'] 
+    }),
       VitePWA({
         strategies: 'injectManifest',
         srcDir: 'src/service-worker',
         filename: 'sw.js',
         injectManifest: {
-          maximumFileSizeToCacheInBytes: 5000000, // 5MB
+          maximumFileSizeToCacheInBytes: 5000000,
         },
         registerType: 'autoUpdate',
       }),
