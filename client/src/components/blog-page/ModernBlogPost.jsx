@@ -142,7 +142,91 @@ export default function ModernBlogPost() {
   }
 
   if (!singleBlogPost) {
-    return <div className="text-gray-500">No blog post found.</div>;
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 text-white p-8">
+        <article className="max-w-4xl mx-auto animate-pulse">
+          {/* Header Skeleton */}
+          <header className="mb-12 text-center">
+            <div className="h-4 bg-purple-300/50 rounded w-32 mx-auto mb-4"></div>
+            <div className="h-8 bg-purple-400/50 rounded w-3/4 mx-auto"></div>
+          </header>
+
+          {/* Bento Grid Skeleton */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* Featured Image Skeleton */}
+            <div className="col-span-full">
+              <div className="relative w-full mb-8 rounded-2xl bg-purple-400 h-64"></div>
+            </div>
+
+            {/* Main Content Skeleton */}
+            <div className="lg:col-span-2 space-y-4">
+              {[...Array(3)].map((_, index) => (
+                <div
+                  key={index}
+                  className="h-4 bg-gray-300/50 rounded w-full"
+                ></div>
+              ))}
+            </div>
+
+            {/* Sidebar Skeleton */}
+            <div className="space-y-8">
+              <div className="bg-white/10 p-6 rounded-2xl space-y-4">
+                <div className="w-24 h-24 bg-gray-300/50 rounded-full mx-auto"></div>
+                <div className="h-4 bg-gray-400/50 rounded w-1/2 mx-auto"></div>
+                <div className="h-3 bg-gray-300/50 rounded w-3/4 mx-auto"></div>
+              </div>
+
+              <div className="bg-white/10 p-6 rounded-2xl space-y-4">
+                <div className="h-4 bg-gray-400/50 rounded w-1/3"></div>
+                <div className="flex justify-around">
+                  {[...Array(4)].map((_, index) => (
+                    <div
+                      key={index}
+                      className="w-6 h-6 bg-gray-300/50 rounded-full"
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Video Content Skeleton */}
+            <div className="col-span-full">
+              <div className="h-8 bg-purple-400/50 rounded w-32 mb-4"></div>
+              <div className="aspect-video bg-gray-300/50 rounded"></div>
+            </div>
+
+            {/* Additional Content Skeleton */}
+            <div className="lg:col-span-2 space-y-4">
+              <div className="h-8 bg-purple-400/50 rounded w-1/3"></div>
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-gray-300/50 rounded-full"></div>
+                <div>
+                  <div className="h-4 bg-gray-400/50 rounded w-24"></div>
+                  <div className="h-3 bg-gray-300/50 rounded w-32"></div>
+                </div>
+              </div>
+              <div className="h-6 bg-gray-300/50 rounded w-full"></div>
+            </div>
+
+            {/* Related Image Skeleton */}
+            <div className="w-full h-64 bg-gray-300/50 rounded-2xl shadow-lg"></div>
+          </div>
+
+          {/* Recent Posts Skeleton */}
+          <div className="mt-16">
+            <div className="h-8 bg-purple-400/50 rounded w-1/3 mx-auto mb-8"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, index) => (
+                <div
+                  key={index}
+                  className="h-48 bg-gray-300/50 rounded-lg col-span-1"
+                ></div>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+    );
   }
 
   const { title, media, content } = singleBlogPost;
