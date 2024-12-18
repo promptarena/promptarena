@@ -243,6 +243,7 @@ const CreatePromptFormz = () => {
                 📝 Describe Your Prompt
               </label>
               <textarea
+                rows="3"
                 id="description"
                 placeholder="Enter a detailed description for your prompt"
                 className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-800 border-gray-700 text-gray-100 focus:ring-blue-500 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline"
@@ -305,6 +306,7 @@ const CreatePromptFormz = () => {
                     value: category,
                     label: category,
                   }))}
+                  isSearchable
                   placeholder="Select or add a category"
                   isClearable
                 />
@@ -389,6 +391,7 @@ const CreatePromptFormz = () => {
                 🎯 Enter Your Prompt
               </label>
               <textarea
+                rows="6"
                 id="prompt"
                 placeholder="Enter the main prompt"
                 className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-800 border-gray-700 text-gray-100 focus:ring-blue-500 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline"
@@ -407,6 +410,7 @@ const CreatePromptFormz = () => {
                 🔮 Example Response (Optional)
               </label>
               <textarea
+                rows="5"
                 id="exampleResponse"
                 placeholder="Enter an example response"
                 className="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-800 border-gray-700 text-gray-100 focus:ring-blue-500 focus:border-blue-500 leading-tight focus:outline-none focus:shadow-outline"

@@ -174,8 +174,11 @@ const PromptCard = React.memo(({ prompt }) => {
         </div>
         <div className="p-4 shadow-inner space-y-2">
           <div className="flex items-center mb-2">
-            <h2 className="text-2xl font-bold text-white leading-tight font-syncopate">
+            {/* <h2 className="text-2xl font-bold text-white leading-tight font-syncopate">
               {title.length > 20 ? `${title.slice(0, 20)}...` : title}
+            </h2> */}
+            <h2 className="h5 font-bold text-white leading-tight ">
+              {title.length > 30 ? `${title.slice(0, 30)}...` : title}
             </h2>
           </div>
           <p className="text-base text-[#9CA3AF] mb-3 font-space-grotesk">
