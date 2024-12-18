@@ -227,8 +227,8 @@ import CyberpunkHeroEnding from '../components/home-page/CyberpunkHeroEnding';
 import AnimatedLogoCloud from '../components/framer-motion/animations/AnimatedLogoCloud';
 import SEO from '../components/seo/SEO';
 import { getCurrentSiteUrl } from '../utils/getCurrentSiteUrl';
-import AIGeneratedContent from '../components/global/AIGeneratedContent';
 import AIImageAndTextGenerator from '../components/global/AIImageAndTextGenerator';
+import PromptCategory from '../components/global/PromptCategory';
 
 const HomePage = () => {
   const [data, setData] = useState({
@@ -321,6 +321,8 @@ const HomePage = () => {
       <AIImageAndTextGenerator />
       {/* <AIGeneratedContent /> */}
       <HeroImageSection />
+      <PromptCategory />
+
       <HeroImageCarousel />
       {/* <HeroSection /> */}
       {/* <h1 className="text-3xl font-bold mb-4">Welcome to PromptArena</h1>
