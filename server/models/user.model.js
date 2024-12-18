@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
     profileImage: {
       type: String,
       default:
-        'https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100270.jpg', // Default profile image
+        'https://mathanmithun.neocities.org/androgynous-avatar-non-binary-queer-person_23-2151100270-_1_.jpg', // Default profile image
     },
     bio: {
       type: String,

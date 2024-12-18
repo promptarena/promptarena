@@ -10,7 +10,7 @@ export const getOptimizedImageUrl = (url, transformations = {}) => {
     return url; // If not a Cloudinary URL, return the original URL as is
   }
 
-  const baseCloudinaryUrl = 'https://res.cloudinary.com/dpkqselpi/image/upload';
+  const baseCloudinaryUrl = 'https://res.cloudinary.com/dpbmyntdu/image/upload';
 
   // Extract the public ID and path from the original Cloudinary URL
   const [_, path] = url.split('/upload/');
