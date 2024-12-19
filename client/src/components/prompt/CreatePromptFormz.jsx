@@ -199,7 +199,7 @@ const CreatePromptFormz = () => {
               media: {
                 images:
                   images.length > 0
-                    ? images
+                    ? images.map(image => URL.createObjectURL(image))
                     : [
                         humanRobotIMG1,
                         humanRobotIMG2,
