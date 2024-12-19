@@ -94,7 +94,6 @@ const ExplorePage = () => {
   }, []);
 
   const { featuredPrompts, isLoading } = data;
-  console.log('featuredPrompts: ', featuredPrompts);
 
   return (
     <>

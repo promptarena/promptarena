@@ -115,6 +115,7 @@
 //     setUpdatedAfter('');
 //     setUpdatedBefore('');
 //     setSearchQuery('');
+//     fetchPrompts();
 //   };
 
 //   if (isLoading) {
@@ -304,7 +305,7 @@
 //         {/* Filter Section */}
 
 //         <motion.div
-//           className="bg-gradient-to-b from-slate-900 to-slate-700 overflow-hidden shadow-lg rounded-lg p-6 lg:p-8 w-full lg:max-w-xs ring-1 ring-neutral-400 max-w-lg mx-auto static lg:sticky top-24 max-h-min"
+//           className="z-[10] bg-gradient-to-b from-slate-900 to-slate-700 overflow-hidden shadow-lg rounded-lg p-6 lg:p-8 w-full lg:max-w-xs ring-1 ring-neutral-400 max-w-lg mx-auto static lg:sticky top-24 max-h-min"
 //           // className="bg-gradient-to-b from-slate-900 to-slate-700 shadow-lg rounded-lg p-6 lg:p-8 w-full lg:max-w-xs sticky top-24"
 //           initial={{ opacity: 0, y: -20 }}
 //           animate={{ opacity: 1, y: 0 }}
@@ -324,14 +325,14 @@
 //           <div className="mb-4">
 //             <label
 //               htmlFor="search"
-//               className="block text-white font-semibold mb-2 flex items-center"
+//               className=" text-white font-semibold mb-2 flex items-center"
 //             >
 //               Search
 //             </label>
 //             <Input
 //               icon={FaSearch}
 //               type="text"
-//               classNamesForInputTag="pl-10 ring-1 ring-gray-600 w-full"
+//               classNamesForInputTag="pl-10 placeholder:text-white ring-1 ring-gray-600 w-full"
 //               id="search"
 //               value={searchQuery}
 //               onChange={e => setSearchQuery(e.target.value)}
@@ -353,6 +354,20 @@
 //                   borderRadius: '0.25rem',
 //                   boxShadow: 'none',
 //                 }),
+//                 placeholder: base => ({
+//                   ...base,
+//                   color: 'white',
+//                 }),
+//                 singleValue: base => ({
+//                   ...base,
+//                   color: 'white',
+//                 }),
+//                 option: (provided, state) => ({
+//                   ...provided,
+//                   backgroundColor: state.isSelected ? '#1f2937' : '#1f2937',
+//                   color: state.isSelected ? '#efefef' : '#fff',
+//                   borderColor: state.isSelected ? '#1f2937' : '#1f2937',
+//                 }),
 //               }}
 //               value={selectedTags}
 //               onChange={setSelectedTags}
@@ -366,7 +381,7 @@
 //             <label className="block text-white font-semibold mb-2">
 //               Category
 //             </label>
-//             <select
+//             {/* <select
 //               className="block w-full ring-1 ring-gray-600 text-dark-text rounded-md border bg-dark-background px-3 py-2 focus:outline-none focus:ring-1 focus:ring-cyber-blue"
 //               value={category}
 //               onChange={e => setCategory(e.target.value)}
@@ -377,7 +392,46 @@
 //                   {cat}
 //                 </option>
 //               ))}
-//             </select>
+//             </select> */}
+//             <Select
+//               options={categories.map(category => ({
+//                 value: category,
+//                 label: category,
+//               }))}
+//               value={category ? { value: category, label: category } : null} // This ensures the selected value is in the correct format
+//               onChange={selectedOption =>
+//                 setCategory(selectedOption ? selectedOption.value : '')
+//               }
+//               className="text-sm"
+//               placeholder="select category"
+//               styles={{
+//                 control: base => ({
+//                   ...base,
+//                   backgroundColor: 'transparent',
+//                   borderColor: 'rgba(255, 255, 255, 0.5)',
+//                   borderRadius: '0.25rem',
+//                   boxShadow: 'none',
+//                 }),
+//                 input: base => ({
+//                   ...base,
+//                   color: 'white',
+//                 }),
+//                 placeholder: base => ({
+//                   ...base,
+//                   color: 'white',
+//                 }),
+//                 singleValue: base => ({
+//                   ...base,
+//                   color: 'white',
+//                 }),
+//                 option: (provided, state) => ({
+//                   ...provided,
+//                   backgroundColor: state.isSelected ? '#1f2937' : '#1f2937',
+//                   color: state.isSelected ? '#efefef' : '#fff',
+//                   borderColor: state.isSelected ? '#1f2937' : '#1f2937',
+//                 }),
+//               }}
+//             />
 //           </div>
 
 //           {/* Model Filter */}
@@ -385,6 +439,7 @@
 //             <label className="block text-white font-semibold mb-2">Model</label>
 //             <Input
 //               icon={FaSearch}
+//               classNamesForInputTag="pl-10 placeholder:text-white ring-1 ring-gray-600 w-full"
 //               type="text"
 //               placeholder="Enter model"
 //               value={model}
@@ -432,21 +487,21 @@
 
 //         {/* Prompt Cards Section */}
 //         <motion.div
-//           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 w-full"
+//           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 justify-center place-items-center gap-6 w-full"
 //           initial={{ opacity: 0 }}
 //           animate={{ opacity: 1 }}
 //           transition={{ duration: 0.5 }}
 //         >
 //           {prompts.length > 0 ? (
 //             prompts.map(prompt => (
-//               <div key={prompt._id} className="w-full">
+//               <div key={prompt._id}>
 //                 <Link to={`/prompt/${prompt._id}`}>
 //                   <PromptCard prompt={prompt} />
 //                 </Link>
 //               </div>
 //             ))
 //           ) : (
-//             <div className="col-span-full text-center text-gray-500">
+//             <div className="col-span-full place-items-center h3 font-bold text-center text-gray-500">
 //               No prompts found. Adjust your filters.
 //             </div>
 //           )}
@@ -457,7 +512,6 @@
 // };
 
 // export default PromptList;
-
 
 import React, { useEffect, useState, useCallback } from 'react';
 import axiosInstance from '../../services/axiosInstance';
@@ -475,6 +529,8 @@ import {
   FaTags,
   FaCalendarAlt,
   FaTimes,
+  FaChevronLeft,
+  FaChevronRight,
 } from 'react-icons/fa';
 import LoadingSpinner from '../animations/loader/LoadingSpinner';
 import { BorderTrail } from '../framer-motion/animations/BorderTrail';
@@ -482,12 +538,14 @@ import { Input } from '../base/Input';
 
 const PromptList = () => {
   const [prompts, setPrompts] = useState([]);
-  console.log('prompts: ', prompts);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [categories, setCategories] = useState([]);
   const [allTags, setAllTags] = useState([]);
   const [filteredCount, setFilteredCount] = useState(0);
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [promptsPerPage] = useState(9); // You can adjust this
 
   // Filter states
   const [minPrice, setMinPrice] = useState('');
@@ -514,7 +572,6 @@ const PromptList = () => {
       if (updatedAfter) queryParams.updatedAfter = updatedAfter;
       if (updatedBefore) queryParams.updatedBefore = updatedBefore;
       if (searchQuery) queryParams.search = searchQuery;
-
       try {
         const response = await axiosInstance.get(
           `/prompt/all?${new URLSearchParams(queryParams).toString()}`
@@ -522,6 +579,7 @@ const PromptList = () => {
         setPrompts(response.data.data.prompts);
         setFilteredCount(response.data.data.prompts.length);
         setIsLoading(false);
+        setCurrentPage(1); // Reset to first page when fetching data
       } catch (error) {
         console.error('Error fetching prompts:', error);
         toast.error(error.response.data.message || 'Error fetching prompts.');
@@ -577,6 +635,27 @@ const PromptList = () => {
     setUpdatedBefore('');
     setSearchQuery('');
     fetchPrompts();
+  };
+
+  // Pagination Logic
+  const indexOfLastPrompt = currentPage * promptsPerPage;
+  const indexOfFirstPrompt = indexOfLastPrompt - promptsPerPage;
+  const currentPrompts = prompts.slice(indexOfFirstPrompt, indexOfLastPrompt);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const prevPage = () => {
+    if (currentPage > 1) {
+      // scroll to the top of the page
+      window.scrollTo(1000, 1000);
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const nextPage = () => {
+    if (currentPage < Math.ceil(prompts.length / promptsPerPage)) {
+      // scroll to the top of the page
+      window.scrollTo(1000, 1000);
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   if (isLoading) {
@@ -758,7 +837,7 @@ const PromptList = () => {
   }
 
   return (
-    <motion.div className="container mx-auto px-4 md:px-8 py-8">
+    <motion.div className="container relative z-50 mx-auto px-4 md:px-8 py-8">
       <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-200 text-shadow mb-6">
         AI Prompts ({filteredCount} results)
       </h1>
@@ -948,23 +1027,184 @@ const PromptList = () => {
 
         {/* Prompt Cards Section */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 justify-center place-items-center gap-6 w-full"
+          className="flex flex-col items-center w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {prompts.length > 0 ? (
-            prompts.map(prompt => (
-              <div key={prompt._id}>
-                <Link to={`/prompt/${prompt._id}`}>
-                  <PromptCard prompt={prompt} />
-                </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 justify-center place-items-center gap-6 w-full">
+            {currentPrompts.length > 0 ? (
+              currentPrompts.map(prompt => (
+                <div key={prompt._id}>
+                  <Link to={`/prompt/${prompt._id}`}>
+                    <PromptCard prompt={prompt} />
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full place-items-center h3 font-bold text-center text-gray-500">
+                No prompts found. Adjust your filters.
               </div>
-            ))
-          ) : (
-            <div className="col-span-full place-items-center h3 font-bold text-center text-gray-500">
-              No prompts found. Adjust your filters.
+            )}
+          </div>
+          {/* Pagination */}
+          {/* {prompts.length > 0 && (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={prevPage}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 mx-1 rounded-md transition-all duration-300 border border-gray-700 hover:bg-gray-800 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}`}
+              >
+                <FaChevronLeft />
+              </button>
+              {Array(Math.ceil(prompts.length / promptsPerPage))
+                .fill()
+                .map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => paginate(index + 1)}
+                    className={`px-4 py-2 mx-1 rounded-md transition-all duration-300 border border-gray-700 hover:bg-gray-800  ${currentPage === index + 1 ? 'bg-gray-700' : 'bg-transparent'}`}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              <button
+                onClick={nextPage}
+                disabled={
+                  currentPage === Math.ceil(prompts.length / promptsPerPage)
+                }
+                className={`px-4 py-2 mx-1 rounded-md transition-all duration-300 border border-gray-700 hover:bg-gray-800 ${currentPage === Math.ceil(prompts.length / promptsPerPage) ? 'opacity-50 cursor-not-allowed' : 'opacity-100'}`}
+              >
+                <FaChevronRight />
+              </button>
             </div>
+          )} */}
+          {/*Pagination Updated UI  */}
+          {prompts.length > 0 && (
+            <ul className="flex items-center mt-8 space-x-1 font-bold">
+              <li
+                className={`rounded border border-gray-300 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-200 ${currentPage === 1 ? 'opacity-80 cursor-not-allowed' : 'opacity-100'}`}
+              >
+                <button
+                  onClick={prevPage}
+                  disabled={currentPage === 1}
+                  className="flex size-9 items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+              </li>
+              {/* add three dots if the page is greater than 4 */}
+              {Array(Math.ceil(prompts.length / promptsPerPage))
+                .fill()
+                .map((_, index, array) => {
+                  const totalPages = array.length;
+                  const isFirstPage = index === 0;
+                  const isLastPage = index === totalPages - 1;
+                  const isCurrentPage = currentPage === index + 1;
+                  const isNearCurrentPage =
+                    Math.abs(index + 1 - currentPage) <= 1; // Pages near the current page
+                  const shouldShowDotBefore = currentPage > 3 && index === 1; // After the first page
+                  const shouldShowDotAfter =
+                    currentPage < totalPages - 2 && index === totalPages - 2; // Before the last page
+
+                  // Handle three dots
+                  if (shouldShowDotBefore) {
+                    return (
+                      <li
+                        key="dot-before"
+                        className="bg-white rounded border opacity-80 border-gray-300 text-gray-500 hover:border-gray-200 hover:bg-gray-200"
+                      >
+                        <button className="flex size-9 items-center justify-center">
+                          ...
+                        </button>
+                      </li>
+                    );
+                  }
+                  if (shouldShowDotAfter) {
+                    return (
+                      <li
+                        key="dot-after"
+                        className="bg-white rounded border opacity-80 border-gray-300 text-gray-500 hover:border-gray-200 hover:bg-gray-200"
+                      >
+                        <button className="flex size-9 items-center justify-center">
+                          ...
+                        </button>
+                      </li>
+                    );
+                  }
+
+                  // Render only the first page, last page, and pages near the current page
+                  if (
+                    isFirstPage ||
+                    isLastPage ||
+                    isCurrentPage ||
+                    isNearCurrentPage
+                  ) {
+                    return (
+                      <li
+                        key={index}
+                        className={`rounded border ${
+                          isCurrentPage
+                            ? 'border-indigo-500 bg-indigo-500 text-gray-100 hover:border-indigo-600 hover:bg-indigo-600'
+                            : 'bg-white border-gray-300 text-gray-500 hover:border-gray-200 hover:bg-gray-200'
+                        }`}
+                      >
+                        <button
+                          className="flex size-9 items-center justify-center"
+                          onClick={() => {
+                            window.scrollTo(1000, 1000);
+                            paginate(index + 1);
+                          }}
+                        >
+                          {index + 1}
+                        </button>
+                      </li>
+                    );
+                  }
+
+                  // Do not render pages that are too far away
+                  return null;
+                })}
+              <li
+                className={`rounded border border-gray-300 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-200 ${currentPage === Math.ceil(prompts.length / promptsPerPage) ? 'opacity-80 cursor-not-allowed' : 'opacity-100'}`}
+              >
+                <button
+                  onClick={nextPage}
+                  disabled={
+                    currentPage === Math.ceil(prompts.length / promptsPerPage)
+                  }
+                  className="flex size-9 items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
           )}
         </motion.div>
       </div>
