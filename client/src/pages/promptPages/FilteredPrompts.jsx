@@ -52,7 +52,7 @@ const FilteredPrompts = () => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto mt-2">
+      <div className="container min-h-screen mx-auto mt-2">
         <h1 className="text-2xl font-bold text-plain-white-background mb-4">
           {category ? `Category: ${category}` : `Tag: #${tag}`}
         </h1>
@@ -110,7 +110,7 @@ const FilteredPrompts = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="container mx-auto p-4"
+        className="container min-h-screen mx-auto p-4"
       >
         <h2 className="text-2xl font-bold text-plain-white-background mb-4">
           {category ? `Category: ${category}` : `Tag: #${tag}`}
