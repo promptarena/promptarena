@@ -3,7 +3,7 @@ import MarqueeSlider from '../components/explore/MarqueeSlider';
 import toast from 'react-hot-toast';
 import axiosInstance from '../services/axiosInstance';
 import GlassmorphicCard from '../components/prompt/GlassmorphicCard';
-import { boy, cat, chucky, girl, honeybee, metal } from '../assets/img/explore';
+import { boy, cat, chucky, girl, honeybee, metal, monkey } from '../assets/img/explore';
 import ExploreTopHead from '../components/explore-page/ExploreTopHead';
 import PromptList from '../components/prompt/PromptList';
 import VelocityText from '../components/framer-motion/animations/VelocityText';
@@ -27,7 +27,7 @@ const ExplorePage = () => {
         'A cute little hornet with big funny eyes, hovering in the air, PIxar style.',
       model: 'Midjourney',
       image:
-        'https://images.piclumen.com/normal/20241108/88252/d8e88ae5-ad3d-4e71-a58d-61314c9a7c14.webp',
+        monkey,
     },
     {
       title: 'Beautiful standing in front of a window',
