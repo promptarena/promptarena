@@ -131,10 +131,11 @@ export default function CyberpunkHero() {
               style={{ translateX: Yvalue }}
               className="absolute left-4 bottom-4 w-32 sm:w-40 h-32 sm:h-40 bg-green-500/20 backdrop-blur-lg rounded-full z-[0]"
             >
-              <img
+              {/* <img
                 src="https://images.piclumen.com/normal/20241103/88252/be95469b-ed4c-42f8-b24e-e9f1ae9030c9.webp"
                 alt="Robot Loader"
-              />
+              /> */}
+              
             </motion.div>
             <motion.div
               style={{ translateX: Yvalue }}
