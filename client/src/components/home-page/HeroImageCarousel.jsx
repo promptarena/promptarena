@@ -117,6 +117,21 @@ export default function HeroImageCarousel() {
             profit. */}
             Find Your Next AI Masterpiece with These Prompts.
           </p>
+          <div className="flex-center mt-5 -mb-5">
+            <a
+              href="https://www.producthunt.com/posts/promptarena?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-promptarena"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=767179&theme=neutral"
+                alt="PromptArena - The Ultimate Free AI Prompt Marketplace for Creativity! | Product Hunt"
+                style={{ width: '250px', height: '54px' }}
+                width="250"
+                height="54"
+              />
+            </a>
+          </div>
         </div>
 
         <div className="relative h-[500px] flex items-center justify-center overflow-hidden">

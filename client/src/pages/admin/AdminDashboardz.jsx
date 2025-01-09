@@ -464,7 +464,7 @@ const AdminDashboardz = () => {
                       <td className="border text-plain-white-background px-4 py-2">
                         {user.role}
                       </td>
-                      <td className="border px-2 py-2 flex gap-2">
+                      <td className="border px-2 py-2 flex flex-col justify-center items-center gap-2">
                         <button
                           onClick={() => handleDeleteUser(user._id)}
                           className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
@@ -480,7 +480,7 @@ const AdminDashboardz = () => {
                           </Link>
                         </button>
                       </td>
-                      <td className="border px-2 space-x-2 py-2">
+                      <td className="border px-2 space-y-1 py-2">
                         <button
                           onClick={() => handleUpdateUser(user._id, 'buyer')}
                           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
