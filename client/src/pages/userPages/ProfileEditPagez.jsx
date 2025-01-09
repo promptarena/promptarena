@@ -7,6 +7,7 @@ import UpdateProfileForm from '../../components/userProfile/UpdateProfileForm';
 import LoadingSpinner from '../../components/animations/loader/LoadingSpinner';
 import UploadProfileImage from '../../components/userProfile/UploadProfileImage';
 import ChangePasswordForm from '../../components/userProfile/ChangePasswordForm';
+import Footer from '../../components/global/Footer';
 
 function ProfileEditPagez() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -88,94 +89,118 @@ function ProfileEditPagez() {
   };
 
   return (
-    <div className="bg-white dark:bg-dark-background pt-4 w-full flex flex-col md:flex-row gap-8 px-4 lg:px-20 xl:px-32 text-[#161931] dark:text-dark-text">
-      {/* Sidebar */}
-      <aside
-        ref={sidebarRef}
-        className={`fixed rounded-lg border-r-2 border-neutral-400 md:static my-4 top-0 left-0 z-[10] w-64 h-full bg-white dark:bg-dark-surface shadow-lg transform ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 transition-transform`}
-      >
-        <div className="flex flex-col h-full p-6 border-r border-gray-200 dark:border-dark-surface">
-          {/* Close Button for Mobile */}
+    <>
+      <div className="bg-white dark:bg-dark-background pt-4 w-full flex flex-col md:flex-row gap-8 px-4 lg:px-20 xl:px-32 text-[#161931] dark:text-dark-text">
+        {/* Sidebar */}
+        <aside
+          ref={sidebarRef}
+          className={`fixed rounded-lg border-r-2 border-neutral-400 md:static my-4 top-0 left-0 z-[10] w-64 h-full bg-white dark:bg-dark-surface shadow-lg transform ${
+            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } md:translate-x-0 transition-transform`}
+        >
+          <div className="flex flex-col h-full p-6 border-r border-gray-200 dark:border-dark-surface">
+            {/* Close Button for Mobile */}
 
-          <h2 className="text-2xl font-semibold md:m-2 mt-16 mb-6">
-            Edit Profile
-          </h2>
-          {[
-            { label: 'Profile Details', value: 'Profile Details' },
-            { label: 'Update Profile Info', value: 'Update Profile Info' },
-            { label: 'Update Image', value: 'Update Image' },
-            { label: 'Change Password', value: 'Change Password' },
-          ].map(item => (
+            <h2 className="text-2xl font-semibold md:m-2 mt-16 mb-6">
+              Edit Profile
+            </h2>
+            {[
+              { label: 'Profile Details', value: 'Profile Details' },
+              { label: 'Update Profile Info', value: 'Update Profile Info' },
+              { label: 'Update Image', value: 'Update Image' },
+              { label: 'Change Password', value: 'Change Password' },
+            ].map(item => (
+              <button
+                key={item.value}
+                onClick={() => {
+                  setActiveMenuItem(item.value);
+                  setSidebarOpen(false);
+                }}
+                className={`flex items-center px-4 py-2.5 rounded-full font-semibold ${
+                  activeMenuItem === item.value
+                    ? 'bg-indigo-100 text-indigo-900 dark:bg-dark-surface dark:text-dark-text border dark:border-dark-disabled'
+                    : 'hover:text-indigo-900 dark:hover:text-dark-primary hover:bg-gray-100 dark:hover:bg-dark-background'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
             <button
-              key={item.value}
-              onClick={() => {
-                setActiveMenuItem(item.value);
-                setSidebarOpen(false);
-              }}
-              className={`flex items-center px-4 py-2.5 rounded-full font-semibold ${
-                activeMenuItem === item.value
-                  ? 'bg-indigo-100 text-indigo-900 dark:bg-dark-surface dark:text-dark-text border dark:border-dark-disabled'
-                  : 'hover:text-indigo-900 dark:hover:text-dark-primary hover:bg-gray-100 dark:hover:bg-dark-background'
-              }`}
+              className="md:hidden flex-center self-end mt-4 ring-1 ring-neutral-400 px-2 rounded-xl"
+              onClick={() => setSidebarOpen(false)}
             >
-              {item.label}
+              <CircleXIcon className="w-4 h-5 mr-1 " /> Close
             </button>
-          ))}
+          </div>
+        </aside>
+
+        {/* Main Content */}
+        <main className="w-full md:w-3/4 lg:w-4/5 min-h-screen py-4">
+          {/* Mobile Sidebar Toggle */}
           <button
-            className="md:hidden flex-center self-end mt-4 ring-1 ring-neutral-400 px-2 rounded-xl"
-            onClick={() => setSidebarOpen(false)}
+            className="md:hidden flex-center mb-6 px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300"
+            onClick={() => setSidebarOpen(!isSidebarOpen)}
           >
-            <CircleXIcon className="w-4 h-5 mr-1 " /> Close
+            {/* <Settings2Icon className="mr-2 w-full" /> Edit */}
+            <svg
+              width="16"
+              height="16"
+              className="mr-2"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#fff"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                {' '}
+                <path
+                  d="M11 0L16 5L14 7V12L3 16L2.20711 15.2071L6.48196 10.9323C6.64718 10.9764 6.82084 11 7 11C8.10457 11 9 10.1046 9 9C9 7.89543 8.10457 7 7 7C5.89543 7 5 7.89543 5 9C5 9.17916 5.02356 9.35282 5.06774 9.51804L0.792893 13.7929L0 13L4 2H9L11 0Z"
+                  fill="#fff"
+                ></path>{' '}
+              </g>
+            </svg>{' '}
+            Edit
           </button>
-        </div>
-      </aside>
 
-      {/* Main Content */}
-      <main className="w-full md:w-3/4 lg:w-4/5 min-h-screen py-4">
-        {/* Mobile Sidebar Toggle */}
-        <button
-          className="md:hidden flex-center mb-6 px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300"
-          onClick={() => setSidebarOpen(!isSidebarOpen)}
-        >
-          {/* <Settings2Icon className="mr-2 w-full" /> Edit */}
-          <svg
-            width="16"
-            height="16"
-            className="mr-2"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            stroke="#fff"
+          <motion.div
+            className="max-w-5xl mx-auto p-6 bg-white dark:bg-dark-surface rounded-lg shadow-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              {' '}
-              <path
-                d="M11 0L16 5L14 7V12L3 16L2.20711 15.2071L6.48196 10.9323C6.64718 10.9764 6.82084 11 7 11C8.10457 11 9 10.1046 9 9C9 7.89543 8.10457 7 7 7C5.89543 7 5 7.89543 5 9C5 9.17916 5.02356 9.35282 5.06774 9.51804L0.792893 13.7929L0 13L4 2H9L11 0Z"
-                fill="#fff"
-              ></path>{' '}
-            </g>
-          </svg>{' '}
-          Edit
-        </button>
+            {renderContent()}
+          </motion.div>
+        </main>
+      </div>
+      <div>
+        <div className="relative w-full bg-[#1A202C] z-0">
+          <div className="absolute rotate-180 inset-0 bg-[linear-gradient(to_right,#4f4f4f3e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] z-[-1] opacity-80"></div>
 
-        <motion.div
-          className="max-w-5xl mx-auto p-6 bg-white dark:bg-dark-surface rounded-lg shadow-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {renderContent()}
-        </motion.div>
-      </main>
-    </div>
+          {/* <div className="relative w-full bg-[#2d1b4e] z-0"> */}
+          {/* Overlay Background */}
+
+          <div className="w-full bottom-0 h-4 lg:h-10">
+            <svg
+              viewBox="0 0 1440 100"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 43.9999C106.667 43.9999 213.333 7.99994 320 7.99994C426.667 7.99994 533.333 43.9999 640 43.9999C746.667 43.9999 853.333 7.99994 960 7.99994C1066.67 7.99994 1173.33 43.9999 1280 43.9999C1386.67 43.9999 1440 19.0266 1440 9.01329V100H0V43.9999Z"
+                className="fill-current dark:text-dark-primary-dark text-dark-primary shadow-2xl"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </>
   );
 }
 

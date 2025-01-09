@@ -350,7 +350,13 @@ module.exports = {
 
   logout: async (req, res, next) => {
     try {
-      res.clearCookie('token');
+      // res.clearCookie('token');
+       res.cookie('token', '', {
+         httpOnly: true,
+         secure: true,
+         sameSite: 'none',
+         maxAge: 0, // Clear the cookie immediately
+       });
       return sendSuccessResponse(res, 'Logged out successfully', {}, 200);
     } catch (error) {
       return handleError(

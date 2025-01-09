@@ -115,10 +115,10 @@ export default function CyberpunkHero() {
               </motion.h1>
             </div>
 
-            {/* 4K Badge */}
+            {/* 10x Badge */}
             <div className="absolute z-[0] sm:right-4 right-1 bottom-4 bg-black/30 backdrop-blur-sm rounded-lg sm:py-2 py-0 px-1 sm:px-3">
               <div className="flex-center sm:gap-2 gap-[2px]">
-                <span className=" text-xs md:text-sm font-semibold">4K</span>
+                <span className=" text-xs md:text-sm font-semibold">100x</span>
                 <div className="h-2 w-2 rounded-full bg-[#00FF85] animate-pulse"></div>
                 <span className=" text-[10px] md:text-xs text-[#ABABAB]">
                   Generating prompt...
