@@ -436,6 +436,9 @@ const AdminDashboardz = () => {
                       Email
                     </th>
                     <th className="px-4 py-2 text-plain-white-background border">
+                      Phone
+                    </th>
+                    <th className="px-4 py-2 text-plain-white-background border">
                       Role
                     </th>
                     <th className="px-4 py-2 text-plain-white-background border">
@@ -454,6 +457,9 @@ const AdminDashboardz = () => {
                       </td>
                       <td className="border text-plain-white-background px-4 py-2">
                         {user.email}
+                      </td>
+                      <td className="border text-plain-white-background px-4 py-2">
+                        {user.phoneNumber ? user.phoneNumber : 'N/A'}
                       </td>
                       <td className="border text-plain-white-background px-4 py-2">
                         {user.role}

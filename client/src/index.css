@@ -182,6 +182,9 @@ body {
   margin-top: 1em;
   margin-bottom: 1em;
 }
+.blog-content ul li{
+  list-style-type: disc !important;
+}
 
 .blog-content ul li,
 .blog-content ol li {

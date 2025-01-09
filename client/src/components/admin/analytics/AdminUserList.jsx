@@ -8,6 +8,7 @@ const AdminUserList = ({ users, onDeleteUser }) => {
         <tr>
           <th className="px-4 py-2">Username</th>
           <th className="px-4 py-2">Email</th>
+          <th className="px-4 py-2">Phone</th>
           <th className="px-4 py-2">Role</th>
           <th className="px-4 py-2">Actions</th>
         </tr>
@@ -17,6 +18,7 @@ const AdminUserList = ({ users, onDeleteUser }) => {
           <tr key={user._id}>
             <td className="border px-4 py-2">{user.username}</td>
             <td className="border px-4 py-2">{user.email}</td>
+            <td className="border px-4 py-2">{user.phoneNumber}</td>
             <td className="border px-4 py-2">{user.role}</td>
             <td className="border px-4 py-2">
               <Link

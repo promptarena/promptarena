@@ -43,7 +43,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         console.log('Profile:', profile);
-        const { id, displayName, emails, photos } = profile;
+        const { id, displayName, emails, photos, phone } = profile;
 
         // Check if the user already exists
         let user = await userModel.findOne({ googleId: id });
@@ -54,6 +54,7 @@ passport.use(
           user = await userModel.create({
             googleId: id,
             username: displayName,
+            phoneNumber: phone,
             email: emails[0].value,
             profilePicture: photos[0].value,
             isVerified: true, // Google accounts are inherently verified
@@ -203,9 +204,9 @@ module.exports = {
       });
 
       const payload = ticket.getPayload();
-      console.log('Payload:', payload);
+      console.log('Payload received:', payload);
 
-      const { sub: googleId, email, name, picture } = payload;
+      const { sub: googleId, email, name, picture, phone } = payload;
 
       // Check if user already exists
       let user = await userModel.findOne({ googleId });
@@ -231,6 +232,7 @@ module.exports = {
             profileImage: picture,
             isVerified: true,
             lastLogin: Date.now(),
+            phoneNumber: phone,
           });
 
           console.log('new user', user);

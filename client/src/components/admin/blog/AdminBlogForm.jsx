@@ -109,7 +109,7 @@ const AdminBlogForm = () => {
         });
         toast.success('Blog post created!');
       }
-      navigate('/admin/blog');
+      navigate('/blog');
     } catch (error) {
       console.error('Error creating/updating blog post:', error);
       toast.error('Error saving blog post.');
