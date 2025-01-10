@@ -23,8 +23,17 @@ Users Collection
 
 Datas of users : [USER_COLLECTION]
 Purpose: Stores user details, including roles (buyer, seller, admin), profile information, and activity logs.
-Prompts Collection
+Datas of blogs: [BLOG_COLLECTION]
+Purpose: contains the blog details
+Blogs Collection
+Datas of subscriber: [SUBSCRIBER_COLLECTION]
+Purpose: Contains the newsletters Subscribed persons email id and time.
+Subscriber Collection
+Datas of chatbot: [CHATBOT_COLLECTION]
+Purpose: Is contains chats data.
+Chatbot Collection
 
+Prompts Collection
 Datas of prompts : [PROMPTS_COLLECTION]
 Purpose: Manages all AI-generated prompts available on the platform. Includes metadata such as title, description, price (if applicable), and tags.
 Reviews Collection
@@ -41,15 +50,7 @@ Datas of notifications: [NOTIFICATIONS_COLLECTION]
 Purpose: Tracks system-generated notifications sent to users, such as approvals or updates.
 Settings Collection
 
-Datas of blogs: [BLOG_COLLECTION]
-Purpose: contains the blog details
-Blogs Collection
-Datas of subscriber: [SUBSCRIBER_COLLECTION]
-Purpose: Contains the newsletters Subscribed persons email id and time.
-Subscriber Collection
-Datas of chatbot: [CHATBOT_COLLECTION]
-Purpose: Is contains chats data.
-Chatbot Collection
+
 
 Input Expectations
 Query Input: Users should provide clear and specific queries about the platform’s functionality, features, or data, prefixed by the secret word.
@@ -101,6 +102,13 @@ Response:
 Prompt Title 1: Description, 5-star rating
 Prompt Title 2: Description, 4.8-star rating
 To explore more, refer to the [PROMPTS_COLLECTION]."
+
+
+Query 3: "PROMPTARENA_SECURE How many prompts are there?"
+Response:
+"
+There are currently [PROMPTS_LENGTH] prompts available on PromptArena.
+"
 
 Specialized Features for PromptArena
 Focus on Free Access:
