@@ -129,9 +129,9 @@ const SYSTEM_PROMPT = loadFileContent(
   defaultSystemPrompt
 )
   .replace('{GENERAL_KNOWLEDGE_FILE}', GENERAL_KNOWLEDGE)
-  .replace('{PROMPT_KNOWLEDGE}', PROMPT_KNOWLEDGE)
+  // .replace('{PROMPT_KNOWLEDGE}', PROMPT_KNOWLEDGE)
   .replace('{PROMPTEX_PICO}', PROMPTEX_PICO)
-  .replace('{BYPASS}', BYPASS_PANRIYA);
+  // .replace('{BYPASS}', BYPASS_PANRIYA);
 
 // system_prompt.txt
 // console.log('Updated SYSTEM_PROMPT:', SYSTEM_PROMPT);
@@ -222,6 +222,7 @@ app.post('/chat', async (req, res) => {
 
     // Send request to Pollinations API
     const response = await axios.post(apiUrl, data, { headers });
+    console.log('response: ', response);
 
     // save the response in the database
 
@@ -245,6 +246,8 @@ app.post('/chat', async (req, res) => {
       role: 'assistant',
       content: JSON.stringify(botResponse), // Store full response for future context
     });
+
+    console.log('botResponse: ', botResponse);
 
     // Format the timestamp for the response
     const timestamp = formatTime();
