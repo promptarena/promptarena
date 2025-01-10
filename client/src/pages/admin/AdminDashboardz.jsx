@@ -430,13 +430,16 @@ const AdminDashboardz = () => {
                 <thead>
                   <tr>
                     <th className="px-4 py-2 text-plain-white-background border">
+                      No.
+                    </th>
+                    <th className="px-4 py-2 text-plain-white-background border">
                       Username
                     </th>
                     <th className="px-4 py-2 text-plain-white-background border">
                       Email
                     </th>
                     <th className="px-4 py-2 text-plain-white-background border">
-                      Phone
+                      Profile
                     </th>
                     <th className="px-4 py-2 text-plain-white-background border">
                       Role
@@ -453,52 +456,67 @@ const AdminDashboardz = () => {
                   {users.map(user => (
                     <tr key={user._id}>
                       <td className="border text-plain-white-background px-4 py-2">
+                        {users.indexOf(user) + 1}
+                      </td>
+                      <td className="border text-plain-white-background px-4 py-2">
                         {user.username}
                       </td>
                       <td className="border text-plain-white-background px-4 py-2">
                         {user.email}
                       </td>
-                      <td className="border text-plain-white-background px-4 py-2">
-                        {user.phoneNumber ? user.phoneNumber : 'N/A'}
+                      <td className="border text-plain-white-background p-1">
+                        {user.profileImage ? (
+                          <img
+                            src={user.profileImage}
+                            alt={user.username}
+                            className="rounded size-24 aspect-square"
+                          />
+                        ) : (
+                          'N/A'
+                        )}
                       </td>
                       <td className="border text-plain-white-background px-4 py-2">
                         {user.role}
                       </td>
-                      <td className="border px-2 py-2 flex flex-col justify-center items-center gap-2">
-                        <button
-                          onClick={() => handleDeleteUser(user._id)}
-                          className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-                        >
-                          Delete
-                        </button>
-                        <button>
-                          <Link
-                            to={`/profile/username/${user.username}`}
-                            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                      <td className="border px-2 py-2">
+                        <div className="flex flex-col gap-2">
+                          <button
+                            onClick={() => handleDeleteUser(user._id)}
+                            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
                           >
-                            View
-                          </Link>
-                        </button>
+                            Delete
+                          </button>
+                          <button>
+                            <Link
+                              to={`/profile/username/${user.username}`}
+                              className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600"
+                            >
+                              View
+                            </Link>
+                          </button>
+                        </div>
                       </td>
-                      <td className="border px-2 space-y-1 py-2">
-                        <button
-                          onClick={() => handleUpdateUser(user._id, 'buyer')}
-                          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                        >
-                          Buyer
-                        </button>
-                        <button
-                          onClick={() => handleUpdateUser(user._id, 'seller')}
-                          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                        >
-                          Seller
-                        </button>
-                        <button
-                          onClick={() => handleUpdateUser(user._id, 'admin')}
-                          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                        >
-                          Admin
-                        </button>
+                      <td className="border px-2 py-2">
+                        <div className="flex flex-col gap-2">
+                          <button
+                            onClick={() => handleUpdateUser(user._id, 'buyer')}
+                            className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600"
+                          >
+                            Buyer
+                          </button>
+                          <button
+                            onClick={() => handleUpdateUser(user._id, 'seller')}
+                            className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600"
+                          >
+                            Seller
+                          </button>
+                          <button
+                            onClick={() => handleUpdateUser(user._id, 'admin')}
+                            className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600"
+                          >
+                            Admin
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
