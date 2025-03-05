@@ -5,6 +5,8 @@ export const siteName = process.env.PUBLIC_SITE_NAME || 'PromptArena';
 //google analytics
 export const googleTrackingId = process.env.PUBLIC_GOOGLE_TRACKING_ID;
 export const googleClientId = process.env.PUBLIC_GOOGLE_CLIENT_ID;
+export const MICROSOFT_CLARITY_PROJECT_ID =
+  process.env.PUBLIC_MICROSOFT_CLARITY_PROJECT_ID;
 
 // Set API URL
 export const apiUrl =

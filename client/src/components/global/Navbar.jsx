@@ -1,6 +1,7 @@
 // import React, { useState, memo, useCallback } from 'react';
 // import { motion } from 'framer-motion';
 // import { useLocation, Link } from 'react-router-dom';
+// import { MemoizedSearchBar } from '../framer-motion/ui/SearchBar';
 // import { siteName } from '../../config/envConfig';
 // import { useAuthStore } from '../../store/authStore';
 // import NotificationBell from './NotificationBell';
@@ -8,7 +9,8 @@
 // import '../../assets/css/base/font.css';
 // import EventLoggingButton from './EventLoggingButton';
 // import NavbarSearch from './NavbarSearch';
-// import { ArrowDown } from 'lucide-react';
+// import { ArrowDown, ChevronDown, Webhook } from 'lucide-react';
+// import { FaLocationArrow } from 'react-icons/fa';
 
 // const Navbar = ({ isAuthenticated }) => {
 //   const { isLoading, user, logout } = useAuthStore();
@@ -81,10 +83,12 @@
 
 //   return (
 //     <div className="sticky top-0 left-0 right-0 z-50">
-//       <div className="w-full flex flex-col items-center justify-center pt-4 sm:px-4 px-1">
-//         <motion.nav
-//           initial={{ opacity: 0, y: -20 }}
-//           animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+//       <motion.div
+//         initial={{ opacity: 0, y: -20 }}
+//         animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+//         className="w-full flex items-start justify-center pt-4 sm:px-4 px-1"
+//       >
+//         <nav
 //           className="w-full max-w-7xl 2xl:max-w-[90rem] bg-plain-black-background/0 backdrop-blur-xl border-[0.5px] border-neutral-200 rounded-2xl px-5 md:px-6 py-3.5 flex items-center justify-between"
 //           role="navigation"
 //           aria-label="Main Navigation"
@@ -122,23 +126,21 @@
 //                 <ProfileDropdown user={user} handleLogout={handleLogout} />
 //               </>
 //             ) : (
-//               <>
-//                 <motion.div
-//                   whileHover={{ scale: 1.02 }}
-//                   whileTap={{ scale: 0.98 }}
-//                   className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm px-4 py-1.5 rounded-lg transition-colors duration-200"
-//                 >
-//                   <Link to="/login">
-//                     <EventLoggingButton
-//                       category="navbar"
-//                       action="navigate"
-//                       label="login-button"
-//                     >
-//                       Login
-//                     </EventLoggingButton>
-//                   </Link>
-//                 </motion.div>
-//               </>
+//               <motion.div
+//                 whileHover={{ scale: 1.02 }}
+//                 whileTap={{ scale: 0.98 }}
+//                 className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm px-4 py-1.5 rounded-lg transition-colors duration-200"
+//               >
+//                 <Link to="/login">
+//                   <EventLoggingButton
+//                     category="navbar"
+//                     action="navigate"
+//                     label="login-button"
+//                   >
+//                     Login
+//                   </EventLoggingButton>
+//                 </Link>
+//               </motion.div>
 //             )}
 //           </div>
 
@@ -155,16 +157,23 @@
 //           >
 //             <div className="flex flex-col gap-4">{renderLinks('mobile')}</div>
 //           </motion.div>
-//         </motion.nav>
+//         </nav>
 
 //         {/* Search Button */}
 //         <button
 //           onClick={() => setIsSearchVisible(!isSearchVisible)}
-//           className={`mt-0 px-4 text-xs py-0 absolute bottom-[-1.20rem] border-[1px] border-t-0 capitalize glass-panel font-medium duration-slow rounded-b-md rounded-t-none transition-colors ${isSearchVisible ? 'text-gray-200/40' : 'text-gray-200/50'}`}
+//           className={`mt-0 px-4 text-xs z-[-1] py-0 absolute font-share-tech-mono bottom-[-1.20rem] border-[1px] border-t-0 capitalize glass-panel font-medium duration-slow rounded-b-md rounded-t-none transition-colors ${isSearchVisible ? 'text-gray-200/50' : 'text-gray-200/70'}`}
 //         >
 //           {/* {isSearchVisible ? 'Close Search' : 'Open Search'} */}
 //           {/* <ArrowDown className="w-4 h-4" /> */}
-//           search your prompts anywhere
+//           {isSearchVisible
+//             ? 'close search here...! '
+//             : 'search your prompts anywhere'}{' '}
+//           <span
+//             className={`inline-block text-xxs -ml-1 transition-transform ease-in  duration-slow ${isSearchVisible ? '-rotate-[91deg]' : 'rotate-[91deg]'}`}
+//           >
+//             &#10148;
+//           </span>
 //         </button>
 
 //         {/* Animated Search Bar */}
@@ -174,11 +183,11 @@
 //             isSearchVisible ? { y: 0, opacity: 1 } : { y: -100, opacity: 0 }
 //           }
 //           transition={{ duration: 0.4, ease: 'easeInOut' }}
-//           className={`mt-2 ${isSearchVisible ? 'block absolute top-[6rem]' : 'hidden'}`}
+//           className={`mt-2 ${isSearchVisible ? 'block absolute top-[7rem] z-0' : 'hidden'}`}
 //         >
 //           <NavbarSearch />
 //         </motion.div>
-//       </div>
+//       </motion.div>
 //     </div>
 //   );
 // };
@@ -196,19 +205,33 @@ import ProfileDropdown from '../base/ProfileDropdown';
 import '../../assets/css/base/font.css';
 import EventLoggingButton from './EventLoggingButton';
 import NavbarSearch from './NavbarSearch';
-import { ArrowDown, ChevronDown, Webhook } from 'lucide-react';
-import { FaLocationArrow } from 'react-icons/fa';
+import { ArrowDown } from 'lucide-react';
+import { useClarity } from '../../contexts/MicrosoftClarityProvider';
 
 const Navbar = ({ isAuthenticated }) => {
   const { isLoading, user, logout } = useAuthStore();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isSearchVisible, setIsSearchVisible] = useState(false); // State to toggle search bar
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+
+  // Destructure the Clarity tracking method you want to use (e.g., setEvent)
+  const { setEvent } = useClarity();
 
   // Logout handler
   const handleLogout = useCallback(() => {
+    // Optionally track logout event
+    setEvent('logout-click');
     logout();
-  }, [logout]);
+  }, [logout, setEvent]);
+
+  // Function to handle navigation clicks and track events
+  const handleNavClick = path => {
+    setEvent('navigate', { path });
+    // For mobile links, close the menu
+    if (window.innerWidth < 1024) {
+      setMenuOpen(false);
+    }
+  };
 
   // Links array for consistency
   const links = ['/', '/explore', '/blog', '/about', '/contact'];
@@ -229,21 +252,16 @@ const Navbar = ({ isAuthenticated }) => {
           whileHover="hover"
           className={`${commonClasses} ${isActive ? activeClasses : ''} ${baseClasses}`}
         >
-          <Link
-            to={path}
-            onClick={() => type === 'mobile' && setMenuOpen(false)}
-          >
-            {
-              <EventLoggingButton
-                category="navbar"
-                action="navigate"
-                label={`${path === '/' ? 'home' : path.slice(1)}`}
-              >
-                {path === '/'
-                  ? 'Home'
-                  : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
-              </EventLoggingButton>
-            }
+          <Link to={path} onClick={() => handleNavClick(path)}>
+            <EventLoggingButton
+              category="navbar"
+              action="navigate"
+              label={path === '/' ? 'home' : path.slice(1)}
+            >
+              {path === '/'
+                ? 'Home'
+                : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+            </EventLoggingButton>
           </Link>
         </motion.div>
       );
@@ -349,15 +367,17 @@ const Navbar = ({ isAuthenticated }) => {
         {/* Search Button */}
         <button
           onClick={() => setIsSearchVisible(!isSearchVisible)}
-          className={`mt-0 px-4 text-xs z-[-1] py-0 absolute font-share-tech-mono bottom-[-1.20rem] border-[1px] border-t-0 capitalize glass-panel font-medium duration-slow rounded-b-md rounded-t-none transition-colors ${isSearchVisible ? 'text-gray-200/50' : 'text-gray-200/70'}`}
+          className={`mt-0 px-4 text-xs z-[-1] py-0 absolute font-share-tech-mono bottom-[-1.20rem] border-[1px] border-t-0 capitalize glass-panel font-medium duration-slow rounded-b-md rounded-t-none transition-colors ${
+            isSearchVisible ? 'text-gray-200/50' : 'text-gray-200/70'
+          }`}
         >
-          {/* {isSearchVisible ? 'Close Search' : 'Open Search'} */}
-          {/* <ArrowDown className="w-4 h-4" /> */}
           {isSearchVisible
             ? 'close search here...! '
             : 'search your prompts anywhere'}{' '}
           <span
-            className={`inline-block text-xxs -ml-1 transition-transform ease-in  duration-slow ${isSearchVisible ? '-rotate-[91deg]' : 'rotate-[91deg]'}`}
+            className={`inline-block text-xxs -ml-1 transition-transform ease-in  duration-slow ${
+              isSearchVisible ? '-rotate-[91deg]' : 'rotate-[91deg]'
+            }`}
           >
             &#10148;
           </span>
